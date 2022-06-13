@@ -1,0 +1,11 @@
+  query($locale: String!) {
+    skills(locale: $locale) {
+      data {
+        id
+        attributes {
+          slug
+          name
+        }
+      }
+    }
+  }

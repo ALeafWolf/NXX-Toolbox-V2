@@ -1,4 +1,4 @@
-# nxxtoolbox-nuxt
+# NXX Toolbox Ver.2
 
 ## Build Setup
 

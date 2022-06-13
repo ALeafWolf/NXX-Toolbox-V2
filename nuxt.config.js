@@ -3,7 +3,7 @@ export default {
   head: {
     title: "nxxtoolbox-nuxt",
     htmlAttrs: {
-      lang: "en",
+      lang: "zh",
     },
     meta: [
       { charset: "utf-8" },
@@ -25,38 +25,49 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/style-resources",
+    "@nuxtjs/i18n",
+    "@nuxtjs/apollo",
+  ],
   i18n: {
     vueI18nLoader: true,
-    locales: ['zh', 'en', 'ko'],
+    locales: ["zh", "en", "ko"],
     defaultLocale: "zh",
     seo: true,
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_nxxtoolbox",
       alwaysRedirect: false,
-      fallbackLocale: "zh"
-    }
+      fallbackLocale: "zh",
+    },
   },
   styleResources: {
     scss: ["@/assets/scss/*.scss"],
   },
-
   server: {
     port: process.env.PORT || 3000,
     host: process.env.HOST || "0.0.0.0",
     timing: false,
   },
-
   axios: {
     baseURL: process.env.API_URL || "http://localhost:1337",
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: "http://localhost:1337/graphql",
+      },
+    },
+  },
+  env: {
+    strapiBaseUri: process.env.API_URL || "http://localhost:1337"
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

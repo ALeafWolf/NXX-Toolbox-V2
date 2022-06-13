@@ -1,16 +1,24 @@
 <template>
-  <Tutorial/>
+  <Tutorial />
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
+import skillsQuery from "~/apollo/queries/skills";
 
-export default Vue.extend({
-  name: 'Home',
-  data(){
+
+export default {
+  data() {
     return {
-      message: 'Welcome to NXXToolbox!'
-    }
-  }
-})
+      skills: {
+        data: []
+      }
+    };
+  },
+  apollo: {
+    skills: {
+      prefetch: true,
+      query: skillsQuery,
+    },
+  },
+};
 </script>
