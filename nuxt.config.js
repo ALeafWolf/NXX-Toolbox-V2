@@ -65,6 +65,7 @@ export default {
         httpEndpoint: "http://localhost:1337/graphql",
       },
     },
+    errorHandler: '~/plugins/errorhandler.apollo.js'
   },
   env: {
     strapiBaseUri: process.env.API_URL || "http://localhost:1337"

@@ -32,9 +32,7 @@ export default {
     skills: {
       prefetch: true,
       query: skills,
-      variables: {
-        locale: 'zh'
-      },
+
     },
   },
 };

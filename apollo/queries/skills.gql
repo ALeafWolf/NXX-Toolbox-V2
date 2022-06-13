@@ -1,5 +1,5 @@
-  query($locale: String!) {
-    skills(locale: $locale) {
+  query {
+    skills(locale: "zh") {
       data {
         id
         attributes {
