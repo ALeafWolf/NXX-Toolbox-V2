@@ -1,24 +1,23 @@
 <template>
-  <Tutorial />
+  <h1>Home</h1>
 </template>
 
 <script>
-import skillsQuery from "~/apollo/queries/skills";
-
-
 export default {
   data() {
-    return {
-      skills: {
-        data: []
-      }
-    };
+    return {};
   },
-  apollo: {
-    skills: {
-      prefetch: true,
-      query: skillsQuery,
-    },
+  head() {
+    return {
+      title: `牛叉叉牌工具箱`,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: `牛叉叉牌工具箱`,
+        },
+      ],
+    };
   },
 };
 </script>

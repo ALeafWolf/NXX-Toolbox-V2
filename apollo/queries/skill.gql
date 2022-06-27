@@ -1,5 +1,5 @@
-  query Skills($locale: I18NLocaleCode!) {
-    skills(locale: $locale) {
+  query Skill($slug: String!) {
+    skills(slug: $slug) {
       data {
         id
         attributes {

@@ -18,7 +18,7 @@ export default {
   css: ["ant-design-vue/dist/antd.css", "@/assets/scss/global.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/global-variables.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -38,7 +38,20 @@ export default {
   ],
   i18n: {
     vueI18nLoader: true,
-    locales: ["zh", "en", "ko"],
+    locales: [
+      {
+        code: "zh",
+        iso: "zh-CN",
+      },
+      {
+        code: "en",
+        iso: "en-US",
+      },
+      {
+        code: "ko",
+        iso: "ko-KR",
+      },
+    ],
     defaultLocale: "zh",
     seo: true,
     detectBrowserLanguage: {
@@ -57,18 +70,16 @@ export default {
     timing: false,
   },
   axios: {
-    baseURL: process.env.API_URL || "http://localhost:1337",
+    baseURL: process.env.API_URL || "http://localhost:1338",
   },
   apollo: {
     clientConfigs: {
-      default: {
-        httpEndpoint: "http://localhost:1337/graphql",
-      },
+      default: "~/plugins/apollo-config.js",
     },
-    errorHandler: '~/plugins/errorhandler.apollo.js'
+    // errorHandler: '~/plugins/errorhandler.apollo.js'
   },
   env: {
-    strapiBaseUri: process.env.API_URL || "http://localhost:1337"
+    strapiBaseUri: process.env.API_URL || "http://localhost:1338",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
