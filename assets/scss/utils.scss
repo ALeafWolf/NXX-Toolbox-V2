@@ -1,22 +1,28 @@
 .wrapper {
-    max-width: 1200px;
-    width: 85vw;
-    margin: 0 auto;
-    @media all and (max-width: 768px) {
-      width: 90vw;
-    }
+  max-width: 1200px;
+  width: 85vw;
+  margin: 0 auto;
+  @media all and (max-width: 768px) {
+    width: 90vw;
   }
-  //图片自适应宽高
-  .img-fluid {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  //文字显示行数超过 $lineNum 行，进行缩减。结尾显示...
-  @mixin text-ellipsis($lineNum) {
-    display: -webkit-box;
-    line-height: 1.5;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $lineNum;
-  }
+}
+//图片自适应宽高
+.img-fluid {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+//文字显示行数超过 $lineNum 行，进行缩减。结尾显示...
+@mixin text-ellipsis($lineNum) {
+  display: -webkit-box;
+  line-height: 1.5;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lineNum;
+}
+
+.icon {
+  @extend .img-fluid;
+  max-width: 30px;
+  max-height: 30px;
+}
