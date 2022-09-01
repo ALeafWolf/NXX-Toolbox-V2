@@ -29,7 +29,7 @@
                 {{ skill.name }}</NuxtLink
               >
             </td>
-            <td>{{ skill.description }}</td>
+            <td>{{ group.description }}</td>
             <td>{{ skill.number.lv1 }}</td>
             <td>{{ skill.number.lv10 }}</td>
           </tr>

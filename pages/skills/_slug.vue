@@ -15,7 +15,7 @@
     <div class="flex justify-center items-center flex-col text-center">
       <img
         style="width: 80px; height: 80px"
-        :src="`${imgUrl}/技能/${skill.img_ref}.webp`"
+        :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
         :alt="skill.name"
       />
       <div>{{ skill.description }}</div>
