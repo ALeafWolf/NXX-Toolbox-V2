@@ -144,7 +144,7 @@
             <td>
               <img
                 class="icon m-auto"
-                :src="`assets/images/${card.attribute}.png`"
+                :src="require(`assets/images/${card.attribute}.png`)"
                 :alt="card.attribute"
               />
             </td>
