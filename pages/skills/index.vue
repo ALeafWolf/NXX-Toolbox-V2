@@ -1,8 +1,49 @@
 <template>
   <section>
     <div class="wrapper">
-      <h1>Skills</h1>
-      <table class="w-full">
+      <h1 class="text-xl">Skills</h1>
+      <div class="filter-wrapper flex">
+        <div class="mr-6">
+          <h3 class="text-blue-600 text-lg">Slot</h3>
+          <div v-for="(slot, i) in filterOptions.slot" :key="i">
+            <input
+              type="checkbox"
+              :name="slot"
+              :value="slot"
+              v-model="filters.slot"
+              @change="filterSkills"
+            />
+            <label :for="slot">{{ slot }}</label>
+          </div>
+        </div>
+        <div class="mr-6">
+          <h3 class="text-blue-600 text-lg">Character</h3>
+          <div v-for="(char, i) in filterOptions.character" :key="i">
+            <input
+              type="checkbox"
+              :name="char"
+              :value="i + 1"
+              v-model="filters.character"
+              @change="filterSkills"
+            />
+            <label :for="char">{{ char }}</label>
+          </div>
+        </div>
+        <div class="mr-6">
+          <h3 class="text-blue-600 text-lg">Attribute</h3>
+          <div v-for="(a, i) in filterOptions.attribute" :key="i">
+            <input
+              type="checkbox"
+              :name="a"
+              :value="i + 1"
+              v-model="filters.attribute"
+              @change="filterSkills"
+            />
+            <label for="a">{{ a }}</label>
+          </div>
+        </div>
+      </div>
+      <table class="w-full text-center sub-panel">
         <thead>
           <tr>
             <th rowspan="2">Icon</th>
@@ -29,7 +70,9 @@
                 {{ skill.name }}</NuxtLink
               >
             </td>
-            <td>{{ group.description }}</td>
+            <td>
+              {{ $globalV.getDesWithRound(group.description, skill.variant) }}
+            </td>
             <td>{{ skill.number.lv1 }}</td>
             <td>{{ skill.number.lv10 }}</td>
           </tr>
@@ -44,6 +87,16 @@ export default {
   data() {
     return {
       imgUrl: this.$globalV.ihs,
+      filterOptions: {
+        slot: [1, 2, 3],
+        character: ["GENERAL", "LUKE", "ARTEM", "VYN", "MARIUS"],
+        attribute: ["GENERAL", "LOGIC", "EMPATHY", "INTUITION"],
+      },
+      filters: {
+        slot: [],
+        character: [],
+        attribute: [],
+      },
     };
   },
   async asyncData({ $axios, app }) {
@@ -71,6 +124,45 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    getFilters() {
+      const f = {};
+      if (this.filters.slot.length > 0) {
+        f.slot = {
+          $in: this.filters.slot,
+        };
+      }
+      if (this.filters.character.length > 0) {
+        f.character = {
+          id: {
+            $in: this.filters.character,
+          },
+        };
+      }
+      if (this.filters.attribute.length > 0) {
+        f.attribute = {
+          id: {
+            $in: this.filters.attribute,
+          },
+        };
+      }
+      return f;
+    },
+    async filterSkills() {
+      const f = this.getFilters();
+      this.skillGroups = await this.$axios
+        .$get("/api/skill-groups", {
+          params: {
+            locale: "zh",
+            filters: f,
+            sort: ["slot"],
+          },
+        })
+        .catch((error) => {
+          console.log(error.toJSON());
+        });
+    },
   },
 };
 </script>

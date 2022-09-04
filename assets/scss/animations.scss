@@ -1,0 +1,23 @@
+@keyframes subpanel-bg {
+    0% {
+        background-color: rgba(48, 47, 70, 0.3);
+    }
+    50% {
+        background-color: rgba(86, 83, 113, 0.6);
+    }
+    100% {
+        background-color: rgba(48, 47, 70, 0.3);
+    }
+}
+
+@keyframes subpanel-glow {  
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

@@ -18,7 +18,7 @@ export default {
   css: ["ant-design-vue/dist/antd.css", "@/assets/scss/global.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/global-variables.js', '~/plugins/axios.js'],
+  plugins: ['~/plugins/global-variables.js', '~/plugins/axios.js', '~/plugins/antd-ui.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,7 +34,6 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/style-resources",
     "@nuxtjs/i18n",
-    "@nuxtjs/apollo",
   ],
   i18n: {
     vueI18nLoader: true,
@@ -71,12 +70,6 @@ export default {
   },
   axios: {
     baseURL: process.env.API_URL || "http://localhost:1338",
-  },
-  apollo: {
-    clientConfigs: {
-      default: "~/plugins/apollo-config.js",
-    },
-    // errorHandler: '~/plugins/errorhandler.apollo.js'
   },
   env: {
     strapiBaseUri: process.env.API_URL || "http://localhost:1338",
