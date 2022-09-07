@@ -1,6 +1,6 @@
 <template>
-  <section class="h-full grid gap-5 grid-cols-5">
-    <div class="col-span-3 grid gap-5">
+  <section class="h-full grid gap-5 lg:grid-cols-5">
+    <div class="col-span-1 lg:col-span-3 grid gap-5">
       <div class="sub-panel flex flex-col items-center justify-center p-3">
         <h2>{{ $t("NAV.CARD-LIST") }}</h2>
         <table class="w-full text-center">
@@ -102,22 +102,32 @@
             <tr>
               <th>{{ $t("RSS-CALC.SKILL-LEVEL") }}</th>
               <td>
-                <a-input-number
-                  class="text-center"
-                  v-for="i in 3"
-                  :key="`skillLv-${i}`"
-                  v-model="filters.skillLv[i - 1]"
-                  :min="1"
-                  :max="10"
-                />
+                <div class="flex">
+                  <a-input-number
+                    class="text-center"
+                    v-for="i in 3"
+                    :key="`skillLv-${i}`"
+                    v-model="filters.skillLv[i - 1]"
+                    :min="1"
+                    :max="10"
+                  />
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="grid grid-cols-5 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
         <div
-          class="sub-panel col-span-3 flex flex-col items-center justify-center"
+          class="
+            sub-panel
+            col-span-1
+            md:col-span-3
+            flex flex-col
+            items-center
+            justify-center
+            p-3
+          "
         >
           <h2>{{ $t("COMMON.EXPCHIP") }}</h2>
           <table class="text-center">
@@ -125,22 +135,19 @@
               <tr>
                 <td v-for="i in options.expChips.ranks" :key="`Expchip-${i}`">
                   <img
-                    class="medium-icon"
+                    class="medium-icon mx-auto"
                     :src="require(`~/assets/images/rss/法理之谕 ${i}.webp`)"
                     :alt="`法理之谕 ${i}`"
                   />
                 </td>
               </tr>
               <tr>
-                <td v-for="i in 4" :key="`ExpchipNum-${i}`">
+                <td class="px-1" v-for="i in 4" :key="`ExpchipNum-${i}`">
                   <a-input-number v-model="filters.expChips[i - 1]" :min="0" />
                 </td>
               </tr>
               <tr>
-                <td
-                  v-for="(chip, i) in results.usedExpChips"
-                  :key="`usedchip-${i}`"
-                >
+                <td v-for="(chip, i) in usedExpChips" :key="`usedchip-${i}`">
                   {{ chip }}
                 </td>
               </tr>
@@ -148,38 +155,44 @@
           </table>
         </div>
         <div
-          class="col-span-2 sub-panel flex flex-col items-center justify-center"
+          class="
+            col-span-1
+            md:col-span-2
+            sub-panel
+            flex flex-col
+            items-center
+            justify-center
+            p-3
+          "
         >
+          <h2>{{ $t("RSS-CALC.CARD-LEVEL-MATERIAL") }}</h2>
           <table class="w-full text-center">
             <tbody>
               <tr>
-                <th colspan="3">{{ $t("RSS-CALC.CARD-LEVEL-MATERIAL") }}</th>
-              </tr>
-              <tr>
-                <td>{{ $t("RSS-CALC.REQUIRED-EXP") }}</td>
+                <th>{{ $t("RSS-CALC.REQUIRED-EXP") }}</th>
                 <td colspan="2">{{ requiredExp }}</td>
               </tr>
               <tr>
-                <td colspan="3">{{ $t("RSS-CALC.ACTUAL-COST") }}</td>
+                <th colspan="3">{{ $t("RSS-CALC.ACTUAL-COST") }}</th>
               </tr>
               <tr>
-                <td>
+                <th>
                   {{ $t("COMMON.LEVEL") }}
-                </td>
-                <td>
+                </th>
+                <th>
                   {{ $t("COMMON.EXP") }}
-                </td>
+                </th>
                 <td>
                   <img
-                    class="icon"
+                    class="icon m-auto"
                     src="~/assets/images/icons/btn_coin_s.png"
                   />
                 </td>
               </tr>
               <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td>{{ actualLv }}</td>
+                <td>{{ actualExp }}</td>
+                <td>{{ expChipCoin }}</td>
               </tr>
             </tbody>
           </table>
@@ -187,175 +200,193 @@
       </div>
     </div>
 
-    <div class="col-span-2 grid gap-5">
-      <table class="sub-panel w-full text-center">
-        <tbody>
-          <tr>
-            <th colspan="3">{{ $t("RSS-CALC.EVOLVE-RSS") }}</th>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                src="~/assets/images/icons/btn_coin_s.png"
-              />
-            </td>
-            <td colspan="2">0</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateAttribute}晶片 Ⅰ.webp`)
-                "
-                :alt="`${translateAttribute}晶片 Ⅰ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateAttribute}晶片 Ⅱ.webp`)
-                "
-                :alt="`${translateAttribute}晶片 Ⅱ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateAttribute}晶片 Ⅲ.webp`)
-                "
-                :alt="`${translateAttribute}晶片 Ⅲ`"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateCharacter}晶片 Ⅰ.webp`)
-                "
-                :alt="`${translateCharacter}晶片 Ⅰ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateCharacter}晶片 Ⅱ.webp`)
-                "
-                :alt="`${translateCharacter}晶片 Ⅱ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateCharacter}晶片 Ⅲ.webp`)
-                "
-                :alt="`${translateCharacter}晶片 Ⅲ`"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="sub-panel w-full text-center">
-        <tbody>
-          <tr>
-            <th colspan="3">{{ $t("RSS-CALC.SKILL-LV-RSS") }}</th>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                src="~/assets/images/icons/btn_coin_s.png"
-              />
-            </td>
-            <td colspan="2">0</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateAttribute}印象 Ⅰ.webp`)
-                "
-                :alt="`${translateAttribute}印象 Ⅰ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${getCharacterSkillMaterial[0]}.webp`)
-                "
-                :alt="getCharacterSkillMaterial[0]"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${getCharacterSkillMaterial[1]}.webp`)
-                "
-                :alt="getCharacterSkillMaterial[1]"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${translateAttribute}印象 Ⅱ.webp`)
-                "
-                :alt="`${translateAttribute}印象 Ⅱ`"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${getCharacterSkillMaterial[2]}.webp`)
-                "
-                :alt="getCharacterSkillMaterial[2]"
-              />
-            </td>
-            <td>
-              <img
-                class="icon m-auto"
-                :src="
-                  require(`~/assets/images/rss/${getCharacterSkillMaterial[3]}.webp`)
-                "
-                :alt="getCharacterSkillMaterial[3]"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-span-1 lg:col-span-2 grid gap-5">
+      <div
+        class="
+          sub-panel
+          p-3
+          text-center
+          flex flex-col
+          items-center
+          justify-center
+        "
+      >
+        <h2>{{ $t("RSS-CALC.EVOLVE-RSS") }}</h2>
+        <table class="w-full">
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  src="~/assets/images/icons/btn_coin_s.png"
+                />
+              </td>
+              <td colspan="2">{{ this.cardEvolveRss.coin }}</td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}晶片 Ⅰ.webp`)
+                  "
+                  :alt="`${translateAttribute}晶片 Ⅰ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}晶片 Ⅱ.webp`)
+                  "
+                  :alt="`${translateAttribute}晶片 Ⅱ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}晶片 Ⅲ.webp`)
+                  "
+                  :alt="`${translateAttribute}晶片 Ⅲ`"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>{{this.cardEvolveRss.chip[0]}}</td>
+              <td>{{this.cardEvolveRss.chip[1]}}</td>
+              <td>{{this.cardEvolveRss.chip[2]}}</td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateCharacter}晶片 Ⅰ.webp`)
+                  "
+                  :alt="`${translateCharacter}晶片 Ⅰ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateCharacter}晶片 Ⅱ.webp`)
+                  "
+                  :alt="`${translateCharacter}晶片 Ⅱ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateCharacter}晶片 Ⅲ.webp`)
+                  "
+                  :alt="`${translateCharacter}晶片 Ⅲ`"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>{{this.cardEvolveRss.charChip[0]}}</td>
+              <td>{{this.cardEvolveRss.charChip[1]}}</td>
+              <td>{{this.cardEvolveRss.charChip[2]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="
+          sub-panel
+          text-center
+          p-3
+          flex flex-col
+          items-center
+          justify-center
+        "
+      >
+        <h2>{{ $t("RSS-CALC.SKILL-LV-RSS") }}</h2>
+        <table class="w-full">
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  src="~/assets/images/icons/btn_coin_s.png"
+                />
+              </td>
+              <td colspan="2">0</td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}印象 Ⅰ.webp`)
+                  "
+                  :alt="`${translateAttribute}印象 Ⅰ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[0]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[0]"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[1]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[1]"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}印象 Ⅱ.webp`)
+                  "
+                  :alt="`${translateAttribute}印象 Ⅱ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[2]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[2]"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[3]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[3]"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 </template>
@@ -363,10 +394,11 @@
 <script>
 import skillRss from "~/assets/data/skill-level-up-rss.json";
 import cardExp from "~/assets/data/card-exp.json";
+import cardEvolve from "~/assets/data/card-evolve-rss.json";
 
 export default {
   async asyncData() {
-    return { cardExp, skillRss };
+    return { cardExp, skillRss, cardEvolve };
   },
   data() {
     return {
@@ -404,9 +436,6 @@ export default {
           ["黑胶唱片", "木柄花铲", "录音笔", "怀表", "烫金扑克牌", "陶艺茶杯"],
           ["油画工具", "积木零件", "压感笔", "蓝牙耳机", "耳钉", "权限秘钥"],
         ],
-      },
-      results: {
-        usedExpChips: [0, 0, 0, 0],
       },
     };
   },
@@ -448,17 +477,107 @@ export default {
           return this.options.skillMaterial[3];
       }
     },
-    requiredExp: function () {
+    orderedLvs: function () {
       const lv1 = this.filters.lv[0];
       const lv2 = this.filters.lv[1];
       const lowLv = lv1 <= lv2 ? lv1 : lv2;
       const highLv = lv1 > lv2 ? lv1 : lv2;
-
+      return { lowLv, highLv };
+    },
+    requiredExp: function () {
+      const lowLv = this.orderedLvs.lowLv;
+      const highLv = this.orderedLvs.highLv;
       let exp = 0;
-      for(let i = lowLv - 1; i < highLv - 1; i++){
+      for (let i = lowLv - 1; i < highLv - 1; i++) {
         exp += this.cardExp[this.filters.rarity][i];
       }
       return exp;
+    },
+    usedExpChips: function () {
+      let expReminder = this.requiredExp;
+      const chips = [0, 0, 0, 0];
+      const remainChips = [];
+
+      for (let i = 3; i >= 0; i--) {
+        if (
+          this.filters.expChips[i] * this.options.expChips.values[i] <
+          expReminder
+        ) {
+          chips[i] = this.filters.expChips[i];
+        } else {
+          chips[i] = Math.floor(expReminder / this.options.expChips.values[i]);
+          if (chips[i] < this.filters.expChips[i]) {
+            remainChips.push(i);
+          }
+        }
+        expReminder -= chips[i] * this.options.expChips.values[i];
+      }
+      // deal with remaining exp
+      if (expReminder > 0 && remainChips.length > 0) {
+        let chip = -1;
+        for (let i = 0; i < remainChips.length; i++) {
+          let index = remainChips[i];
+          if (expReminder <= this.options.expChips.values[index]) {
+            chip = index;
+          }
+        }
+        if (chip != -1) {
+          chips[chip] += 1;
+        }
+      }
+      return chips;
+    },
+    actualExp: function () {
+      let exp = 0;
+      for (let i = 0; i < this.usedExpChips.length; i++) {
+        exp += this.usedExpChips[i] * this.options.expChips.values[i];
+      }
+      return exp;
+    },
+    actualLv: function () {
+      let exp = this.actualExp;
+      if (exp === 0) return 1;
+      const expStep = this.cardExp[this.filters.rarity];
+      let i = this.orderedLvs.lowLv - 1;
+      while (exp > 0 && i < this.orderedLvs.highLv) {
+        exp -= expStep[i++];
+      }
+      return i;
+    },
+    expChipCoin: function () {
+      let coin = 0;
+      for (let i = 0; i < 4; i++) {
+        coin += this.options.expChips.costs[i] * this.usedExpChips[i];
+      }
+      return coin;
+    },
+    cardEvolveRss: function () {
+      const evolveRssList = this.cardEvolve[this.filters.rarity].rss;
+      const evolveRss = {
+        coin: 0,
+        chip: [0, 0, 0],
+        charChip: [0,0,0],
+      };
+      for(let o = 0; o < evolveRssList.length; o++) {
+        let data = evolveRssList[o];
+        if (
+          data.lv >= this.orderedLvs.lowLv &&
+          data.lv <= this.orderedLvs.highLv
+        ) {
+          let i = 1;
+          let j = 2;
+          let c = 0;
+          if (data.lv === 40) {
+            i = 0;
+            j = 1;
+          }
+          if(this.filters.rarity === 'MR' && data.lv === 70) c = 2;
+          evolveRss.chip[i] += parseInt(data.chip1);
+          evolveRss.chip[j] += parseInt(data.chip2);
+          evolveRss.charChip[c] += parseInt(data.charChip);
+        }
+      }
+      return evolveRss;
     },
   },
   methods: {
@@ -482,3 +601,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+h2 {
+  font-weight: 700;
+  font-size: 18px;
+}
+</style>
