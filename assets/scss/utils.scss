@@ -27,6 +27,12 @@
   max-height: 30px;
 }
 
+.medium-icon {
+  @extend .img-fluid;
+  max-width: 60px;
+  max-height: 60px;
+}
+
 .large-icon {
   @extend .img-fluid;
   max-width: 100px;

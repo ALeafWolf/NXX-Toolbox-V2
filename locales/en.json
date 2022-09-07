@@ -1,0 +1,36 @@
+{
+  "COMMON": {
+    "TITLE-POSTFIX": "NXXToolbox",
+    "META-DESCRIPTION": "NXX Toolbox: Multi-functional Support Site for Tears of Themis",
+    "SKILL-SLOT": "Skill Slot",
+    "CHARACTER": "Character",
+    "LUKE": "Luke Pearce",
+    "ARTEM": "Artem Wing",
+    "VYN": "Vyn Richter",
+    "MARIUS": "Marius von Hagen",
+    "GENERAL": "General",
+    "LOGIC": "Logic",
+    "EMPATHY": "Empathy",
+    "INTUITION": "Intuition",
+    "ATTRIBUTE": "Attribute",
+    "RARITY": "Rarity",
+    "LEVEL": "Level",
+    "EXP": "EXP",
+    "EXPCHIP": "EXP Chips"
+  },
+  "NAV": {
+    "HOME": "Home",
+    "CARD-RSS-CALC": "Card Resource",
+    "CARD-LIST": "Cards",
+    "SKILL-LIST": "Skills",
+    "CONTACT": "Contact"
+  },
+  "RSS-CALC": {
+    "SKILL-LEVEL": "Skill Level",
+    "CARD-LEVEL-MATERIAL": "Card Leveling Resource",
+    "ACTUAL-COST": "Actual Cost",
+    "REQUIRED-EXP": "Required EXP",
+    "EVOLVE-RSS": "Card Evolve Resource",
+    "SKILL-LV-RSS": "Skill Leveling Resource"
+  }
+}

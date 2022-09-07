@@ -1,0 +1,36 @@
+{
+  "COMMON": {
+    "TITLE-POSTFIX": "牛叉叉牌工具箱 (NXXToolbox)",
+    "META-DESCRIPTION": "牛叉叉牌工具箱：未定事件簿多功能辅助网站",
+    "SKILL-SLOT": "技能槽",
+    "CHARACTER": "角色",
+    "LUKE": "夏彦",
+    "ARTEM": "左然",
+    "VYN": "莫弈",
+    "MARIUS": "陆景和",
+    "GENERAL": "通用",
+    "LOGIC": "逻辑",
+    "EMPATHY": "共情",
+    "INTUITION": "直觉",
+    "ATTRIBUTE": "属性",
+    "RARITY": "稀有度",
+    "LEVEL": "等级",
+    "EXP": "经验",
+    "EXPCHIP": "法理之谕"
+  },
+  "NAV": {
+    "HOME": "主页",
+    "CARD-RSS-CALC": "思绪养成资源",
+    "CARD-LIST": "思绪",
+    "SKILL-LIST": "技能",
+    "CONTACT": "联系"
+  },
+  "RSS-CALC": {
+    "SKILL-LEVEL": "技能等级",
+    "CARD-LEVEL-MATERIAL": "思绪升级材料",
+    "ACTUAL-COST": "实际消耗",
+    "REQUIRED-EXP": "所需经验",
+    "EVOLVE-RSS": "思绪进化材料",
+    "SKILL-LV-RSS": "技能升级材料"
+  }
+}

@@ -15,10 +15,14 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["ant-design-vue/dist/antd.css", "@/assets/scss/global.scss"],
+  css: ["~/assets/ant.less", "@/assets/scss/global.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/global-variables.js', '~/plugins/axios.js', '~/plugins/antd-ui.js'],
+  plugins: [
+    "~/plugins/global-variables.js",
+    "~/plugins/axios.js",
+    "~/plugins/antd-ui.js",
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -37,18 +41,22 @@ export default {
   ],
   i18n: {
     vueI18nLoader: true,
+    langDir: "~/locales/",
     locales: [
       {
         code: "zh",
         iso: "zh-CN",
+        file: "zh.json",
       },
       {
         code: "en",
         iso: "en-US",
+        file: "en.json",
       },
       {
         code: "ko",
         iso: "ko-KR",
+        file: "ko.json",
       },
     ],
     defaultLocale: "zh",
@@ -75,5 +83,14 @@ export default {
     strapiBaseUri: process.env.API_URL || "http://localhost:1338",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    loaders: {
+      less: {
+        lessOptions: {
+          javascriptEnabled: true,
+          math: "always",
+        },
+      },
+    },
+  },
 };

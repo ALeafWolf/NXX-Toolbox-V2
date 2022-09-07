@@ -1,0 +1,36 @@
+{
+  "COMMON": {
+    "TITLE-POSTFIX": "NXXToolbox",
+    "META-DESCRIPTION": "NXX Toolbox: 미해결사건부 다기능 지원 사이트",
+    "SKILL-SLOT": "슬롯",
+    "CHARACTER": "캐릭터",
+    "LUKE": "강혁",
+    "ARTEM": "백은후",
+    "VYN": "윤노아",
+    "MARIUS": "유신우",
+    "GENERAL": "공용",
+    "LOGIC": "논리",
+    "EMPATHY": "공감",
+    "INTUITION": "직감",
+    "ATTRIBUTE": "속성",
+    "RARITY": "희귀도",
+    "LEVEL": "레벨",
+    "EXP": "경험치",
+    "EXPCHIP": "법리적 훈계"
+  },
+  "NAV": {
+    "HOME": "홈",
+    "CARD-RSS-CALC": "육성 재료",
+    "CARD-LIST": "생각",
+    "SKILL-LIST": "스킬",
+    "CONTACT": "문의 양식"
+  },
+  "RSS-CALC": {
+    "SKILL-LEVEL": "스킬 레벨",
+    "CARD-LEVEL-MATERIAL": "강화 재료",
+    "ACTUAL-COST": "실제 소모량",
+    "REQUIRED-EXP": "필요 경험치",
+    "EVOLVE-RSS": "진화 재료",
+    "SKILL-LV-RSS": "스킬 레벨업 재료"
+  }
+}

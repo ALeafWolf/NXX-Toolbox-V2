@@ -1,21 +1,22 @@
 <template>
-  <h1>Home</h1>
+  <h1>{{$t('NAV.HOME')}}</h1>
 </template>
 
 <script>
 export default {
   name: "HomePage",
   data() {
-    return {};
+    return {
+    };
   },
   head() {
     return {
-      title: `牛叉叉牌工具箱`,
+      title: `${this.$t('NAV.HOME')} - ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `牛叉叉牌工具箱`,
+          content: this.$t('COMMON.META-DESCRIPTION'),
         },
       ],
     };

@@ -1,46 +1,55 @@
 <template>
   <section>
     <div class="wrapper">
-      <h1 class="text-xl">Skills</h1>
-      <div class="filter-wrapper flex">
-        <div class="mr-6">
-          <h3 class="text-blue-600 text-lg">Slot</h3>
-          <div v-for="(slot, i) in filterOptions.slot" :key="i">
-            <input
-              type="checkbox"
-              :name="slot"
-              :value="slot"
-              v-model="filters.slot"
-              @change="filterSkills"
-            />
-            <label :for="slot">{{ slot }}</label>
-          </div>
+      <h1 class="text-xl">{{$t('NAV.SKILL-LIST')}}</h1>
+      <div class="filter-wrapper">
+        <div>
+          <h3 class="text-blue-600 text-lg">{{$t('COMMON.SKILL-SLOT')}}</h3>
+          <a-select
+            mode="multiple"
+            class="w-full"
+            placeholder="Slot"
+            :defaultValue="[]"
+            @change="handleSlotChange"
+          >
+            <a-select-option v-for="slot in filterOptions.slot" :key="slot">
+              {{ slot }}
+            </a-select-option>
+          </a-select>
         </div>
-        <div class="mr-6">
-          <h3 class="text-blue-600 text-lg">Character</h3>
-          <div v-for="(char, i) in filterOptions.character" :key="i">
-            <input
-              type="checkbox"
-              :name="char"
-              :value="i + 1"
-              v-model="filters.character"
-              @change="filterSkills"
-            />
-            <label :for="char">{{ char }}</label>
-          </div>
+        <div>
+          <h3 class="text-blue-600 text-lg">{{$t('COMMON.CHARACTER')}}</h3>
+          <a-select
+            mode="multiple"
+            class="w-full"
+            placeholder="Character"
+            :defaultValue="[]"
+            @change="handleCharChange"
+          >
+            <a-select-option
+              v-for="(char, i) in filterOptions.character"
+              :key="i + 1"
+            >
+              {{ $t(`COMMON.${char}`) }}
+            </a-select-option>
+          </a-select>
         </div>
-        <div class="mr-6">
-          <h3 class="text-blue-600 text-lg">Attribute</h3>
-          <div v-for="(a, i) in filterOptions.attribute" :key="i">
-            <input
-              type="checkbox"
-              :name="a"
-              :value="i + 1"
-              v-model="filters.attribute"
-              @change="filterSkills"
-            />
-            <label for="a">{{ a }}</label>
-          </div>
+        <div>
+          <h3 class="text-blue-600 text-lg">{{$t('COMMON.ATTRIBUTE')}}</h3>
+          <a-select
+            mode="multiple"
+            class="w-full"
+            placeholder="Attribute"
+            :defaultValue="[]"
+            @change="handleAttrChange"
+          >
+            <a-select-option
+              v-for="(a, i) in filterOptions.attribute"
+              :key="i + 1"
+            >
+            {{ $t(`COMMON.${a}`) }}
+            </a-select-option>
+          </a-select>
         </div>
       </div>
       <table class="w-full text-center sub-panel">
@@ -115,17 +124,31 @@ export default {
   },
   head() {
     return {
-      title: `技能 | 牛叉叉牌工具箱`,
+      title: `${this.$t("NAV.SKILL-LIST")} - ${this.$t(
+        "COMMON.TITLE-POSTFIX"
+      )}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `技能 | 牛叉叉牌工具箱`,
+          content: this.$t("COMMON.META-DESCRIPTION"),
         },
       ],
     };
   },
   methods: {
+    async handleSlotChange(value) {
+      this.filters.slot = value;
+      await this.filterSkills();
+    },
+    async handleCharChange(value) {
+      this.filters.character = value;
+      await this.filterSkills();
+    },
+    async handleAttrChange(value) {
+      this.filters.attribute = value;
+      await this.filterSkills();
+    },
     getFilters() {
       const f = {};
       if (this.filters.slot.length > 0) {
@@ -171,5 +194,11 @@ export default {
 section {
   display: flex;
   justify-content: center;
+}
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 30px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section>
     <div>
-      <h1 class="text-xl">Cards</h1>
+      <h1 class="text-xl">{{$t("NAV.CARD-LIST")}}</h1>
       <table class="mx-auto my-4 text-center sub-panel">
         <tr>
           <th>-</th>
@@ -81,7 +81,7 @@
           </button>
         </div>
       </div>
-      <div v-if="isGrid" class="card-grid w-full">
+      <div v-show="isGrid" class="card-grid w-full">
         <div v-for="(card, i) in cards" class="sub-panel p-3" :key="i">
           <NuxtLink :to="`/cards/${card.slug}`">
             <img
@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-      <table v-if="!isGrid" class="w-full text-center sub-panel card-table">
+      <table v-show="!isGrid" class="w-full text-center sub-panel card-table">
         <thead>
           <tr>
             <th>Thumbnail</th>
@@ -216,13 +216,13 @@ export default {
     };
   },
   head() {
-    return {
-      title: `思绪 | 牛叉叉牌工具箱`,
+    return {      
+      title: `${this.$t('NAV.CARD-LIST')} - ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `思绪 | 牛叉叉牌工具箱`,
+          content: this.$t('COMMON.META-DESCRIPTION'),
         },
       ],
     };

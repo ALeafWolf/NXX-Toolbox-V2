@@ -3,18 +3,18 @@
     class="desktop-sidebar p-4 base-panel"
     :class="{ hide: !$store.state.mobileMenu }"
   >
-    <NuxtLink :to="localePath('/')" @click="closeMobileMenu"><h2>Home</h2></NuxtLink>
+    <NuxtLink :to="localePath('/')" @click="closeMobileMenu"><h2>{{$t('NAV.HOME')}}</h2></NuxtLink>
     <NuxtLink :to="localePath('/calculator/resource')" @click="closeMobileMenu"
-      ><h2>Resource Calculator</h2></NuxtLink
+      ><h2>{{$t('NAV.CARD-RSS-CALC')}}</h2></NuxtLink
     >
     <NuxtLink :to="localePath('/cards')" @click="closeMobileMenu"
-      ><h2>Cards</h2></NuxtLink
+      ><h2>{{$t('NAV.CARD-LIST')}}</h2></NuxtLink
     >
     <NuxtLink :to="localePath('/skills')" @click="closeMobileMenu"
-      ><h2>Skills</h2></NuxtLink
+      ><h2>{{$t('NAV.SKILL-LIST')}}</h2></NuxtLink
     >
     <NuxtLink :to="localePath('/contact')" @click="closeMobileMenu"
-      ><h2>Contact</h2></NuxtLink
+      ><h2>{{$t('NAV.CONTACT')}}</h2></NuxtLink
     >
   </section>
 </template>
