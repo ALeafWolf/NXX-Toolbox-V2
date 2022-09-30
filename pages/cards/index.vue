@@ -121,7 +121,6 @@
             <th>Influence</th>
             <th>Defense</th>
             <th>Skills</th>
-            <th>Acquisitions</th>
           </tr>
         </thead>
         <tbody>
@@ -163,7 +162,6 @@
                 </span>
               </div>
             </td>
-            <td></td>
           </tr>
         </tbody>
       </table>

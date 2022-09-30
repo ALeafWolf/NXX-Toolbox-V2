@@ -5,7 +5,7 @@
       <div class="card-section">
         <div>
           <img
-            :src="`${imgUrl + card.character.name}/${card.name}-full.webp`"
+            :src="`${imgUrl + card.character.name}/${card.img_ref}-full.webp`"
             :alt="card.name"
           />
         </div>
@@ -45,6 +45,26 @@
           </div>
         </div>
       </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Server</th>
+            <th>Type</th>
+            <th>Subtype</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(record, i) in card.card_acquisitions" :key="i">
+            <td>{{record.start}}</td>
+            <td>{{record.end}}</td>
+            <td>{{record.server}}</td>
+            <td>{{record.type}}</td>
+            <td>{{record.subtype}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 </template>
@@ -92,5 +112,6 @@ export default {
     gap: 60px;
   }
   .skill-row {
+    display: block;
   }
   </style>

@@ -23,7 +23,8 @@
     "CARD-RSS-CALC": "思绪养成资源",
     "CARD-LIST": "思绪",
     "SKILL-LIST": "技能",
-    "CONTACT": "联系"
+    "CONTACT": "联系",
+    "CARD-ACQUISITION": "思绪获取方式"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "技能等级",

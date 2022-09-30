@@ -23,7 +23,8 @@
     "CARD-RSS-CALC": "Card Resource",
     "CARD-LIST": "Cards",
     "SKILL-LIST": "Skills",
-    "CONTACT": "Contact"
+    "CONTACT": "Contact",
+    "CARD-ACQUISITION": "Card Acquisition"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "Skill Level",

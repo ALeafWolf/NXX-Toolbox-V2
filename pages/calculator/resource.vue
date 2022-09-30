@@ -3,7 +3,7 @@
     <div class="col-span-1 lg:col-span-3 grid gap-5">
       <div class="sub-panel flex flex-col items-center justify-center p-3">
         <h2>{{ $t("NAV.CARD-LIST") }}</h2>
-        <table class="w-full text-center">
+        <table class="w-full text-center card-table">
           <tbody>
             <tr>
               <th>{{ $t("COMMON.CHARACTER") }}</th>
@@ -102,7 +102,7 @@
             <tr>
               <th>{{ $t("RSS-CALC.SKILL-LEVEL") }}</th>
               <td>
-                <div class="flex">
+                <div class="grid grid-cols-3 gap-2">
                   <a-input-number
                     class="text-center"
                     v-for="i in 3"
@@ -119,15 +119,7 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
         <div
-          class="
-            sub-panel
-            col-span-1
-            md:col-span-3
-            flex flex-col
-            items-center
-            justify-center
-            p-3
-          "
+          class="sub-panel col-span-1 md:col-span-3 flex flex-col items-center justify-center p-3"
         >
           <h2>{{ $t("COMMON.EXPCHIP") }}</h2>
           <table class="text-center">
@@ -155,15 +147,7 @@
           </table>
         </div>
         <div
-          class="
-            col-span-1
-            md:col-span-2
-            sub-panel
-            flex flex-col
-            items-center
-            justify-center
-            p-3
-          "
+          class="col-span-1 md:col-span-2 sub-panel flex flex-col items-center justify-center p-3"
         >
           <h2>{{ $t("RSS-CALC.CARD-LEVEL-MATERIAL") }}</h2>
           <table class="w-full text-center">
@@ -202,14 +186,7 @@
 
     <div class="col-span-1 lg:col-span-2 grid gap-5">
       <div
-        class="
-          sub-panel
-          p-3
-          text-center
-          flex flex-col
-          items-center
-          justify-center
-        "
+        class="sub-panel p-3 text-center flex flex-col items-center justify-center"
       >
         <h2>{{ $t("RSS-CALC.EVOLVE-RSS") }}</h2>
         <table class="w-full">
@@ -253,9 +230,9 @@
               </td>
             </tr>
             <tr>
-              <td>{{this.cardEvolveRss.chip[0]}}</td>
-              <td>{{this.cardEvolveRss.chip[1]}}</td>
-              <td>{{this.cardEvolveRss.chip[2]}}</td>
+              <td>{{ this.cardEvolveRss.chip[0] }}</td>
+              <td>{{ this.cardEvolveRss.chip[1] }}</td>
+              <td>{{ this.cardEvolveRss.chip[2] }}</td>
             </tr>
             <tr>
               <td>
@@ -287,22 +264,15 @@
               </td>
             </tr>
             <tr>
-              <td>{{this.cardEvolveRss.charChip[0]}}</td>
-              <td>{{this.cardEvolveRss.charChip[1]}}</td>
-              <td>{{this.cardEvolveRss.charChip[2]}}</td>
+              <td>{{ this.cardEvolveRss.charChip[0] }}</td>
+              <td>{{ this.cardEvolveRss.charChip[1] }}</td>
+              <td>{{ this.cardEvolveRss.charChip[2] }}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div
-        class="
-          sub-panel
-          text-center
-          p-3
-          flex flex-col
-          items-center
-          justify-center
-        "
+        class="sub-panel text-center p-3 flex flex-col items-center justify-center"
       >
         <h2>{{ $t("RSS-CALC.SKILL-LV-RSS") }}</h2>
         <table class="w-full">
@@ -314,7 +284,7 @@
                   src="~/assets/images/icons/btn_coin_s.png"
                 />
               </td>
-              <td colspan="2">0</td>
+              <td colspan="2">{{calculatedSkillRss.coin}}</td>
             </tr>
             <tr>
               <td>
@@ -346,9 +316,9 @@
               </td>
             </tr>
             <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <td>{{calculatedSkillRss.impression[0]}}</td>
+              <td>{{calculatedSkillRss.rss[0]}}</td>
+              <td>{{calculatedSkillRss.rss[0]}}</td>
             </tr>
             <tr>
               <td>
@@ -380,9 +350,43 @@
               </td>
             </tr>
             <tr>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <td>{{calculatedSkillRss.impression[1]}}</td>
+              <td>{{calculatedSkillRss.rss[1]}}</td>
+              <td>{{calculatedSkillRss.rss[1]}}</td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${translateAttribute}印象 Ⅲ.webp`)
+                  "
+                  :alt="`${translateAttribute}印象 Ⅲ`"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[4]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[4]"
+                />
+              </td>
+              <td>
+                <img
+                  class="icon m-auto"
+                  :src="
+                    require(`~/assets/images/rss/${getCharacterSkillMaterial[5]}.webp`)
+                  "
+                  :alt="getCharacterSkillMaterial[5]"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>{{calculatedSkillRss.impression[2]}}</td>
+              <td>{{calculatedSkillRss.rss[2]}}</td>
+              <td>{{calculatedSkillRss.rss[2]}}</td>
             </tr>
           </tbody>
         </table>
@@ -556,28 +560,64 @@ export default {
       const evolveRss = {
         coin: 0,
         chip: [0, 0, 0],
-        charChip: [0,0,0],
+        charChip: [0, 0, 0],
       };
-      for(let o = 0; o < evolveRssList.length; o++) {
+      for (let o = 0; o < evolveRssList.length; o++) {
         let data = evolveRssList[o];
         if (
           data.lv >= this.orderedLvs.lowLv &&
           data.lv <= this.orderedLvs.highLv
         ) {
+          evolveRss.coin += parseInt(data.coin);
           let i = 1;
           let j = 2;
           let c = 0;
           if (data.lv === 40) {
             i = 0;
             j = 1;
+            if (this.filters.rarity === "SR" || this.filters.rarity === "SSR")
+              c = 1;
           }
-          if(this.filters.rarity === 'MR' && data.lv === 70) c = 2;
+          if (data.lv === 70) c = 2;
           evolveRss.chip[i] += parseInt(data.chip1);
           evolveRss.chip[j] += parseInt(data.chip2);
           evolveRss.charChip[c] += parseInt(data.charChip);
         }
       }
       return evolveRss;
+    },
+    calculatedSkillRss: function () {
+      let coin = 0;
+      const rss = [0, 0, 0];
+      const impression = [0, 0, 0];
+      const rssList = this.skillRss[this.filters.rarity];
+
+      for (let i = 0; i < this.filters.skillLv.length; i++) {
+        const lv = this.filters.skillLv[i];
+        if (lv > 1) {
+          //lv2: index 0, lv10: index 8
+          for (let j = 0; j < lv - 1; j++) {
+            coin += rssList[j].coin;
+            //lv2-4
+            if (j < 3) {
+              impression[0] += rssList[j].impression;
+              rss[0] += rssList[j].item;
+            }
+            //lv5-7
+            else if (j < 6) {
+              impression[1] += rssList[j].impression;
+              rss[1] += rssList[j].item;
+            }
+            //lv8-10
+            else {
+              impression[2] += rssList[j].impression;
+              rss[2] += rssList[j].item;
+            }
+          }
+        }
+      }
+
+      return { coin, rss, impression };
     },
   },
   methods: {
@@ -606,5 +646,10 @@ export default {
 h2 {
   font-weight: 700;
   font-size: 18px;
+}
+.card-table {
+  td {
+    padding: 5px 20px;
+  }
 }
 </style>
