@@ -16,7 +16,16 @@
     "RARITY": "희귀도",
     "LEVEL": "레벨",
     "EXP": "경험치",
-    "EXPCHIP": "법리적 훈계"
+    "EXPCHIP": "법리적 훈계",
+    "PERMANENT-POOL": "일반",
+    "ROTATION-POOL": "누적 충전",
+    "EVENT-POOL": "이벤트",
+    "EVENT-LIMITED-POOL": "한정 이벤트",
+    "EVENT-REWARD": "이벤트 보상",
+    "RERUN-POOL": "복각",
+    "ANOMALY-LEVEL": "Anomaly Level",
+    "TOP-UP-REWARD": "누적 충전",
+    "OTHER": "기타"
   },
   "NAV": {
     "HOME": "홈",
@@ -24,7 +33,8 @@
     "CARD-LIST": "생각",
     "SKILL-LIST": "스킬",
     "CONTACT": "문의 양식",
-    "CARD-ACQUISITION": "카드 획득"
+    "CARD-ACQUISITION": "카드 획득",
+    "MERCH-LIST": "공식 굿즈"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "스킬 레벨",
@@ -33,5 +43,18 @@
     "REQUIRED-EXP": "필요 경험치",
     "EVOLVE-RSS": "진화 재료",
     "SKILL-LV-RSS": "스킬 레벨업 재료"
+  },
+  "MERCH": {
+    "PRODUCT-NAME": "상품명",
+    "REFERENCE": "참고",
+    "PURCHASE-LINK": "구매 링크",
+    "PRODUCT-PACKAGING": "포장",
+    "PRODUCT-TECHNOLOGY": "기술",
+    "PRODUCT-MATERIAL": "소재",
+    "SELL-TIME": "판매 기일",
+    "PRICE": "가격",
+    "PRODUCT-SERIES": "상품 시리즈",
+    "HIDE-DESCRIPTION": "제품 설명 숨기기",
+    "SHOW-DESCRIPTION": "제품 설명 보기"
   }
 }

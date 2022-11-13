@@ -18,7 +18,7 @@
           <td>{{ record.end }}</td>
           <td>{{ record.server }}</td>
           <td>{{ record.type }}</td>
-          <td>{{ record.subtype }}</td>
+          <td>{{ $t(`COMMON.${record.subtype}`) }}</td>
           <td>
             <span
               class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2"

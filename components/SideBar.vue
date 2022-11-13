@@ -18,6 +18,9 @@
     <NuxtLink :to="localePath('/skills')" @click="closeMobileMenu">
       <h2>{{ $t("NAV.SKILL-LIST") }}</h2>
     </NuxtLink>
+    <NuxtLink :to="localePath('/merches')" @click="closeMobileMenu">
+      <h2>{{ $t("NAV.MERCH-LIST") }}</h2>
+    </NuxtLink>
     <NuxtLink :to="localePath('/contact')" @click="closeMobileMenu">
       <h2>{{ $t("NAV.CONTACT") }}</h2>
     </NuxtLink>

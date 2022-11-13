@@ -16,7 +16,16 @@
     "RARITY": "Rarity",
     "LEVEL": "Level",
     "EXP": "EXP",
-    "EXPCHIP": "EXP Chips"
+    "EXPCHIP": "EXP Chips",
+    "PERMANENT-POOL": "Permanent Pool",
+    "ROTATION-POOL": "Rotation Pool",
+    "EVENT-POOL": "Event Pool",
+    "EVENT-LIMITED-POOL": "Event Limited Pool",
+    "EVENT-REWARD": "Event Reward",
+    "RERUN-POOL": "Rerun Pool",
+    "ANOMALY-LEVEL": "Anomaly Level",
+    "TOP-UP-REWARD": "Top-up Reward",
+    "OTHER": "Other"
   },
   "NAV": {
     "HOME": "Home",
@@ -24,7 +33,8 @@
     "CARD-LIST": "Cards",
     "SKILL-LIST": "Skills",
     "CONTACT": "Contact",
-    "CARD-ACQUISITION": "Card Acquisition"
+    "CARD-ACQUISITION": "Card Acquisition",
+    "MERCH-LIST": "Merches"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "Skill Level",
@@ -33,5 +43,18 @@
     "REQUIRED-EXP": "Required EXP",
     "EVOLVE-RSS": "Card Evolve Resource",
     "SKILL-LV-RSS": "Skill Leveling Resource"
+  },
+  "MERCH": {
+    "PRODUCT-NAME": "Product Name",
+    "REFERENCE": "Reference",
+    "PURCHASE-LINK": "Purchase Link",
+    "PRODUCT-PACKAGING": "Product Packaging",
+    "PRODUCT-TECHNOLOGY": "Product Technology",
+    "PRODUCT-MATERIAL": "Product Material",
+    "SELL-TIME": "On Sell Date",
+    "PRICE": "Price",
+    "PRODUCT-SERIES": "Product Series",
+    "HIDE-DESCRIPTION": "Hide Product Description",
+    "SHOW-DESCRIPTION": "Show Product Description"
   }
 }

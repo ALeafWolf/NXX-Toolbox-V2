@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper px-6">
+  <section class="px-6">
     <img
       class="large-icon m-auto"
       :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
@@ -37,7 +37,7 @@
           <div>{{ num }}</div>
         </div>
       </div>
-      <div class="card-grid w-full">
+      <div class="card-grid w-full p-3">
         <NuxtLink
           v-for="(card, j) in skill.relate_cards"
           :key="j"
@@ -87,6 +87,18 @@ export default {
       }
       return arr;
     },
+  },
+  head() {
+    return {
+      title: `${this.skill.name} | 牛叉叉牌工具箱`,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: `${this.skill.name} | 牛叉叉牌工具箱`,
+        },
+      ],
+    };
   },
 };
 </script>

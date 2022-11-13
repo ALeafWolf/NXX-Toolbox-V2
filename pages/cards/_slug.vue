@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper">
+  <section>
     <div class="sub-panel p-4">
       <h1 class="text-center">{{ card.character.name }} - {{ card.name }}</h1>
       <div class="card-section">

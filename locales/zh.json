@@ -16,7 +16,16 @@
     "RARITY": "稀有度",
     "LEVEL": "等级",
     "EXP": "经验",
-    "EXPCHIP": "法理之谕"
+    "EXPCHIP": "法理之谕",
+    "PERMANENT-POOL": "常驻池",
+    "ROTATION-POOL": "轮替池",
+    "EVENT-POOL": "活动池",
+    "EVENT-LIMITED-POOL": "限定活动池",
+    "EVENT-REWARD": "活动奖励",
+    "RERUN-POOL": "复刻池",
+    "ANOMALY-LEVEL": "异常关卡",
+    "TOP-UP-REWARD": "限时累冲奖励",
+    "OTHER": "其他"
   },
   "NAV": {
     "HOME": "主页",
@@ -24,7 +33,8 @@
     "CARD-LIST": "思绪",
     "SKILL-LIST": "技能",
     "CONTACT": "联系",
-    "CARD-ACQUISITION": "思绪获取方式"
+    "CARD-ACQUISITION": "思绪获取方式",
+    "MERCH-LIST": "周边列表"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "技能等级",
@@ -33,5 +43,18 @@
     "REQUIRED-EXP": "所需经验",
     "EVOLVE-RSS": "思绪进化材料",
     "SKILL-LV-RSS": "技能升级材料"
+  },
+  "MERCH": {
+    "PRODUCT-NAME": "商品名",
+    "REFERENCE": "参考",
+    "PURCHASE-LINK": "购买地址",
+    "PRODUCT-PACKAGING": "商品包装",
+    "PRODUCT-TECHNOLOGY": "商品工艺",
+    "PRODUCT-MATERIAL": "商品材质",
+    "SELL-TIME": "贩售日期",
+    "PRICE": "价格",
+    "PRODUCT-SERIES": "商品系列",
+    "HIDE-DESCRIPTION": "隐藏产品信息",
+    "SHOW-DESCRIPTION": "显示产品描述"
   }
 }
