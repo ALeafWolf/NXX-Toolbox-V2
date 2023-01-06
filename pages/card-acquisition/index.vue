@@ -1,6 +1,13 @@
 <template>
   <section>
-    <table class="sub-panel w-full">
+    <div class="mb-4">
+      <a-input-search
+        :placeholder="$t('CARD-ACQUISITION.SEARCH-BY-NAME')"
+        size="large"
+        @search="filterHistoriesByCardName"
+      />
+    </div>
+    <table class="sub-panel w-full custom-table">
       <thead>
         <tr>
           <th>Start</th>
@@ -26,7 +33,13 @@
               <NuxtLink
                 v-for="(card, j) in record.cards"
                 :key="j"
-                :to="localePath(`/cards/${card.slug}`)"
+                :to="
+                  localePath(
+                    `/cards/${$globalV.nameToSlug(
+                      card[`name${$globalV.getLocalePostfix(locale)}`]
+                    )}`
+                  )
+                "
               >
                 <img
                   class="large-icon"
@@ -80,28 +93,46 @@
 export default {
   async asyncData({ $axios, app, route }) {
     const acquisition = await $axios
-      .$get("/api/card-acquisition/list", {
-        params: {
-          locale: app.i18n.locale,
-          slug: route.params.slug,
-        },
-      })
+      .$get("/api/card-acquisition/list")
       .catch((error) => {
         console.log(error.toJSON());
       });
-    const index = [];
-    for (let i = 0; i < acquisition.length; i++) {
-      if (
-        acquisition[i].start === "2020-07-30" &&
-        acquisition[i].subtype === "PERMANENT-POOL"
-      ) {
-        index.push(i);
-      }
-    }
-    acquisition.splice(index[0], 1);
     return {
       acquisition,
+      locale: app.i18n.locale,
     };
+  },
+  methods: {
+    async filterHistoriesByCardName(name) {
+      console.log(name);
+      const result = await this.$axios.$get("/api/card-acquisition/list", {
+        params: {
+          filters: {
+            cards: {
+              $or: [
+                {
+                  name: {
+                    $eq: name,
+                  },
+                },
+                {
+                  name_en: {
+                    $eq: name,
+                  },
+                },
+                {
+                  name_ko: {
+                    $eq: name,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      });
+      console.log(result);
+      this.acquisition = result;
+    },
   },
   head() {
     return {

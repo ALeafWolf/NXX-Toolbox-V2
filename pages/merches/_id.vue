@@ -76,7 +76,7 @@
                 >
               </td>
             </tr>
-            <tr v-if="merch.tmall">
+            <tr v-if="merch.tmall && merch.tmall !== '-'">
               <th>{{ $t("MERCH.PURCHASE-LINK") }}</th>
               <td>
                 <a :href="merch.tmall" target="_blank">

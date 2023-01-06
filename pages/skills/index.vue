@@ -1,14 +1,15 @@
 <template>
   <section>
     <div class="wrapper">
-      <h1 class="text-xl">{{$t('NAV.SKILL-LIST')}}</h1>
+      <h1 class="text-xl">{{ $t("NAV.SKILL-LIST") }}</h1>
       <div class="filter-wrapper">
         <div>
-          <h3 class="text-blue-600 text-lg">{{$t('COMMON.SKILL-SLOT')}}</h3>
+          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.SKILL-SLOT") }}</h3>
           <a-select
             mode="multiple"
-            class="w-full"
+            class="w-full custom-select"
             placeholder="Slot"
+            dropdownClassName="custom-dropdown"
             :defaultValue="[]"
             @change="handleSlotChange"
           >
@@ -18,12 +19,13 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">{{$t('COMMON.CHARACTER')}}</h3>
+          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.CHARACTER") }}</h3>
           <a-select
             mode="multiple"
-            class="w-full"
+            class="w-full custom-select"
             placeholder="Character"
             :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
             @change="handleCharChange"
           >
             <a-select-option
@@ -35,19 +37,20 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">{{$t('COMMON.ATTRIBUTE')}}</h3>
+          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.ATTRIBUTE") }}</h3>
           <a-select
             mode="multiple"
-            class="w-full"
+            class="w-full custom-select"
             placeholder="Attribute"
             :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
             @change="handleAttrChange"
           >
             <a-select-option
               v-for="(a, i) in filterOptions.attribute"
               :key="i + 1"
             >
-            {{ $t(`COMMON.${a}`) }}
+              {{ $t(`COMMON.${a}`) }}
             </a-select-option>
           </a-select>
         </div>
@@ -65,7 +68,7 @@
             <th>Lv 10</th>
           </tr>
         </thead>
-        <tbody v-for="(group, i) in skillGroups" :key="i">
+        <tbody v-for="(group, i) in currentSkillGroups" :key="i">
           <tr v-for="(skill, j) in group.skills" :key="j">
             <td v-if="j === 0" :rowspan="group.skills.length">
               <NuxtLink :to="`/skills/${skill.slug}`">
@@ -118,8 +121,10 @@ export default {
       .catch((error) => {
         console.log(error.toJSON());
       });
+
     return {
       skillGroups,
+      currentSkillGroups: skillGroups,
     };
   },
   head() {
@@ -174,17 +179,21 @@ export default {
     },
     async filterSkills() {
       const f = this.getFilters();
-      this.skillGroups = await this.$axios
-        .$get("/api/skill-groups", {
-          params: {
-            locale: "zh",
-            filters: f,
-            sort: ["slot"],
-          },
-        })
-        .catch((error) => {
-          console.log(error.toJSON());
-        });
+      if (Object.keys(f).length === 0) {
+        this.currentSkillGroups = this.skillGroups;
+      } else {
+        this.currentSkillGroups = await this.$axios
+          .$get("/api/skill-groups", {
+            params: {
+              locale: "zh",
+              filters: f,
+              sort: ["slot"],
+            },
+          })
+          .catch((error) => {
+            console.log(error.toJSON());
+          });
+      }
     },
   },
 };

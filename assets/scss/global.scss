@@ -18,6 +18,34 @@ p {
 }
 
 /*Ant design components*/
-.ant-input-number{
+.ant-input-number {
     width: 100%;
+}
+
+.custom-select {
+    .ant-select-selection--multiple .ant-select-selection__choice {
+        background-color: rgba(76, 76, 133, 0.45);
+    }
+}
+
+.custom-dropdown {
+    .ant-select-dropdown-menu-item {
+        color: #fff;
+        svg {
+            display: none;
+        }
+    }
+    .ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
+        background-color: #000000cc;
+    }
+    .ant-select-dropdown-menu-item-selected {
+        svg {
+            display: block;
+            fill: #fff;
+        }
+    }
+}
+
+.ant-input-group-addon{
+    background: none;
 }

@@ -1,7 +1,7 @@
 <template>
   <section>
     <div>
-      <h1 class="text-xl">{{$t("NAV.CARD-LIST")}}</h1>
+      <h1 class="text-xl">{{ $t("NAV.CARD-LIST") }}</h1>
       <table class="mx-auto my-4 text-center sub-panel">
         <tr>
           <th>-</th>
@@ -83,7 +83,9 @@
       </div>
       <div v-show="isGrid" class="card-grid w-full">
         <div v-for="(card, i) in cards" class="sub-panel p-3" :key="i">
-          <NuxtLink :to="`/cards/${card.slug}`">
+          <NuxtLink
+            :to="localePath(`/cards/${$globalV.nameToSlug(card.name)}`)"
+          >
             <img
               class="large-icon m-auto"
               :src="card.thumbnail.url"
@@ -210,22 +212,21 @@ export default {
     });
     return {
       cards,
-      cardCount
+      cardCount,
     };
   },
   head() {
-    return {      
-      title: `${this.$t('NAV.CARD-LIST')} - ${this.$t('COMMON.TITLE-POSTFIX')}`,
+    return {
+      title: `${this.$t("NAV.CARD-LIST")} - ${this.$t("COMMON.TITLE-POSTFIX")}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: this.$t('COMMON.META-DESCRIPTION'),
+          content: this.$t("COMMON.META-DESCRIPTION"),
         },
       ],
     };
   },
-  mounted() {},
   methods: {
     setIsGrid(bool) {
       this.isGrid = bool;

@@ -48,13 +48,18 @@
     "PRODUCT-NAME": "商品名",
     "REFERENCE": "参考",
     "PURCHASE-LINK": "购买地址",
-    "PRODUCT-PACKAGING": "商品包装",
-    "PRODUCT-TECHNOLOGY": "商品工艺",
-    "PRODUCT-MATERIAL": "商品材质",
+    "PRODUCT-PACKAGING": "包装",
+    "PRODUCT-TECHNOLOGY": "工艺",
+    "PRODUCT-MATERIAL": "材质",
     "SELL-TIME": "贩售日期",
     "PRICE": "价格",
-    "PRODUCT-SERIES": "商品系列",
+    "PRODUCT-SERIES": "系列",
     "HIDE-DESCRIPTION": "隐藏产品信息",
-    "SHOW-DESCRIPTION": "显示产品描述"
+    "SHOW-DESCRIPTION": "显示产品描述",
+    "PRODUCT-TYPE": "种类",
+    "PRODUCT-PRICE": "价格"
+  },
+  "CARD-ACQUISITION": {
+    "SEARCH-BY-NAME": "输入思绪名称"
   }
 }

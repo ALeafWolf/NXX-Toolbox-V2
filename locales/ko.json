@@ -55,6 +55,11 @@
     "PRICE": "가격",
     "PRODUCT-SERIES": "상품 시리즈",
     "HIDE-DESCRIPTION": "제품 설명 숨기기",
-    "SHOW-DESCRIPTION": "제품 설명 보기"
+    "SHOW-DESCRIPTION": "제품 설명 보기",
+    "PRODUCT-TYPE": "상품 유형",
+    "PRODUCT-PRICE": "가격"
+  },
+  "CARD-ACQUISITION": {
+    "SEARCH-BY-NAME": "카드 이름 입력"
   }
 }

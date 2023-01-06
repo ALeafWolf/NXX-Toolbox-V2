@@ -1,7 +1,9 @@
 <template>
   <section>
     <div class="sub-panel p-4">
-      <h1 class="text-center">{{ card.character.name }} - {{ card.name }}</h1>
+      <h1 class="text-center">
+        {{ $t(`COMMON.${card.character.name}`) }} - {{ card.name }}
+      </h1>
       <div class="card-section">
         <div>
           <img
@@ -38,8 +40,8 @@
                     :alt="skill.name"
                   />
                 </NuxtLink>
-                <h2>{{skill.name}}</h2>
-                <p>{{skill.skill_group.description}}</p>
+                <h2>{{ skill.name }}</h2>
+                <p>{{ skill.skill_group.description }}</p>
               </div>
             </div>
           </div>
@@ -57,11 +59,11 @@
         </thead>
         <tbody>
           <tr v-for="(record, i) in card.card_acquisitions" :key="i">
-            <td>{{record.start}}</td>
-            <td>{{record.end}}</td>
-            <td>{{record.server}}</td>
-            <td>{{record.type}}</td>
-            <td>{{record.subtype}}</td>
+            <td>{{ record.start }}</td>
+            <td>{{ record.end }}</td>
+            <td>{{ record.server }}</td>
+            <td>{{ record.type }}</td>
+            <td>{{ record.subtype }}</td>
           </tr>
         </tbody>
       </table>
@@ -77,15 +79,15 @@ export default {
     };
   },
   async asyncData({ $axios, app, route }) {
+    const name = app.$globalV.slugToName(route.params.slug, app.i18n.locale);
     const card = await $axios
-      .$get("/api/card/detail", {
+      .$get(`/api/card/detail/${encodeURIComponent(name)}`, {
         params: {
           locale: app.i18n.locale,
-          slug: route.params.slug,
         },
       })
       .catch((error) => {
-        console.log(error.toJSON());
+        console.log(error);
       });
     return {
       card,
@@ -106,12 +108,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .card-section {
-    display: grid;
-    grid-template-columns: 300px auto;
-    gap: 60px;
-  }
-  .skill-row {
-    display: block;
-  }
-  </style>
+.card-section {
+  display: grid;
+  grid-template-columns: 300px auto;
+  gap: 60px;
+}
+.skill-row {
+  display: block;
+}
+</style>

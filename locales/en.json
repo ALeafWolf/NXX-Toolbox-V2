@@ -48,13 +48,18 @@
     "PRODUCT-NAME": "Product Name",
     "REFERENCE": "Reference",
     "PURCHASE-LINK": "Purchase Link",
-    "PRODUCT-PACKAGING": "Product Packaging",
-    "PRODUCT-TECHNOLOGY": "Product Technology",
-    "PRODUCT-MATERIAL": "Product Material",
+    "PRODUCT-PACKAGING": "Merch Packaging",
+    "PRODUCT-TECHNOLOGY": "Merch Technology",
+    "PRODUCT-MATERIAL": "Merch Material",
     "SELL-TIME": "On Sell Date",
     "PRICE": "Price",
-    "PRODUCT-SERIES": "Product Series",
+    "PRODUCT-SERIES": "Merch Series",
     "HIDE-DESCRIPTION": "Hide Product Description",
-    "SHOW-DESCRIPTION": "Show Product Description"
+    "SHOW-DESCRIPTION": "Show Product Description",
+    "PRODUCT-TYPE": "Merch Type",
+    "PRODUCT-PRICE": "Merch Price"
+  },
+  "CARD-ACQUISITION": {
+    "SEARCH-BY-NAME": "Enter Card Name"
   }
 }

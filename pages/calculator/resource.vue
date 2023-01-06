@@ -117,9 +117,9 @@
           </tbody>
         </table>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
         <div
-          class="sub-panel col-span-1 md:col-span-3 flex flex-col items-center justify-center p-3"
+          class="sub-panel col-span-1 md:col-span-2 flex flex-col items-center justify-center p-3"
         >
           <h2>{{ $t("COMMON.EXPCHIP") }}</h2>
           <table class="text-center">
@@ -169,7 +169,7 @@
                 <td>
                   <img
                     class="icon m-auto"
-                    src="~/assets/images/icons/btn_coin_s.png"
+                    src="~/assets/images/icons/icon_coin_s.png"
                   />
                 </td>
               </tr>
@@ -195,7 +195,7 @@
               <td>
                 <img
                   class="icon m-auto"
-                  src="~/assets/images/icons/btn_coin_s.png"
+                  src="~/assets/images/icons/icon_coin_s.png"
                 />
               </td>
               <td colspan="2">{{ this.cardEvolveRss.coin }}</td>
@@ -281,7 +281,7 @@
               <td>
                 <img
                   class="icon m-auto"
-                  src="~/assets/images/icons/btn_coin_s.png"
+                  src="~/assets/images/icons/icon_coin_s.png"
                 />
               </td>
               <td colspan="2">{{calculatedSkillRss.coin}}</td>
