@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "TITLE-POSTFIX": "NXXToolbox",
+    "TITLE-POSTFIX": "NXX Toolbox",
     "META-DESCRIPTION": "NXX Toolbox: 미해결사건부 다기능 지원 사이트",
     "SKILL-SLOT": "슬롯",
     "CHARACTER": "캐릭터",
@@ -25,7 +25,12 @@
     "RERUN-POOL": "복각",
     "ANOMALY-LEVEL": "Anomaly Level",
     "TOP-UP-REWARD": "누적 충전",
-    "OTHER": "기타"
+    "OTHER": "기타",
+    "HIDE-FILTER": "필터 옵션 숨기기",
+    "SHOW-FILTER": "필터 옵션 표시",
+    "APPLY-FILTER": "필터 적용",
+    "CARD": "생각",
+    "RESET-FILTER": "필터 재설정"
   },
   "NAV": {
     "HOME": "홈",

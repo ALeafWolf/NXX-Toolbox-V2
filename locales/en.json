@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "TITLE-POSTFIX": "NXXToolbox",
+    "TITLE-POSTFIX": "NXX Toolbox",
     "META-DESCRIPTION": "NXX Toolbox: Multi-functional Support Site for Tears of Themis",
     "SKILL-SLOT": "Skill Slot",
     "CHARACTER": "Character",
@@ -25,7 +25,12 @@
     "RERUN-POOL": "Rerun Pool",
     "ANOMALY-LEVEL": "Anomaly Level",
     "TOP-UP-REWARD": "Top-up Reward",
-    "OTHER": "Other"
+    "OTHER": "Other",
+    "HIDE-FILTER": "Hide Filter Options",
+    "SHOW-FILTER": "Show Filter Options",
+    "APPLY-FILTER": "Apply Filter",
+    "CARD": "Card",
+    "RESET-FILTER": "Reset Filter"
   },
   "NAV": {
     "HOME": "Home",

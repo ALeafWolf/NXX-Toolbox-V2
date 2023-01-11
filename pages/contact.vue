@@ -80,6 +80,18 @@ export default {
       });
     },
   },
+  head() {
+    return {
+      title: `${this.$t("NAV.CONTACT")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: `${this.$t("NAV.CONTACT")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+        },
+      ],
+    };
+  },
 };
 </script>
 

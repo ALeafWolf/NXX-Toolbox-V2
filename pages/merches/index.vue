@@ -1,17 +1,44 @@
 <template>
   <section>
-    <h1 class="text-xl">Merches</h1>
-    <div class="flex justify-between mb-4 base-panel">
+    <div class="flex justify-between mb-4 base-panel p-4">
       <a-button class="flex" @click="toggleDateSort">
         <a-icon :type="`arrow-${isDateDesc ? 'down' : 'up'}`" />
         <span>Sell Date</span>
       </a-button>
       <a-button @click="isFilterShow = !isFilterShow">
         <a-icon type="filter" />
-      Filter
+        {{ isFilterShow ? $t("COMMON.HIDE-FILTER") : $t("COMMON.SHOW-FILTER") }}
       </a-button>
     </div>
     <div class="filter-wrapper base-panel p-4" v-if="isFilterShow">
+      <div>
+        <h3 class="text-blue-600 text-lg">
+          {{ $t("COMMON.CHARACTER") }}
+        </h3>
+        <a-select
+          mode="multiple"
+          class="w-full custom-select"
+          :defaultValue="[]"
+          dropdownClassName="custom-dropdown"
+          @change="handleCharacterChange"
+        >
+          <a-select-option key="LUKE">
+            {{ $t("COMMON.LUKE") }}
+          </a-select-option>
+          <a-select-option key="ARTEM">
+            {{ $t("COMMON.ARTEM") }}
+          </a-select-option>
+          <a-select-option key="VYN">
+            {{ $t("COMMON.VYN") }}
+          </a-select-option>
+          <a-select-option key="MARIUS">
+            {{ $t("COMMON.MARIUS") }}
+          </a-select-option>
+          <a-select-option key="OTHER">
+            {{ $t("COMMON.OTHER") }}
+          </a-select-option>
+        </a-select>
+      </div>
       <div>
         <h3 class="text-blue-600 text-lg">
           {{ $t("MERCH.PRODUCT-SERIES") }}
@@ -111,46 +138,8 @@
         </div>
       </div>
       <div>
-        <h3 class="text-blue-600 text-lg">
-          {{ $t("COMMON.CHARACTER") }}
-        </h3>
-        <a-select
-          mode="multiple"
-          class="w-full custom-select"
-          :defaultValue="[]"
-          dropdownClassName="custom-dropdown"
-          @change="handleCharacterChange"
-        >
-          <a-select-option key="LUKE">
-            {{$t("COMMON.LUKE")}}
-          </a-select-option>
-          <a-select-option key="ARTEM">
-            {{$t("COMMON.ARTEM")}}
-          </a-select-option>
-          <a-select-option key="VYN">
-            {{$t("COMMON.VYN")}}
-          </a-select-option>
-          <a-select-option key="MARIUS">
-            {{$t("COMMON.MARIUS")}}
-          </a-select-option>
-          <a-select-option key="OTHER">
-            {{$t("COMMON.OTHER")}}
-          </a-select-option>
-        </a-select>
-        <!-- <a-radio-group v-model="filters.character">
-          <a-radio-button value="LUKE">
-            <img class="icon" src="~/assets/images/夏彦.webp" alt="夏彦" />
-          </a-radio-button>
-          <a-radio-button value="ARTEM">
-            <img class="icon" src="~/assets/images/左然.webp" alt="左然" />
-          </a-radio-button>
-          <a-radio-button value="VYN">
-            <img class="icon" src="~/assets/images/莫弈.webp" alt="莫弈" />
-          </a-radio-button>
-          <a-radio-button value="MARIUS">
-            <img class="icon" src="~/assets/images/陆景和.webp" alt="陆景和" />
-          </a-radio-button>
-        </a-radio-group> -->
+        <a-button class="w-full">{{ $t('COMMON.APPLY-FILTER') }}</a-button>
+        <a-button class="w-full">{{ $t('COMMON.RESET-FILTER') }}</a-button>
       </div>
     </div>
     <div class="card-grid w-full">
@@ -252,17 +241,17 @@ export default {
       technologies: technologies.data,
       packagings: packagings.data,
       priceRange,
-      priceFilter: priceRange
+      priceFilter: priceRange,
     };
   },
   head() {
     return {
-      title: `官方周边列表 | 牛叉叉牌工具箱`,
+      title: `${this.$t("NAV.MERCH-LIST")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `官方周边列表 | 牛叉叉牌工具箱`,
+          content: `${this.$t("NAV.MERCH-LIST")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
         },
       ],
     };
@@ -270,11 +259,11 @@ export default {
   methods: {
     async toggleDateSort() {
       this.isDateDesc = !this.isDateDesc;
-      await this.filterMerches(); 
+      await this.filterMerches();
     },
-    async handleCharacterChange(value){
+    async handleCharacterChange(value) {
       this.filters.characters = value;
-      await this.filterMerches(); 
+      await this.filterMerches();
     },
     async handleSeriesChange(value) {
       this.filters.series = value;
@@ -304,13 +293,17 @@ export default {
       const f = {};
       if (this.filters.characters.length > 0) {
         const c = this.filters.characters;
-        if((this.filters.characters[0] !== 'OTHER' && this.filters.characters.length === 1) || this.filters.characters.length > 1 ){
-          c.push('ALL');
+        if (
+          (this.filters.characters[0] !== "OTHER" &&
+            this.filters.characters.length === 1) ||
+          this.filters.characters.length > 1
+        ) {
+          c.push("ALL");
         }
         f.character = {
           name: {
             $in: c,
-          }
+          },
         };
       }
       if (this.filters.series.length > 0) {
@@ -356,7 +349,7 @@ export default {
     },
     async filterMerches() {
       const f = this.getFilters();
-      const s = [`id:${this.isDateDesc ? 'desc' : 'asc'}`]
+      const s = [`id:${this.isDateDesc ? "desc" : "asc"}`];
       if (Object.keys(f).length === 0) {
         this.currentMerches = this.merches;
       } else {
@@ -364,7 +357,7 @@ export default {
           .$get("/api/merch/list", {
             params: {
               filters: f,
-              sort: s
+              sort: s,
             },
           })
           .catch((error) => {
@@ -397,9 +390,15 @@ export default {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .filter-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 @media all and (max-width: $sm) {
   .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filter-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
 }

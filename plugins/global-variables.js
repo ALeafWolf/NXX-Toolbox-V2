@@ -26,9 +26,14 @@ const global = {
     }
   },
   nameToSlug: (name) => {
-    if(typeof name === "string") {
-      let n = name.toLowerCase();
-      return n.replace(/ /g, "-");
+    if (typeof name === "string") {
+      const words = name.split(" ");
+      for (let i = 0; i < words.length; i++) {
+        if (words[i] !== "Ⅰ" && words[i] !== "Ⅱ" && words[i] !== "Ⅲ" && words[i] !== "α" && words[i] !== "β" && words[i] !== "γ") {
+          words[i] = words[i].toLowerCase();
+        }
+      }
+      return words.join("-");
     }
     return "";
   },
@@ -38,7 +43,6 @@ const global = {
   slugToName: (slug, locale) => {
     if (slug === undefined) return "";
     if (locale === "cn") return slug;
-    if (locale === "ko") return slug.replace(/-/g, " ");
     let splits = slug.split("-");
     const isCapitalizable = (string) => {
       const words = [
@@ -60,6 +64,9 @@ const global = {
         "on",
         "or",
         "to",
+        "α",
+        "β",
+        "γ"
       ];
       let bool = true;
       words.forEach((w) => {
@@ -80,8 +87,8 @@ const global = {
     return name;
   },
   getLocalePostfix: (locale) => {
-    return locale === 'zh' ? '' : `_${locale}`;
-  }
+    return locale === "zh" ? "" : `_${locale}`;
+  },
 };
 
 export default ({ app }, inject) => {

@@ -11,7 +11,7 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t('NAV.HOME')} - ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      title: `${this.$t('NAV.HOME')} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",

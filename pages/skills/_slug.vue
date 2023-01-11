@@ -2,16 +2,22 @@
   <section class="px-6">
     <img
       class="large-icon m-auto"
-      :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
-      :alt="skill.name"
+      :src="skill.skill_group.icon.url"
+      :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
     />
     <div class="flex w-full skill-tab-row">
       <NuxtLink
         v-for="(s, i) in skill.skill_group.skills"
         :key="i"
-        :to="`/skills/${s.slug}`"
+        :to="
+          localePath(
+            `/skills/${$globalV.nameToSlug(
+              s[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+            )}`
+          )
+        "
         class="skill-tab text-center flex-1 py-2"
-        :class="{ skillSelected: skill.slug === s.slug }"
+        :class="{ skillSelected: skill.name === s.name }"
       >
         {{ s.variant }} {{ s.rank }}
       </NuxtLink>
@@ -19,10 +25,10 @@
     <div
       class="flex justify-center items-center flex-col text-center skill-detail-block"
     >
-      <h2 class="text-center text-xl">{{ skill.name }}</h2>
+      <h2 class="text-center text-xl">{{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}</h2>
       <div>
         {{
-          $globalV.getDesWithRound(skill.skill_group.description, skill.variant)
+          $globalV.getDesWithRound(skill.skill_group[`description${$globalV.getLocalePostfix($i18n.locale)}`], skill.variant)
         }}
       </div>
       <div class="skill-num-grid w-full">
@@ -41,12 +47,18 @@
         <NuxtLink
           v-for="(card, j) in skill.relate_cards"
           :key="j"
-          :to="`/cards/${card.slug}`"
+          :to="
+          localePath(
+            `/cards/${$globalV.nameToSlug(
+              card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+            )}`
+          )
+        "
         >
           <img
             class="img-fluid"
-            :src="`${imgUrl}/${card.character.name}/${card.img_ref}.webp`"
-            :alt="skill.name"
+            :src="card.thumbnail.url"
+            :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
           />
         </NuxtLink>
       </div>
@@ -55,18 +67,12 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      imgUrl: this.$globalV.ihs,
-    };
-  },
   async asyncData({ $axios, route, app }) {
     const slug = route.params.slug;
     const skill = await $axios
       .$get(`/api/skill/detail`, {
         params: {
-          slug: slug,
-          locale: app.i18n.locale,
+          name: app.$globalV.slugToName(slug, app.i18n.locale),
         },
       })
       .catch((err) => {
@@ -90,7 +96,7 @@ export default {
   },
   head() {
     return {
-      title: `${this.skill.name} | 牛叉叉牌工具箱`,
+      title: `${this.$t("NAV.SKILL-LIST")}: ${this.skill[`name${this.$globalV.getLocalePostfix(this.$i18n.locale)}`]} | ${this.$t("COMMON.TITLE-POSTFIX")}`,
       meta: [
         {
           hid: "description",

@@ -33,15 +33,33 @@
             </table>
             <div>
               <div class="skill-row" v-for="(skill, i) in card.skills" :key="i">
-                <NuxtLink :to="`/skills/${skill.slug}`">
+                <NuxtLink
+                  :to="
+                    localePath(
+                      `/skills/${$globalV.nameToSlug(
+                        skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                      )}`
+                    )
+                  "
+                >
                   <img
                     class="icon"
-                    :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
-                    :alt="skill.name"
+                    :src="skill.skill_group.icon.url"
+                    :alt="
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    "
                   />
                 </NuxtLink>
-                <h2>{{ skill.name }}</h2>
-                <p>{{ skill.skill_group.description }}</p>
+                <h2>
+                  {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+                </h2>
+                <p>
+                  {{
+                    skill.skill_group[
+                      `description${$globalV.getLocalePostfix($i18n.locale)}`
+                    ]
+                  }}
+                </p>
               </div>
             </div>
           </div>
@@ -95,12 +113,12 @@ export default {
   },
   head() {
     return {
-      title: `思绪: ${this.card.name} | 牛叉叉牌工具箱`,
+      title: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `思绪:  ${this.card.name} | 牛叉叉牌工具箱`,
+          content: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
         },
       ],
     };

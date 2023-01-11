@@ -40,7 +40,7 @@
             <tr>
               <th>{{ $t("MERCH.SELL-TIME") }}</th>
               <td>
-                <span v-for="(d, i) in sellTimes" :key="i">{{ d }}</span>
+                <div v-for="(d, i) in sellTimes" :key="i">{{ d }}</div>
               </td>
             </tr>
             <tr v-if="merch.materials.length > 0">
@@ -132,7 +132,7 @@ export default {
         console.log(error.toJSON());
       });
 
-    const sellTimes = [];
+    let sellTimes = [];
     if (merch.sell_date_index[0] === -1 && merch.sell_date_index.length === 1) {
       sellTimes = merch.series.sell_times;
     } else {
@@ -153,12 +153,12 @@ export default {
   },
   head() {
     return {
-      title: `官方周边列表 | 牛叉叉牌工具箱`,
+      title: `${this.$t("NAV.MERCH-LIST")}: ${this.merch.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `官方周边列表 | 牛叉叉牌工具箱`,
+          content: `${this.$t("NAV.MERCH-LIST")}: ${this.merch.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
         },
       ],
     };

@@ -1,6 +1,6 @@
 {
   "COMMON": {
-    "TITLE-POSTFIX": "牛叉叉牌工具箱 (NXXToolbox)",
+    "TITLE-POSTFIX": "牛叉叉牌工具箱 (NXX Toolbox)",
     "META-DESCRIPTION": "牛叉叉牌工具箱：未定事件簿多功能辅助网站",
     "SKILL-SLOT": "技能槽",
     "CHARACTER": "角色",
@@ -25,7 +25,12 @@
     "RERUN-POOL": "复刻池",
     "ANOMALY-LEVEL": "异常关卡",
     "TOP-UP-REWARD": "限时累冲奖励",
-    "OTHER": "其他"
+    "OTHER": "其他",
+    "HIDE-FILTER": "隐藏筛选选项",
+    "SHOW-FILTER": "显示筛选选项",
+    "APPLY-FILTER": "筛选",
+    "CARD": "思绪",
+    "RESET-FILTER": "重置筛选"
   },
   "NAV": {
     "HOME": "主页",

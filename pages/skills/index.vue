@@ -71,19 +71,45 @@
         <tbody v-for="(group, i) in currentSkillGroups" :key="i">
           <tr v-for="(skill, j) in group.skills" :key="j">
             <td v-if="j === 0" :rowspan="group.skills.length">
-              <NuxtLink :to="`/skills/${skill.slug}`">
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/skills/${$globalV.nameToSlug(
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
                 <img
-                  :src="`${imgUrl}/技能/${group.img_ref}.webp`"
-                  :alt="skill.name"
-              /></NuxtLink>
+                  :src="`${imgUrl}/技能/${group.name}.webp`"
+                  :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+                />
+              </NuxtLink>
             </td>
             <td>
-              <NuxtLink :to="`/skills/${skill.slug}`">
-                {{ skill.name }}</NuxtLink
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/skills/${$globalV.nameToSlug(
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
+                {{
+                  skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                }}</NuxtLink
               >
             </td>
             <td>
-              {{ $globalV.getDesWithRound(group.description, skill.variant) }}
+              {{
+                $globalV.getDesWithRound(
+                  group[
+                    `description${$globalV.getLocalePostfix($i18n.locale)}`
+                  ],
+                  skill.variant
+                )
+              }}
             </td>
             <td>{{ skill.number.lv1 }}</td>
             <td>{{ skill.number.lv10 }}</td>
@@ -111,13 +137,9 @@ export default {
       },
     };
   },
-  async asyncData({ $axios, app }) {
+  async asyncData({ $axios }) {
     const skillGroups = await $axios
-      .$get("/api/skill-groups", {
-        params: {
-          locale: app.i18n.locale,
-        },
-      })
+      .$get("/api/skill-groups")
       .catch((error) => {
         console.log(error.toJSON());
       });
@@ -129,9 +151,7 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.SKILL-LIST")} - ${this.$t(
-        "COMMON.TITLE-POSTFIX"
-      )}`,
+      title: `${this.$t("NAV.SKILL-LIST")} | ${this.$t("COMMON.TITLE-POSTFIX")}`,
       meta: [
         {
           hid: "description",
@@ -185,7 +205,6 @@ export default {
         this.currentSkillGroups = await this.$axios
           .$get("/api/skill-groups", {
             params: {
-              locale: "zh",
               filters: f,
               sort: ["slot"],
             },

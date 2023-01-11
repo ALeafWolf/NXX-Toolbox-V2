@@ -84,12 +84,18 @@
       <div v-show="isGrid" class="card-grid w-full">
         <div v-for="(card, i) in cards" class="sub-panel p-3" :key="i">
           <NuxtLink
-            :to="localePath(`/cards/${$globalV.nameToSlug(card.name)}`)"
+            :to="
+              localePath(
+                `/cards/${$globalV.nameToSlug(
+                  card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                )}`
+              )
+            "
           >
             <img
               class="large-icon m-auto"
               :src="card.thumbnail.url"
-              :alt="card.name"
+              :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
             />
           </NuxtLink>
           <div class="flex justify-center">
@@ -98,15 +104,25 @@
               :src="require(`~/assets/images/${card.attribute}.png`)"
               :alt="card.attribute"
             />
-            <h2>{{ card.name }}</h2>
+            <h2>
+              {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+            </h2>
           </div>
           <div class="flex justify-center">
             <span v-for="(skill, i) in card.skills" :key="i">
-              <NuxtLink :to="`/skills/${skill.slug}`">
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/skills/${$globalV.nameToSlug(
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
                 <img
                   class="icon"
-                  :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
-                  :alt="skill.name"
+                  :src="skill.skill_group.icon.url"
+                  :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
                 />
               </NuxtLink>
             </span>
@@ -128,17 +144,33 @@
         <tbody>
           <tr v-for="(card, i) in cards" :key="i">
             <td>
-              <NuxtLink :to="`/cards/${card.slug}`">
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/cards/${$globalV.nameToSlug(
+                      card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
                 <img
                   class="large-icon m-auto"
                   :src="card.thumbnail.url"
-                  :alt="card.name"
+                  :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
                 />
               </NuxtLink>
             </td>
             <td>
-              <NuxtLink :to="`/cards/${card.slug}`">
-                {{ card.name }}
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/cards/${$globalV.nameToSlug(
+                      card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
+                {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
               </NuxtLink>
             </td>
             <td>{{ card.rarity.value }}</td>
@@ -154,11 +186,23 @@
             <td>
               <div class="flex justify-center">
                 <span v-for="(skill, i) in card.skills" :key="i">
-                  <NuxtLink :to="`/skills/${skill.slug}`">
+                  <NuxtLink
+                    :to="
+                      localePath(
+                        `/skills/${$globalV.nameToSlug(
+                          skill[
+                            `name${$globalV.getLocalePostfix($i18n.locale)}`
+                          ]
+                        )}`
+                      )
+                    "
+                  >
                     <img
                       class="icon"
-                      :src="`${imgUrl}/技能/${skill.skill_group.img_ref}.webp`"
-                      :alt="skill.name"
+                      :src="skill.skill_group.icon.url"
+                      :alt="
+                        skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                      "
                     />
                   </NuxtLink>
                 </span>
