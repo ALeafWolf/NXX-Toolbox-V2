@@ -30,7 +30,9 @@
     "SHOW-FILTER": "필터 옵션 표시",
     "APPLY-FILTER": "필터 적용",
     "CARD": "생각",
-    "RESET-FILTER": "필터 재설정"
+    "RESET-FILTER": "필터 재설정",
+    "RECENT-UPDATE": "최근 업데이트",
+    "POOL": "여신의 그림자"
   },
   "NAV": {
     "HOME": "홈",
@@ -66,5 +68,8 @@
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "카드 이름 입력"
+  },
+  "HOME": {
+    "WELCOME-SLUG": "NXX Toolbox에 어서오세요!"
   }
 }

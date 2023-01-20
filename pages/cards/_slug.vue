@@ -7,7 +7,7 @@
       <div class="card-section">
         <div>
           <img
-            :src="`${imgUrl + card.character.name}/${card.img_ref}-full.webp`"
+            :src="`${imgUrl + card.character.name}/${card.name}-full.webp`"
             :alt="card.name"
           />
         </div>

@@ -1,7 +1,6 @@
 <template>
   <section>
     <div>
-      <h1 class="text-xl">{{ $t("NAV.CARD-LIST") }}</h1>
       <table class="mx-auto my-4 text-center sub-panel">
         <tr>
           <th>-</th>
@@ -63,6 +62,91 @@
           <td>{{ cardCount.marius[0] }}</td>
         </tr>
       </table>
+      <div class="base-panel p-4 grid grid-cols-4 gap-4 mb-4">
+        <div>
+          <h3 class="text-blue-600 text-lg">
+            {{ $t("COMMON.CHARACTER") }}
+          </h3>
+          <a-select
+            mode="multiple"
+            class="w-full custom-select"
+            :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
+            @change="handleCharacterChange"
+          >
+            <a-select-option key="LUKE">
+              {{ $t("COMMON.LUKE") }}
+            </a-select-option>
+            <a-select-option key="ARTEM">
+              {{ $t("COMMON.ARTEM") }}
+            </a-select-option>
+            <a-select-option key="VYN">
+              {{ $t("COMMON.VYN") }}
+            </a-select-option>
+            <a-select-option key="MARIUS">
+              {{ $t("COMMON.MARIUS") }}
+            </a-select-option>
+          </a-select>
+        </div>
+        <div>
+          <h3 class="text-blue-600 text-lg">
+            {{ $t("COMMON.ATTRIBUTE") }}
+          </h3>
+          <a-select
+            mode="multiple"
+            class="w-full custom-select"
+            :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
+            @change="handleAttributesChange"
+          >
+            <a-select-option key="LOGIC">
+              {{ $t("COMMON.LOGIC") }}
+            </a-select-option>
+            <a-select-option key="EMPATHY">
+              {{ $t("COMMON.EMPATHY") }}
+            </a-select-option>
+            <a-select-option key="INTUITION">
+              {{ $t("COMMON.INTUITION") }}
+            </a-select-option>
+          </a-select>
+        </div>
+        <div>
+          <h3 class="text-blue-600 text-lg">
+            {{ $t("COMMON.RARITY") }}
+          </h3>
+          <a-select
+            mode="multiple"
+            class="w-full custom-select"
+            :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
+            @change="handleRaritiesChange"
+          >
+            <a-select-option key="R"> R </a-select-option>
+            <a-select-option key="MR"> MR </a-select-option>
+            <a-select-option key="SR"> SR </a-select-option>
+            <a-select-option key="SSR"> SSR </a-select-option>
+          </a-select>
+        </div>
+        <div>
+          <h3 class="text-blue-600 text-lg">
+            {{ $t("NAV.CARD-ACQUISITION") }}
+          </h3>
+          <a-select
+            mode="multiple"
+            class="w-full custom-select"
+            :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
+            @change="handleAcquisitionsChange"
+          >
+            <a-select-option key="POOL">
+              {{ $t("COMMON.POOL") }}
+            </a-select-option>
+            <a-select-option key="OTHER">
+              {{ $t("COMMON.OTHER") }}
+            </a-select-option>
+          </a-select>
+        </div>
+      </div>
       <div class="w-full flex justify-end mb-6">
         <div class="switch-btn-row">
           <button
@@ -82,7 +166,7 @@
         </div>
       </div>
       <div v-show="isGrid" class="card-grid w-full">
-        <div v-for="(card, i) in cards" class="sub-panel p-3" :key="i">
+        <div v-for="(card, i) in currentCards" class="sub-panel p-3" :key="i">
           <NuxtLink
             :to="
               localePath(
@@ -142,7 +226,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(card, i) in cards" :key="i">
+          <tr v-for="(card, i) in currentCards" :key="i">
             <td>
               <NuxtLink
                 :to="
@@ -219,7 +303,12 @@ export default {
   data() {
     return {
       isGrid: true,
-      imgUrl: this.$globalV.ihs,
+      filters: {
+        attributes: [],
+        characters: [],
+        rarities: [],
+        acquisitions: [],
+      },
     };
   },
   async asyncData({ $axios, app }) {
@@ -256,8 +345,96 @@ export default {
     });
     return {
       cards,
+      currentCards: cards,
       cardCount,
     };
+  },
+  methods: {
+    setIsGrid(bool) {
+      this.isGrid = bool;
+    },
+    async handleCharacterChange(value) {
+      this.filters.characters = value;
+      await this.filterCards();
+    },
+    async handleAttributesChange(value) {
+      this.filters.attributes = value;
+      await this.filterCards();
+    },
+    async handleRaritiesChange(value) {
+      this.filters.rarities = value;
+      await this.filterCards();
+    },
+    async handleAcquisitionsChange(value) {
+      this.filters.acquisitions = value;
+      await this.filterCards();
+    },
+    getFilters() {
+      const f = {};
+      if (this.filters.characters.length > 0) {
+        f.character = {
+          name: {
+            $eq: this.filters.characters[0],
+          },
+        };
+      }
+      if (this.filters.attributes.length > 0) {
+        f.attribute = {
+          $in: this.filters.attributes,
+        };
+      }
+      if (this.filters.rarities.length > 0) {
+        f.rarity = {
+          value: {
+            $in: this.filters.rarities,
+          },
+        };
+      }
+      if (this.filters.acquisitions.length > 0) {
+        if (this.filters.acquisitions.includes("POOL")) {
+          f["$or"] = [
+            {
+              card_acquisitions: {
+                type: {
+                  $in: this.filters.acquisitions,
+                },
+              },
+            },
+            {
+              is_permanent: {
+                $eq: true,
+              },
+            },
+          ];
+        } else {
+          f.card_acquisitions = {
+            type: {
+              $in: this.filters.acquisitions,
+            },
+          };
+        }
+      }
+      f.publishedAt = {
+        $ne: null,
+      };
+      return f;
+    },
+    async filterCards() {
+      const f = this.getFilters();
+      if (Object.keys(f).length === 0) {
+        this.currentCards = this.cards;
+      } else {
+        this.currentCards = await this.$axios
+          .$get("/api/card/list", {
+            params: {
+              filters: f,
+            },
+          })
+          .catch((error) => {
+            console.log(error.toJSON());
+          });
+      }
+    },
   },
   head() {
     return {
@@ -270,11 +447,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    setIsGrid(bool) {
-      this.isGrid = bool;
-    },
   },
 };
 </script>

@@ -30,7 +30,9 @@
     "SHOW-FILTER": "Show Filter Options",
     "APPLY-FILTER": "Apply Filter",
     "CARD": "Card",
-    "RESET-FILTER": "Reset Filter"
+    "RESET-FILTER": "Reset Filter",
+    "RECENT-UPDATE": "Recent Update",
+    "POOL": "Shadow of Themis"
   },
   "NAV": {
     "HOME": "Home",
@@ -66,5 +68,8 @@
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "Enter Card Name"
+  },
+  "HOME": {
+    "WELCOME-SLUG": "Welcome to NXX Toolbox"
   }
 }

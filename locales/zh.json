@@ -30,7 +30,9 @@
     "SHOW-FILTER": "显示筛选选项",
     "APPLY-FILTER": "筛选",
     "CARD": "思绪",
-    "RESET-FILTER": "重置筛选"
+    "RESET-FILTER": "重置筛选",
+    "RECENT-UPDATE": "近期更新",
+    "POOL": "女神之影"
   },
   "NAV": {
     "HOME": "主页",
@@ -66,5 +68,8 @@
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "输入思绪名称"
+  },
+  "HOME": {
+    "WELCOME-SLUG": "牛叉叉牌工具箱，用过都说好！"
   }
 }

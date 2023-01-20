@@ -144,7 +144,7 @@
     </div>
     <div class="card-grid w-full">
       <div v-for="(merch, i) in currentMerches" class="sub-panel p-3" :key="i">
-        <NuxtLink :to="`/merches/${merch.id}`">
+        <NuxtLink :to="localePath(`/merches/${merch.id}`)">
           <img
             class="large-icon m-auto"
             :src="merch.avatar.url"
