@@ -138,8 +138,8 @@
         </div>
       </div>
       <div>
-        <a-button class="w-full">{{ $t('COMMON.APPLY-FILTER') }}</a-button>
-        <a-button class="w-full">{{ $t('COMMON.RESET-FILTER') }}</a-button>
+        <a-button class="w-full">{{ $t("COMMON.APPLY-FILTER") }}</a-button>
+        <a-button class="w-full">{{ $t("COMMON.RESET-FILTER") }}</a-button>
       </div>
     </div>
     <div class="card-grid w-full">
@@ -156,6 +156,7 @@
         </div>
       </div>
     </div>
+    <LoadingMask :isShow="isLoading" />
   </section>
 </template>
 
@@ -174,6 +175,7 @@ export default {
         priceRange: [0, 0],
         characters: [],
       },
+      isLoading: false,
     };
   },
   async asyncData({ $axios }) {
@@ -246,12 +248,16 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.MERCH-LIST")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      title: `${this.$t("NAV.MERCH-LIST")} | ${this.$t(
+        "COMMON.TITLE-POSTFIX"
+      )}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `${this.$t("NAV.MERCH-LIST")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+          content: `${this.$t("NAV.MERCH-LIST")} | ${this.$t(
+            "COMMON.TITLE-POSTFIX"
+          )}`,
         },
       ],
     };
@@ -348,6 +354,7 @@ export default {
       return f;
     },
     async filterMerches() {
+      this.isLoading = true;
       const f = this.getFilters();
       const s = [`id:${this.isDateDesc ? "desc" : "asc"}`];
       if (Object.keys(f).length === 0) {
@@ -364,6 +371,7 @@ export default {
             console.log(error.toJSON());
           });
       }
+      this.isLoading = false;
     },
   },
 };

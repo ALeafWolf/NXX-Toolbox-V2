@@ -1,10 +1,11 @@
 <template>
   <section>
     <div class="sub-panel p-4">
-      <h1 class="text-center">
-        {{ $t(`COMMON.${card.character.name}`) }} - {{ card.name }}
+      <h1 class="text-center text-3xl">
+        {{ $t(`COMMON.${card.character.name}`) }} -
+        {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
       </h1>
-      <div class="card-section">
+      <div class="base-panel p-4 card-section">
         <div>
           <img
             :src="`${imgUrl + card.character.name}/${card.name}-full.webp`"
@@ -12,27 +13,34 @@
           />
         </div>
         <div>
-          <div class="flex">
-            <table>
-              <tr>
-                <th>Rarity</th>
-                <td>{{ card.rarity.value }}</td>
-              </tr>
-              <tr>
-                <th>Attribute</th>
-                <td>{{ card.attribute }}</td>
-              </tr>
-              <tr>
-                <th>Infludence</th>
-                <td>{{ card.influence }}</td>
-              </tr>
-              <tr>
-                <th>Defense</th>
-                <td>{{ card.defense }}</td>
-              </tr>
-            </table>
-            <div>
-              <div class="skill-row" v-for="(skill, i) in card.skills" :key="i">
+          <table class="text-xl w-full">
+            <tr>
+              <th>{{ $t("COMMON.RARITY") }}</th>
+              <td>{{ card.rarity.value }}</td>
+            </tr>
+            <tr>
+              <th>{{ $t("COMMON.ATTRIBUTE") }}</th>
+              <td>
+                <img
+                  class="icon inline"
+                  :src="require(`assets/images/${card.attribute}.png`)"
+                  :alt="card.attribute"
+                />
+                {{ $t(`COMMON.${card.attribute}`) }}
+              </td>
+            </tr>
+            <tr>
+              <th>{{ $t("COMMON.INFLUENCE") }}</th>
+              <td>{{ card.influence }}</td>
+            </tr>
+            <tr>
+              <th>{{ $t("COMMON.DEFENSE") }}</th>
+              <td>{{ card.defense }}</td>
+            </tr>
+          </table>
+          <div>
+            <div class="skill-row" v-for="(skill, i) in card.skills" :key="i">
+              <div class="flex justify-center items-center">
                 <NuxtLink
                   :to="
                     localePath(
@@ -50,7 +58,9 @@
                     "
                   />
                 </NuxtLink>
-                <h2>
+              </div>
+              <div>
+                <h2 class="text-lg">
                   {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
                 </h2>
                 <p>
@@ -65,26 +75,10 @@
           </div>
         </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Start</th>
-            <th>End</th>
-            <th>Server</th>
-            <th>Type</th>
-            <th>Subtype</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(record, i) in card.card_acquisitions" :key="i">
-            <td>{{ record.start }}</td>
-            <td>{{ record.end }}</td>
-            <td>{{ record.server }}</td>
-            <td>{{ record.type }}</td>
-            <td>{{ record.subtype }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <AcquisitionTable
+        :entries="card.card_acquisitions"
+        :locale="$i18n.locale"
+      />
     </div>
   </section>
 </template>
@@ -99,11 +93,7 @@ export default {
   async asyncData({ $axios, app, route }) {
     const name = app.$globalV.slugToName(route.params.slug, app.i18n.locale);
     const card = await $axios
-      .$get(`/api/card/detail/${encodeURIComponent(name)}`, {
-        params: {
-          locale: app.i18n.locale,
-        },
-      })
+      .$get(`/api/card/detail/${encodeURIComponent(name)}`)
       .catch((error) => {
         console.log(error);
       });
@@ -113,12 +103,16 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      title: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t(
+        "COMMON.TITLE-POSTFIX"
+      )}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+          content: `${this.$t("COMMON.CARD")}: ${this.card.name} | ${this.$t(
+            "COMMON.TITLE-POSTFIX"
+          )}`,
         },
       ],
     };
@@ -128,10 +122,12 @@ export default {
 <style lang="scss" scoped>
 .card-section {
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 250px auto;
   gap: 60px;
 }
 .skill-row {
-  display: block;
+  display: grid;
+  grid-template-columns: 50px auto;
+  gap: 10px;
 }
 </style>

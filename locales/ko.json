@@ -32,7 +32,14 @@
     "CARD": "생각",
     "RESET-FILTER": "필터 재설정",
     "RECENT-UPDATE": "최근 업데이트",
-    "POOL": "여신의 그림자"
+    "POOL": "여신의 그림자",
+    "REFERENCE": "참고",
+    "SERVER": "서버",
+    "CN": "중국 서버",
+    "GLOBAL": "글로벌 서버",
+    "CARDS": "생각",
+    "INFLUENCE": "설득력",
+    "DEFENSE": "방어력"
   },
   "NAV": {
     "HOME": "홈",
@@ -67,7 +74,10 @@
     "PRODUCT-PRICE": "가격"
   },
   "CARD-ACQUISITION": {
-    "SEARCH-BY-NAME": "카드 이름 입력"
+    "SEARCH-BY-NAME": "카드 이름 입력",
+    "START": "시작일",
+    "END": "종료일",
+    "TYPE": "획득 유형"
   },
   "HOME": {
     "WELCOME-SLUG": "NXX Toolbox에 어서오세요!"

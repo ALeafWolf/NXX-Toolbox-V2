@@ -213,7 +213,7 @@
           </div>
         </div>
       </div>
-      <table v-show="!isGrid" class="w-full text-center sub-panel card-table">
+      <table v-show="!isGrid" class="w-full text-center general-table">
         <thead>
           <tr>
             <th>Thumbnail</th>
@@ -296,19 +296,21 @@
         </tbody>
       </table>
     </div>
+    <LoadingMask :isShow="isLoading" />
   </section>
 </template>
 <script>
 export default {
   data() {
     return {
-      isGrid: true,
+      isGrid: false,
       filters: {
         attributes: [],
         characters: [],
         rarities: [],
         acquisitions: [],
       },
+      isLoading: false,
     };
   },
   async asyncData({ $axios, app }) {
@@ -420,6 +422,7 @@ export default {
       return f;
     },
     async filterCards() {
+      this.isLoading = true;
       const f = this.getFilters();
       if (Object.keys(f).length === 0) {
         this.currentCards = this.cards;
@@ -433,6 +436,7 @@ export default {
           .catch((error) => {
             console.log(error.toJSON());
           });
+        this.isLoading = false;
       }
     },
   },
@@ -465,17 +469,10 @@ export default {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .card-table {
-    font-size: 14px;
-  }
 }
 @media all and (max-width: $sm) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card-table {
-    font-size: 12px;
   }
 }
 </style>

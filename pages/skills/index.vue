@@ -55,7 +55,7 @@
           </a-select>
         </div>
       </div>
-      <table class="w-full text-center sub-panel">
+      <table class="w-full text-center general-table">
         <thead>
           <tr>
             <th rowspan="2">Icon</th>
@@ -117,6 +117,7 @@
         </tbody>
       </table>
     </div>
+    <LoadingMask :isShow="isLoading" />
   </section>
 </template>
 
@@ -135,6 +136,7 @@ export default {
         character: [],
         attribute: [],
       },
+      isLoading: false,
     };
   },
   async asyncData({ $axios }) {
@@ -198,6 +200,7 @@ export default {
       return f;
     },
     async filterSkills() {
+      this.isLoading = true;
       const f = this.getFilters();
       if (Object.keys(f).length === 0) {
         this.currentSkillGroups = this.skillGroups;
@@ -213,6 +216,7 @@ export default {
             console.log(error.toJSON());
           });
       }
+      this.isLoading = false;
     },
   },
 };

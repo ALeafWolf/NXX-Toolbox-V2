@@ -32,7 +32,14 @@
     "CARD": "Card",
     "RESET-FILTER": "Reset Filter",
     "RECENT-UPDATE": "Recent Update",
-    "POOL": "Shadow of Themis"
+    "POOL": "Shadow of Themis",
+    "REFERENCE": "Reference",
+    "SERVER": "Server",
+    "CN": "CN",
+    "GLOBAL": "Global",
+    "CARDS": "Cards",
+    "INFLUENCE": "Influence",
+    "DEFENSE": "Defense"
   },
   "NAV": {
     "HOME": "Home",
@@ -53,7 +60,6 @@
   },
   "MERCH": {
     "PRODUCT-NAME": "Product Name",
-    "REFERENCE": "Reference",
     "PURCHASE-LINK": "Purchase Link",
     "PRODUCT-PACKAGING": "Merch Packaging",
     "PRODUCT-TECHNOLOGY": "Merch Technology",
@@ -67,7 +73,10 @@
     "PRODUCT-PRICE": "Merch Price"
   },
   "CARD-ACQUISITION": {
-    "SEARCH-BY-NAME": "Enter Card Name"
+    "SEARCH-BY-NAME": "Enter Card Name",
+    "START": "Start Date",
+    "END": "End Date",
+    "TYPE": "Acquisition Type"
   },
   "HOME": {
     "WELCOME-SLUG": "Welcome to NXX Toolbox"

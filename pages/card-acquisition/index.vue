@@ -1,137 +1,249 @@
 <template>
   <section>
-    <div class="mb-4">
-      <a-input-search
-        :placeholder="$t('CARD-ACQUISITION.SEARCH-BY-NAME')"
-        size="large"
-        @search="filterHistoriesByCardName"
-      />
-    </div>
-    <table class="sub-panel w-full custom-table">
-      <thead>
-        <tr>
-          <th>Start</th>
-          <th>End</th>
-          <th>Server</th>
-          <th>Type</th>
-          <th>Subtype</th>
-          <th>Cards</th>
-          <th>References</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(record, i) in acquisition" :key="i">
-          <td>{{ record.start }}</td>
-          <td>{{ record.end }}</td>
-          <td>{{ record.server }}</td>
-          <td>{{ record.type }}</td>
-          <td>{{ $t(`COMMON.${record.subtype}`) }}</td>
-          <td>
-            <span
-              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2"
+    <div class="base-panel p-4 mb-4">
+      <div class="mb-4">
+        <a-input-search
+          :placeholder="$t('CARD-ACQUISITION.SEARCH-BY-NAME')"
+          size="large"
+          @search="handleNameChange"
+        />
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <h3 class="text-lg">
+            {{ $t("COMMON.SERVER") }}
+          </h3>
+          <a-select
+            mode="multiple"
+            class="w-full custom-select"
+            :defaultValue="[]"
+            dropdownClassName="custom-dropdown"
+            @change="handleServerChange"
+          >
+            <a-select-option key="CN">
+              {{ $t("COMMON.CN") }}
+            </a-select-option>
+            <a-select-option key="GLOBAL">
+              {{ $t("COMMON.GLOBAL") }}
+            </a-select-option>
+          </a-select>
+        </div>
+        <div class="col-span-2">
+          <h3 class="text-lg">
+            {{ $t("CARD-ACQUISITION.TYPE") }}
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleTypeChange"
             >
-              <NuxtLink
-                v-for="(card, j) in record.cards"
-                :key="j"
-                :to="
-                  localePath(
-                    `/cards/${$globalV.nameToSlug(
-                      card[`name${$globalV.getLocalePostfix(locale)}`]
-                    )}`
-                  )
-                "
-              >
-                <img
-                  class="large-icon"
-                  :src="card.thumbnail.url"
-                  :alt="card.name"
-                />
-              </NuxtLink>
-            </span>
-          </td>
-          <td>
-            <span class="flex">
-              <a
-                v-if="record.social_media_url"
-                :href="record.social_media_url"
-                target="_blank"
-              >
-                <img
-                  class="icon"
-                  :src="
-                    require(`~/assets/images/icons/icon-${
-                      record.server === 'CN' ? 'weibo' : 'twitter'
-                    }.png`)
-                  "
-                  :alt="record.server === 'CN' ? 'weibo' : 'twitter'"
-                />
-              </a>
-              <a
-                v-if="record.video_url"
-                :href="record.video_url"
-                target="_blank"
-              >
-                <img
-                  class="icon"
-                  :src="
-                    require(`~/assets/images/icons/icon-${
-                      record.server === 'CN' ? 'bilibili' : 'youtube'
-                    }.png`)
-                  "
-                  :alt="record.server === 'CN' ? 'bilibili' : 'youtube'"
-                />
-              </a>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <a-select-option key="POOL">
+                {{ $t("COMMON.POOL") }}
+              </a-select-option>
+              <a-select-option key="OTHER">
+                {{ $t("COMMON.OTHER") }}
+              </a-select-option>
+            </a-select>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleSubtypeChange"
+            >
+              <a-select-option v-for="o in getSubtypeOptions" :key="o">
+                {{ $t(`COMMON.${o}`) }}
+              </a-select-option>
+            </a-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <AcquisitionTable
+      :entries="acquisition"
+      :startDateDesc="startDateDesc"
+      :endDateDesc="endDateDesc"
+      :toggleSortHeader="toggleSortHeader"
+      :locale="$i18n.locale"
+    />
+    <LoadingMask :isShow="isLoading" />
   </section>
 </template>
 
 <script>
 export default {
-  async asyncData({ $axios, app, route }) {
+  data() {
+    return {
+      startDateDesc: true,
+      endDateDesc: true,
+      isLoading: false,
+      filters: {
+        server: [],
+        type: [],
+        subtype: [],
+        name: "",
+      },
+      filterOptions: {
+        pool: [
+          "PERMANENT-POOL",
+          "ROTATION-POOL",
+          "EVENT-POOL",
+          "EVENT-LIMITED-POOL",
+          "RERUN-POOL",
+          "OTHER",
+        ],
+        other: ["EVENT-REWARD", "ANOMALY-LEVEL", "TOP-UP-REWARD"],
+      },
+    };
+  },
+  async asyncData({ $axios }) {
     const acquisition = await $axios
-      .$get("/api/card-acquisition/list")
+      .$get("/api/card-acquisition/list", {
+        params: {
+          sort: ["start:desc", "end:desc"],
+        },
+      })
       .catch((error) => {
         console.log(error.toJSON());
       });
     return {
       acquisition,
-      locale: app.i18n.locale,
     };
+  },
+  computed: {
+    getSubtypeOptions: function () {
+      if (this.filters.type.length === 1) {
+        if (this.filters.type[0] === "POOL") return this.filterOptions.pool;
+        else if (this.filters.type[0] === "OTHER")
+          return this.filterOptions.other;
+        else return [];
+      }
+      return this.filterOptions.pool.concat(this.filterOptions.other);
+    },
   },
   methods: {
     async filterHistoriesByCardName(name) {
-      console.log(name);
+      this.isLoading = true;
+      const filters = {};
+      if (name !== "") {
+        filters.cards = {
+          $or: [
+            {
+              name: {
+                $eq: name,
+              },
+            },
+            {
+              name_en: {
+                $eq: name,
+              },
+            },
+            {
+              name_ko: {
+                $eq: name,
+              },
+            },
+          ],
+        };
+      }
       const result = await this.$axios.$get("/api/card-acquisition/list", {
         params: {
-          filters: {
-            cards: {
-              $or: [
-                {
-                  name: {
-                    $eq: name,
-                  },
-                },
-                {
-                  name_en: {
-                    $eq: name,
-                  },
-                },
-                {
-                  name_ko: {
-                    $eq: name,
-                  },
-                },
-              ],
-            },
-          },
+          filters: filters,
         },
       });
-      console.log(result);
       this.acquisition = result;
+      this.isLoading = false;
+    },
+    async toggleSortHeader(date) {
+      if (date === "start") {
+        this.startDateDesc = !this.startDateDesc;
+      } else if (date === "end") {
+        this.endDateDesc = !this.endDateDesc;
+      }
+      await this.filterAcquisitions();
+    },
+    async handleNameChange(value) {
+      this.filters.name = value;
+      await this.filterAcquisitions();
+    },
+    async handleServerChange(value) {
+      this.filters.server = value;
+      await this.filterAcquisitions();
+    },
+    async handleTypeChange(value) {
+      this.filters.type = value;
+      await this.filterAcquisitions();
+    },
+    async handleSubtypeChange(value) {
+      this.filters.subtype = value;
+      await this.filterAcquisitions();
+    },
+    getFilters() {
+      const f = {};
+      if (this.filters.name !== "") {
+        f.cards = {
+          $or: [
+            {
+              name: {
+                $eq: this.filters.name,
+              },
+            },
+            {
+              name_en: {
+                $eq: this.filters.name,
+              },
+            },
+            {
+              name_ko: {
+                $eq: this.filters.name,
+              },
+            },
+          ],
+        };
+      }
+      if (this.filters.server.length > 0) {
+        f.server = {
+          $in: this.filters.server,
+        };
+      }
+      if (this.filters.type.length > 0) {
+        f.type = {
+          $in: this.filters.type,
+        };
+      }
+      if (this.filters.subtype.length > 0) {
+        f.subtype = {
+          $in: this.filters.subtype,
+        };
+      }
+      return f;
+    },
+    getSorts() {
+      const s = [];
+      s.push(`start:${this.startDateDesc ? "desc" : "asc"}`);
+      s.push(`end:${this.endDateDesc ? "desc" : "asc"}`);
+      return s;
+    },
+    async filterAcquisitions() {
+      this.isLoading = true;
+      const sort = this.getSorts();
+      const filters = this.getFilters();
+      console.log(filters)
+      const acquisition = await this.$axios
+        .$get("/api/card-acquisition/list", {
+          params: {
+            sort: sort,
+            filters: filters,
+          },
+        })
+        .catch((error) => {
+          console.log(error.toJSON());
+        });
+      this.acquisition = acquisition;
+      this.isLoading = false;
     },
   },
   head() {

@@ -1,3 +1,5 @@
+@import "variables";
+
 .wrapper {
   max-width: 1200px;
   width: 85vw;
@@ -48,8 +50,8 @@
   position: relative;
   border-radius: 5px;
   background-color: rgba(48, 47, 70, 0.3);
-  border-top: 2px solid #8e8baf;
-  border-bottom: 2px solid #8e8baf;
+  border-top: 2px solid $purple;
+  border-bottom: 2px solid $purple;
   border-collapse: separate;
   animation-name: subpanel-bg;
   animation-duration: $glow-time;
@@ -100,11 +102,27 @@
   }
 }
 
-.custom-table {
-  td, th{
-    padding: 10px;
+.general-table {
+  border-radius: 10px;
+  th,
+  td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #60627a;
+    text-align: center;
   }
-  > tbody > tr > td {
-    border-bottom: 1px solid #8e8baf;
+  > thead > tr {
+    background-color: rgba(142, 139, 175, 0.3);
+  }
+}
+
+@media all and (max-width: $md) {
+  .general-table {
+    font-size: 14px;
+  }
+}
+@media all and (max-width: $sm) {
+  .general-table {
+    font-size: 12px;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="sub-panel grid grid-cols-2 gap-4">
+  <div class="base-panel grid grid-cols-2 gap-4">
     <div class="col-span-2 lg:col-span-1 flex justify-center items-center">
       <div class="p-6">
         <h1 class="text-3xl text-center">{{ $t("HOME.WELCOME-SLUG") }}</h1>

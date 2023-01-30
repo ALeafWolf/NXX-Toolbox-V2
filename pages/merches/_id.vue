@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="sub-panel px-6 py-3 merch-detail-container">
+    <div class="base-panel px-6 py-3 merch-detail-container">
       <a-tabs type="card">
         <a-tab-pane class="tab-content" key="`image-1`" tab="1">
           <img
@@ -89,7 +89,7 @@
               </td>
             </tr>
             <tr v-if="merch.weibo">
-              <th>{{ $t("MERCH.REFERENCE") }}</th>
+              <th>{{ $t("COMMON.REFERENCE") }}</th>
               <td>
                 <a :href="merch.weibo" target="_blank">
                   <img

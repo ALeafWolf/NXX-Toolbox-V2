@@ -32,7 +32,14 @@
     "CARD": "思绪",
     "RESET-FILTER": "重置筛选",
     "RECENT-UPDATE": "近期更新",
-    "POOL": "女神之影"
+    "POOL": "女神之影",
+    "REFERENCE": "相关链接",
+    "SERVER": "服务器",
+    "CN": "国服/陆服",
+    "GLOBAL": "国际服",
+    "CARDS": "思绪",
+    "INFLUENCE": "说服力",
+    "DEFENSE": "防御力"
   },
   "NAV": {
     "HOME": "主页",
@@ -61,13 +68,16 @@
     "SELL-TIME": "贩售日期",
     "PRICE": "价格",
     "PRODUCT-SERIES": "系列",
-    "HIDE-DESCRIPTION": "隐藏产品信息",
+    "HIDE-DESCRIPTION": "隐藏产品描述",
     "SHOW-DESCRIPTION": "显示产品描述",
     "PRODUCT-TYPE": "种类",
     "PRODUCT-PRICE": "价格"
   },
   "CARD-ACQUISITION": {
-    "SEARCH-BY-NAME": "输入思绪名称"
+    "SEARCH-BY-NAME": "输入思绪名称",
+    "START": "开始日期",
+    "END": "结束日期",
+    "TYPE": "获取种类"
   },
   "HOME": {
     "WELCOME-SLUG": "牛叉叉牌工具箱，用过都说好！"
