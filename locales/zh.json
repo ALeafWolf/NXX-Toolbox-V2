@@ -39,7 +39,8 @@
     "GLOBAL": "国际服",
     "CARDS": "思绪",
     "INFLUENCE": "说服力",
-    "DEFENSE": "防御力"
+    "DEFENSE": "防御力",
+    "RANK": "星级"
   },
   "NAV": {
     "HOME": "主页",
@@ -48,7 +49,9 @@
     "SKILL-LIST": "技能",
     "CONTACT": "联系",
     "CARD-ACQUISITION": "思绪获取方式",
-    "MERCH-LIST": "周边列表"
+    "MERCH-LIST": "周边列表",
+    "UPDATE-LOG": "更新日志",
+    "CARD-POWER-CALC": "思绪战力"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "技能等级",

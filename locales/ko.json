@@ -23,7 +23,7 @@
     "EVENT-LIMITED-POOL": "한정 이벤트",
     "EVENT-REWARD": "이벤트 보상",
     "RERUN-POOL": "복각",
-    "ANOMALY-LEVEL": "Anomaly Level",
+    "ANOMALY-LEVEL": "외전 스테이지",
     "TOP-UP-REWARD": "누적 충전",
     "OTHER": "기타",
     "HIDE-FILTER": "필터 옵션 숨기기",
@@ -39,7 +39,8 @@
     "GLOBAL": "글로벌 서버",
     "CARDS": "생각",
     "INFLUENCE": "설득력",
-    "DEFENSE": "방어력"
+    "DEFENSE": "방어력",
+    "RANK": "등급"
   },
   "NAV": {
     "HOME": "홈",
@@ -48,7 +49,9 @@
     "SKILL-LIST": "스킬",
     "CONTACT": "문의 양식",
     "CARD-ACQUISITION": "카드 획득",
-    "MERCH-LIST": "공식 굿즈"
+    "MERCH-LIST": "공식 굿즈",
+    "UPDATE-LOG": "업데이트 로그",
+    "CARD-POWER-CALC": "전투력"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "스킬 레벨",

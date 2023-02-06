@@ -46,6 +46,7 @@
     overflow-x: hidden;
     height: 100%;
     padding: 30px;
+    position: relative;
   }
   @media all and (max-width: $lg) {
     .content {

@@ -39,7 +39,8 @@
     "GLOBAL": "Global",
     "CARDS": "Cards",
     "INFLUENCE": "Influence",
-    "DEFENSE": "Defense"
+    "DEFENSE": "Defense",
+    "RANK": "Rank"
   },
   "NAV": {
     "HOME": "Home",
@@ -48,7 +49,9 @@
     "SKILL-LIST": "Skills",
     "CONTACT": "Contact",
     "CARD-ACQUISITION": "Card Acquisition",
-    "MERCH-LIST": "Merches"
+    "MERCH-LIST": "Merches",
+    "UPDATE-LOG": "Update Log",
+    "CARD-POWER-CALC": "Card Power"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "Skill Level",

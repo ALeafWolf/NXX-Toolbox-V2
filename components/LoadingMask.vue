@@ -14,7 +14,7 @@
 export default {
   name: "LoadingMask",
   props: {
-    isShow: { type: Boolean },
+    isShow: Boolean,
   },
 };
 </script>

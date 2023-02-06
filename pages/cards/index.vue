@@ -64,7 +64,7 @@
       </table>
       <div class="base-panel p-4 grid grid-cols-4 gap-4 mb-4">
         <div>
-          <h3 class="text-blue-600 text-lg">
+          <h3 class="text-lg">
             {{ $t("COMMON.CHARACTER") }}
           </h3>
           <a-select
@@ -89,7 +89,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">
+          <h3 class="text-lg">
             {{ $t("COMMON.ATTRIBUTE") }}
           </h3>
           <a-select
@@ -111,7 +111,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">
+          <h3 class="text-lg">
             {{ $t("COMMON.RARITY") }}
           </h3>
           <a-select
@@ -128,7 +128,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">
+          <h3 class="text-lg">
             {{ $t("NAV.CARD-ACQUISITION") }}
           </h3>
           <a-select
@@ -166,52 +166,18 @@
         </div>
       </div>
       <div v-show="isGrid" class="card-grid w-full">
-        <div v-for="(card, i) in currentCards" class="sub-panel p-3" :key="i">
-          <NuxtLink
-            :to="
-              localePath(
-                `/cards/${$globalV.nameToSlug(
-                  card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                )}`
-              )
-            "
-          >
-            <img
-              class="large-icon m-auto"
-              :src="card.thumbnail.url"
-              :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
-            />
-          </NuxtLink>
-          <div class="flex justify-center">
-            <img
-              class="icon"
-              :src="require(`~/assets/images/${card.attribute}.png`)"
-              :alt="card.attribute"
-            />
-            <h2>
-              {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
-            </h2>
-          </div>
-          <div class="flex justify-center">
-            <span v-for="(skill, i) in card.skills" :key="i">
-              <NuxtLink
-                :to="
-                  localePath(
-                    `/skills/${$globalV.nameToSlug(
-                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                    )}`
-                  )
-                "
-              >
-                <img
-                  class="icon"
-                  :src="skill.skill_group.icon.url"
-                  :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
-                />
-              </NuxtLink>
-            </span>
-          </div>
-        </div>
+        <CardGridItem
+          v-for="(card, i) in currentCards"
+          :key="i"
+          :card="card"
+          :url="
+            toLocalePath(
+              `/cards/${$globalV.nameToSlug(
+                card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+              )}`
+            )
+          "
+        />
       </div>
       <table v-show="!isGrid" class="w-full text-center general-table">
         <thead>
@@ -303,7 +269,7 @@
 export default {
   data() {
     return {
-      isGrid: false,
+      isGrid: true,
       filters: {
         attributes: [],
         characters: [],
@@ -438,7 +404,7 @@ export default {
           });
         this.isLoading = false;
       }
-    },
+    }
   },
   head() {
     return {

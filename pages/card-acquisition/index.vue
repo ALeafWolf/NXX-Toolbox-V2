@@ -125,38 +125,6 @@ export default {
     },
   },
   methods: {
-    async filterHistoriesByCardName(name) {
-      this.isLoading = true;
-      const filters = {};
-      if (name !== "") {
-        filters.cards = {
-          $or: [
-            {
-              name: {
-                $eq: name,
-              },
-            },
-            {
-              name_en: {
-                $eq: name,
-              },
-            },
-            {
-              name_ko: {
-                $eq: name,
-              },
-            },
-          ],
-        };
-      }
-      const result = await this.$axios.$get("/api/card-acquisition/list", {
-        params: {
-          filters: filters,
-        },
-      });
-      this.acquisition = result;
-      this.isLoading = false;
-    },
     async toggleSortHeader(date) {
       if (date === "start") {
         this.startDateDesc = !this.startDateDesc;
@@ -231,7 +199,7 @@ export default {
       this.isLoading = true;
       const sort = this.getSorts();
       const filters = this.getFilters();
-      console.log(filters)
+      console.log(filters);
       const acquisition = await this.$axios
         .$get("/api/card-acquisition/list", {
           params: {

@@ -92,11 +92,11 @@
 export default {
   name: "AcquisitionTable",
   props: {
-    entries: { type: Array },
-    startDateDesc: { type: Boolean },
-    endDateDesc: { type: Boolean },
-    toggleSortHeader: { type: Function },
-    locale: { type: String },
+    entries: Array ,
+    startDateDesc: Boolean,
+    endDateDesc: Boolean,
+    toggleSortHeader: Function ,
+    locale: String ,
   },
 };
 </script>

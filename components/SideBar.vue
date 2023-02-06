@@ -9,6 +9,9 @@
     <NuxtLink :to="localePath('/calculator/resource')" @click="closeMobileMenu">
       <h2>{{ $t("NAV.CARD-RSS-CALC") }}</h2>
     </NuxtLink>
+    <NuxtLink :to="localePath('/calculator/power')" @click="closeMobileMenu">
+      <h2>{{ $t("NAV.CARD-POWER-CALC") }}</h2>
+    </NuxtLink>
     <NuxtLink :to="localePath('/cards')" @click="closeMobileMenu">
       <h2>{{ $t("NAV.CARD-LIST") }}</h2>
     </NuxtLink>
@@ -42,7 +45,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .desktop-sidebar {
   display: block;
   position: absolute;
