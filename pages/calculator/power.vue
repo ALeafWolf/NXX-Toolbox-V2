@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-2 gap-4">
-    <section class="base-panel buffs">
+    <section class="base-panel buffs p-6">
       <h3>Buff List</h3>
       <div class="row">
         <div class="header">
@@ -45,15 +45,25 @@
         <div class="content"></div>
       </div>
     </section>
-    <section class="base-panel">
-      <h3>Power: {{ totalPower }}</h3>
+    <section class="base-panel p-6">
+      <div class="flex justify-between">
+        <h3>Power: {{ totalPower }}</h3>
+        <button>
+          <img
+            class="icon"
+            src="~assets/images/icons/icon_delete.png"
+            alt="Clean card deck"
+            @click="cleanCardDeck"
+          />
+        </button>
+      </div>
       <div class="grid grid-cols-5 gap-2">
         <button
           v-for="(c, i) in this.cardDesk"
           :key="`card-${i}`"
-          @click="editCard()"
+          @click="editCard(i)"
         >
-          <img src="~/assets/images/card-placeholder.png" alt="Placeholder" />
+          <img :src="c.thumbnail.url" :alt="c.name" />
         </button>
         <button
           v-for="i in this.getPlaceHolder"
@@ -68,10 +78,14 @@
         </button>
       </div>
     </section>
-    <dialog v-if="showCalcModal" id="calcModal" class="base-panel p-4">
-      <div class="flex justify-end mb-4">
-        <button class="close-btn" @click="closeModal">Close</button>
-      </div>
+    <dialog v-if="showCalcModal" id="calcModal" class="base-panel p-10">
+      <button class="close-btn" @click="closeModal">
+        <img
+          class="icon"
+          src="~/assets/images/icons/icon_close.png"
+          alt="Close modal"
+        />
+      </button>
       <AddCardDesk
         v-if="isAddCard"
         :cards="currentCards"
@@ -85,10 +99,14 @@
         v-if="isEditCard"
         :card="this.selectedCard"
         :goBack="goBack"
-        :handleStarChange="handleStarChange"
+        :saveCard="saveCard"
+        :editSavedCard="editSavedCard"
+        :cardOptions="selectedCardOptions"
+        :isSavedCard="isSavedCard"
+        :deleteCard="deleteCard"
       />
     </dialog>
-    <LoadingMask isLoading />
+    <LoadingMask :isLoading="isLoading" />
   </div>
 </template>
 
@@ -97,11 +115,14 @@ export default {
   name: "PowerCalculatorPage",
   data() {
     return {
+      cards: [],
+      currentCards: [],
       cardDesk: [],
-      totalPower: -1,
-      showCalcModal: true,
+      totalPower: 0,
+      showCalcModal: false,
       isAddCard: true,
       isEditCard: false,
+      isSavedCard: false,
       filters: {
         name: "",
         characters: [],
@@ -118,30 +139,116 @@ export default {
         character: "",
         rarity: "",
       },
+      selectedCardOptions: {
+        rank: 1,
+        skill1: 1,
+        skill2: 1,
+        skill3: 1,
+      },
     };
   },
-  async asyncData({ $axios }) {
-    const cards = await $axios.$get("/api/card/list").catch((error) => {
-      console.log(error.toJSON());
-    });
-    return {
-      cards,
-      currentCards: cards,
-    };
+  mounted() {
+    this.isLoading = true;
+    const storeCards = JSON.parse(localStorage.getItem("powerCalculatorItems"));
+    const f = {};
+    if (storeCards) {
+      f.id = {
+        $notIn: storeCards.id,
+      };
+    }
+    this.$axios
+      .$get("/api/card/power", {
+        params: {
+          filters: f,
+          sort: ["id:desc"],
+        },
+      })
+      .then((res) => {
+        this.cards = res;
+        this.currentCards = res;
+        this.loadCardDesk();
+      })
+      .catch((error) => {
+        console.log(error.toJSON());
+      })
+      .finally(() => (this.isLoading = false));
   },
   computed: {
     getPlaceHolder: function () {
       return 15 - this.cardDesk.length;
-    },
+    }
   },
   methods: {
+    loadCardDesk() {
+      const cards = JSON.parse(localStorage.getItem("powerCalculatorItems"));
+      if (cards && cards.id.length > 0) {
+        this.$axios
+          .$get("/api/card/power", {
+            params: {
+              filters: {
+                id: {
+                  $in: cards.id,
+                },
+              },
+            },
+          })
+          .then((res) => {
+            this.cardDesk = [];
+            for (let i = 0; i < cards.id.length; i++) {
+              const id = cards.id[i];
+              for (let j = 0; j < res.length; j++) {
+                if (res[j].id === id) {
+                  this.cardDesk.push(res[j]);
+                  break;
+                }
+              }
+            }
+            this.totalPower = this.loadTotalPower(cards.powers);
+            this.loadBuffList();
+          })
+          .catch((err) => console.log(err));
+      } else {
+        this.cardDesk = [];
+      }
+    },
+    loadTotalPower(powers){
+      let power = 0;
+      if(powers.length > 0){
+        for(let i = 0; i < powers.length; i++){
+          power += powers[i];
+        }
+      }
+      return power;
+    },
+    loadBuffList() {},
+    cleanCardDeck() {
+      this.isLoading = true;
+      localStorage.removeItem("powerCalculatorItems");
+      this.loadCardDesk();
+      this.isLoading = false;
+    },
     addCard() {
       this.showCalcModal = true;
       this.isAddCard = true;
+      this.isSavedCard = false;
+      this.selectedCardOptions = {
+        rank: 1,
+        skill1: 1,
+        skill2: 1,
+        skill3: 1,
+      };
     },
-    editCard() {
-      this.showCalcModal = true;
-      this.isEditCard = true;
+    async editCard(index) {
+      const cards = JSON.parse(localStorage.getItem("powerCalculatorItems"));
+      this.selectedCardOptions.id = cards.id[index];
+      this.selectedCardOptions.rank = cards.rank[index];
+      this.selectedCardOptions.skill1 = cards.skillLvs[index][0];
+      this.selectedCardOptions.skill2 = cards.skillLvs[index][1];
+      if (cards.skillLvs[index][2]) {
+        this.selectedCardOptions.skill3 = cards.skillLvs[index][2];
+      }
+      this.isSavedCard = true;
+      await this.getSelectedCard(this.selectedCardOptions.id);
     },
     closeModal() {
       this.showCalcModal = false;
@@ -150,19 +257,19 @@ export default {
     },
     async handleNameChange(value) {
       this.filters.name = value;
-      await this.filterCards();
+      this.filterCards();
     },
     async handleCharacterChange(value) {
       this.filters.characters = value;
-      await this.filterCards();
+      this.filterCards();
     },
     async handleAttributesChange(value) {
       this.filters.attributes = value;
-      await this.filterCards();
+      this.filterCards();
     },
     async handleRaritiesChange(value) {
       this.filters.rarities = value;
-      await this.filterCards();
+      this.filterCards();
     },
     getFilters() {
       const f = {};
@@ -204,47 +311,129 @@ export default {
           },
         };
       }
-      f.publishedAt = {
-        $ne: null,
-      };
+      // f.publishedAt = {
+      //   $ne: null,
+      // };
+      const storeCards = JSON.parse(
+        localStorage.getItem("powerCalculatorItems")
+      );
+      if (storeCards) {
+        f.id = {
+          $notIn: storeCards.id,
+        };
+      }
       return f;
     },
-    async filterCards() {
+    filterCards() {
       this.isLoading = true;
       const f = this.getFilters();
       if (Object.keys(f).length === 0) {
         this.currentCards = this.cards;
       } else {
-        this.currentCards = await this.$axios
-          .$get("/api/card/list", {
+        this.$axios
+          .$get("/api/card/power", {
             params: {
               filters: f,
+              sort: ["id:desc"],
             },
+          })
+          .then((res) => {
+            this.currentCards = res;
           })
           .catch((error) => {
             console.log(error.toJSON());
+          })
+          .finally(() => {
+            this.isLoading = false;
           });
-        this.isLoading = false;
       }
     },
-    async getSelectedCard(name) {
+    async getSelectedCard(id) {
       this.isLoading = true;
-      this.selectedCard = await this.$axios
-        .$get(`/api/card/detail/${encodeURIComponent(name)}`)
+      const cards = await this.$axios
+        .$get(`/api/card/power`, {
+          params: {
+            filters: {
+              id: {
+                $eq: id,
+              },
+            },
+          },
+        })
         .catch((error) => {
           console.log(error);
         });
+      this.selectedCard = cards[0];
       this.isAddCard = false;
       this.isEditCard = true;
+      this.showCalcModal = true;
       this.isLoading = false;
     },
     goBack() {
       this.isAddCard = true;
       this.isEditCard = false;
     },
-    handleStarChange(value) {},
-    getAttributeWithStar(star, attribute) {
-      return (attribute / 1.4) * (1 + 0.1 * (star - 1));
+    getStoredCards() {
+      let data = JSON.parse(localStorage.getItem("powerCalculatorItems"));
+      if (!data) {
+        data = {
+          id: [],
+          rank: [],
+          skillLvs: [],
+          powers: [],
+        };
+      }
+      return data;
+    },
+    saveCard(id, rarity, options, power) {
+      let data = this.getStoredCards();
+      data.id.push(id);
+      data.rank.push(options.rank);
+      const skills = [];
+      const length = rarity === "R" ? 2 : 3;
+      for (let i = 1; i <= length; i++) {
+        skills.push(options[`skill${i}`]);
+      }
+      data.skillLvs.push(skills);
+      data.powers.push(power);
+      localStorage.setItem("powerCalculatorItems", JSON.stringify(data));
+      this.loadCardDesk();
+      this.showCalcModal = false;
+      this.isEditCard = false;
+    },
+    editSavedCard(id, rarity, options, power) {
+      let data = this.getStoredCards();
+      const index = data.id.indexOf(id);
+      data.rank[index] = options.rank;
+      const skills = [];
+      const length = rarity === "R" ? 2 : 3;
+      for (let i = 1; i <= length; i++) {
+        skills.push(options[`skill${i}`]);
+      }
+      data.skillLvs[index] = skills;
+      data.powers[index] = power;
+      localStorage.setItem("powerCalculatorItems", JSON.stringify(data));
+      this.loadCardDesk();
+      this.showCalcModal = false;
+      this.isEditCard = false;
+    },
+    deleteCard(id) {
+      const data = JSON.parse(localStorage.getItem("powerCalculatorItems"));
+      const i = data.id.indexOf(id);
+      data.id.splice(i, 1);
+      data.rank.splice(i, 1);
+      data.skillLvs.splice(i, 1);
+      localStorage.setItem("powerCalculatorItems", JSON.stringify(data));
+      this.loadCardDesk();
+      this.showCalcModal = false;
+      this.isEditCard = false;
+    },
+    getAttributeWithRank(rank, attribute) {
+      if (rank === 5) return attribute;
+      return Math.round((attribute / 1.4) * (1 + 0.1 * (rank - 1)));
+    },
+    getSkillNumber(lv1num, lv10num, lv) {
+      return lv1num + ((lv10num - lv1num) / 10) * (lv - 1);
     },
   },
   head() {
@@ -280,8 +469,13 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  height: 100%;
   width: 100%;
-  min-height: 100%;
+  overflow-y: hidden;
+  > .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 }
 </style>

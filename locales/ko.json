@@ -40,7 +40,8 @@
     "CARDS": "생각",
     "INFLUENCE": "설득력",
     "DEFENSE": "방어력",
-    "RANK": "등급"
+    "RANK": "등급",
+    "POWER": "전투력"
   },
   "NAV": {
     "HOME": "홈",

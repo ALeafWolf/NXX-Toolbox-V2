@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <section class="base-panel p-4 mb-4">
       <div class="mb-4">
         <a-input-search
@@ -75,7 +75,7 @@
         </div>
       </div>
     </section>
-    <section class="grid grid-cols-5 gap-3">
+    <section class="grid grid-cols-5 gap-6 overflow-y-scroll h-full">
       <CardGridItem
         v-for="(card, i) in cards"
         :key="i"
@@ -92,13 +92,15 @@ export default {
   props: {
     cards: {
       type: Array,
-      default: [],
+      default() {
+        return [];
+      },
     },
     handleNameChange: Function,
     handleCharacterChange: Function,
     handleAttributesChange: Function,
     handleRaritiesChange: Function,
-    onClick: Function
+    onClick: Function,
   },
 };
 </script>

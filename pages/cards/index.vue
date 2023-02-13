@@ -1,3 +1,6 @@
+<!-- <template>
+  <div>yay</div>
+</template> -->
 <template>
   <section>
     <div>
@@ -170,13 +173,9 @@
           v-for="(card, i) in currentCards"
           :key="i"
           :card="card"
-          :url="
-            toLocalePath(
-              `/cards/${$globalV.nameToSlug(
-                card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-              )}`
-            )
-          "
+          :url="`/cards/${$globalV.nameToSlug(
+            card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+          )}`"
         />
       </div>
       <table v-show="!isGrid" class="w-full text-center general-table">
@@ -279,16 +278,10 @@ export default {
       isLoading: false,
     };
   },
-  async asyncData({ $axios, app }) {
-    const cards = await $axios
-      .$get("/api/card/list", {
-        params: {
-          locale: app.i18n.locale,
-        },
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-      });
+  async asyncData({ $axios }) {
+    const cards = await $axios.$get("/api/card/list").catch((error) => {
+      console.log(error.toJSON());
+    });
     const cardCount = {
       luke: [0, 0, 0, 0],
       artem: [0, 0, 0, 0],
@@ -404,7 +397,7 @@ export default {
           });
         this.isLoading = false;
       }
-    }
+    },
   },
   head() {
     return {

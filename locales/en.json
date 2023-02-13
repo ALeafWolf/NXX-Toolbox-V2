@@ -40,7 +40,8 @@
     "CARDS": "Cards",
     "INFLUENCE": "Influence",
     "DEFENSE": "Defense",
-    "RANK": "Rank"
+    "RANK": "Rank",
+    "POWER": "Power"
   },
   "NAV": {
     "HOME": "Home",

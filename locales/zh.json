@@ -40,7 +40,8 @@
     "CARDS": "思绪",
     "INFLUENCE": "说服力",
     "DEFENSE": "防御力",
-    "RANK": "星级"
+    "RANK": "星级",
+    "POWER": "战力"
   },
   "NAV": {
     "HOME": "主页",

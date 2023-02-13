@@ -1,6 +1,6 @@
 <template>
   <div class="sub-panel p-3 flex flex-col justify-center">
-    <NuxtLink v-if="url" class="m-auto inline-block" :to="url">
+    <NuxtLink v-if="url" class="m-auto inline-block" :to="localePath(url)">
       <img
         class="large-icon"
         :src="card.thumbnail.url"
@@ -10,7 +10,7 @@
     <div
       class="flex justify-center cursor-pointer"
       v-if="onClick"
-      @click="onClick(card[`name${$globalV.getLocalePostfix($i18n.locale)}`])"
+      @click="onClick(card.id)"
     >
       <img
         class="large-icon"
