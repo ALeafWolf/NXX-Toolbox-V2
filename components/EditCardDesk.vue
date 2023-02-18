@@ -227,7 +227,7 @@ export default {
   },
   computed: {
     getSkill1Description: function () {
-      const number = this.getSkillNumber(
+      const number = this.$globalV.getSkillNumber(
         this.card.skills[0].number.lv1,
         this.card.skills[0].number.lv10,
         this.options.skill1
@@ -248,7 +248,7 @@ export default {
       return description.replace("X", number);
     },
     getSkill2Description: function () {
-      const number = this.getSkillNumber(
+      const number = this.$globalV.getSkillNumber(
         this.card.skills[1].number.lv1,
         this.card.skills[1].number.lv10,
         this.options.skill2
@@ -260,7 +260,7 @@ export default {
       return description.replace("X", number);
     },
     getSkill3Description: function () {
-      const number = this.getSkillNumber(
+      const number = this.$globalV.getSkillNumber(
         this.card.skills[2].number.lv1,
         this.card.skills[2].number.lv10,
         this.options.skill3

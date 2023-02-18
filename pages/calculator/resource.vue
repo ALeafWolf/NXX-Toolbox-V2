@@ -12,28 +12,28 @@
                   <a-radio-button value="LUKE">
                     <img
                       class="icon"
-                      src="~/assets/images/夏彦.webp"
+                      src="~/assets/images/LUKE.webp"
                       alt="夏彦"
                     />
                   </a-radio-button>
                   <a-radio-button value="ARTEM">
                     <img
                       class="icon"
-                      src="~/assets/images/左然.webp"
+                      src="~/assets/images/ARTEM.webp"
                       alt="左然"
                     />
                   </a-radio-button>
                   <a-radio-button value="VYN">
                     <img
                       class="icon"
-                      src="~/assets/images/莫弈.webp"
+                      src="~/assets/images/VYN.webp"
                       alt="莫弈"
                     />
                   </a-radio-button>
                   <a-radio-button value="MARIUS">
                     <img
                       class="icon"
-                      src="~/assets/images/陆景和.webp"
+                      src="~/assets/images/MARIUS.webp"
                       alt="陆景和"
                     />
                   </a-radio-button>

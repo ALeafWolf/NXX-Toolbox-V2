@@ -29,7 +29,14 @@ const global = {
     if (typeof name === "string") {
       const words = name.split(" ");
       for (let i = 0; i < words.length; i++) {
-        if (words[i] !== "Ⅰ" && words[i] !== "Ⅱ" && words[i] !== "Ⅲ" && words[i] !== "α" && words[i] !== "β" && words[i] !== "γ") {
+        if (
+          words[i] !== "Ⅰ" &&
+          words[i] !== "Ⅱ" &&
+          words[i] !== "Ⅲ" &&
+          words[i] !== "α" &&
+          words[i] !== "β" &&
+          words[i] !== "γ"
+        ) {
           words[i] = words[i].toLowerCase();
         }
       }
@@ -66,7 +73,7 @@ const global = {
         "to",
         "α",
         "β",
-        "γ"
+        "γ",
       ];
       let bool = true;
       words.forEach((w) => {
@@ -88,6 +95,13 @@ const global = {
   },
   getLocalePostfix: (locale) => {
     return locale === "zh" ? "" : `_${locale}`;
+  },
+  getSkillNumber(lv1num, lv10num, lv) {
+    return (
+      Math.round(
+        (lv1num + ((lv10num - lv1num) / 9) * (lv - 1) + Number.EPSILON) * 100
+      ) / 100
+    );
   },
 };
 

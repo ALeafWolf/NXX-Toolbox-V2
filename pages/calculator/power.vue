@@ -1,49 +1,54 @@
 <template>
   <div class="grid grid-cols-2 gap-4">
+    <div class="base-panel col-span-2 p-6">
+      <p>owo</p>
+    </div>
     <section class="base-panel buffs p-6">
       <h3>Buff List</h3>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/LOGIC.png" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/EMPATHY.png" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/INTUITION.png" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/夏彦.webp" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/左然.webp" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/莫弈.webp" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="row">
-        <div class="header">
-          <img class="icon" src="~assets/images/陆景和.webp" alt="logic" />
-        </div>
-        <div class="content"></div>
-      </div>
+      <table class="general-table w-full">
+        <tbody>
+          <template v-for="row in buffRows">
+            <tr v-if="buffs[row.toLowerCase()].length > 0" :key="row">
+              <th class="icon-header">
+                <img
+                  class="icon mx-auto"
+                  :src="require(`~/assets/images/${row}.png`)"
+                  :alt="row"
+                />
+              </th>
+              <td>
+                <div class="content flex">
+                  <NuxtLink
+                    v-for="(skill, i) in buffs[row.toLowerCase()]"
+                    :key="`${row}-${i}`"
+                    :to="
+                      localePath(
+                        `/skills/${$globalV.nameToSlug(
+                          skill[
+                            `name${$globalV.getLocalePostfix($i18n.locale)}`
+                          ]
+                        )}`
+                      )
+                    "
+                    target="_blank"
+                  >
+                    <div class="flex mr-2 flex-wrap px-2">
+                      <img class="icon" :src="skill.url" :alt="skill.name" />
+                      <span>
+                        {{
+                          skill[
+                            `name${$globalV.getLocalePostfix($i18n.locale)}`
+                          ]
+                        }}(+{{ skill.number + skill.unit }})
+                      </span>
+                    </div>
+                  </NuxtLink>
+                </div>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
     </section>
     <section class="base-panel p-6">
       <div class="flex justify-between">
@@ -63,7 +68,7 @@
           :key="`card-${i}`"
           @click="editCard(i)"
         >
-          <img :src="c.thumbnail.url" :alt="c.name" />
+          <img class="large-icon" :src="c.thumbnail.url" :alt="c.name" />
         </button>
         <button
           v-for="i in this.getPlaceHolder"
@@ -118,6 +123,24 @@ export default {
       cards: [],
       currentCards: [],
       cardDesk: [],
+      buffs: {
+        logic: [],
+        empathy: [],
+        intuition: [],
+        luke: [],
+        artem: [],
+        vyn: [],
+        marius: [],
+      },
+      buffRows: [
+        "LOGIC",
+        "EMPATHY",
+        "INTUITION",
+        "LUKE",
+        "ARTEM",
+        "VYN",
+        "MARIUS",
+      ],
       totalPower: 0,
       showCalcModal: false,
       isAddCard: true,
@@ -176,7 +199,7 @@ export default {
   computed: {
     getPlaceHolder: function () {
       return 15 - this.cardDesk.length;
-    }
+    },
   },
   methods: {
     loadCardDesk() {
@@ -211,20 +234,130 @@ export default {
         this.cardDesk = [];
       }
     },
-    loadTotalPower(powers){
+    loadTotalPower(powers) {
       let power = 0;
-      if(powers.length > 0){
-        for(let i = 0; i < powers.length; i++){
+      if (powers.length > 0) {
+        for (let i = 0; i < powers.length; i++) {
           power += powers[i];
         }
       }
       return power;
     },
-    loadBuffList() {},
+    loadBuffList() {
+      this.buffs = {
+        logic: [],
+        empathy: [],
+        intuition: [],
+        luke: [],
+        artem: [],
+        vyn: [],
+        marius: [],
+      };
+      const cardOptions = JSON.parse(
+        localStorage.getItem("powerCalculatorItems")
+      );
+      for (let i = 0; i < this.cardDesk.length; i++) {
+        const card = this.cardDesk[i];
+        if (card.rarity.value !== "R") {
+          for (let j = 1; j < card.skills.length; j++) {
+            const skill = card.skills[j];
+            // 夏左莫陆
+            if (skill.skill_group.attribute.name === "GENERAL") {
+              switch (skill.skill_group.character.name) {
+                case "LUKE":
+                  this.loadSingleBuff(
+                    "luke",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+                case "ARTEM":
+                  this.loadSingleBuff(
+                    "artem",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+                case "VYN":
+                  this.loadSingleBuff("vyn", skill, cardOptions.skillLvs[i][j]);
+                  break;
+                case "MARIUS":
+                  this.loadSingleBuff(
+                    "marius",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+              }
+            } else {
+              //logic, empathy, intuition
+              switch (skill.skill_group.attribute.name) {
+                case "LOGIC":
+                  this.loadSingleBuff(
+                    "logic",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+                case "EMPATHY":
+                  this.loadSingleBuff(
+                    "empathy",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+                case "INTUITION":
+                  this.loadSingleBuff(
+                    "intuition",
+                    skill,
+                    cardOptions.skillLvs[i][j]
+                  );
+                  break;
+              }
+            }
+          }
+        }
+      }
+    },
+    loadSingleBuff(identifier, skill, level) {
+      // console.log(`${identifier}\n${skill.id}\n${level}`);
+      let isSameGroupFound = false;
+      for (let i = 0; i < this.buffs[identifier].length; i++) {
+        if (this.buffs[identifier][i].id === skill.skill_group.id) {
+          isSameGroupFound = true;
+          let num =
+            this.buffs[identifier][i].number +
+            this.$globalV.getSkillNumber(
+              skill.number.lv1,
+              skill.number.lv10,
+              level
+            );
+          this.buffs[identifier][i].number = num;
+          break;
+        }
+      }
+      if (!isSameGroupFound) {
+        const skillObj = {
+          id: skill.skill_group.id,
+          url: skill.skill_group.icon.url,
+          number: this.$globalV.getSkillNumber(
+            skill.number.lv1,
+            skill.number.lv10,
+            level
+          ),
+          unit: skill.skill_group.description.includes("%") ? "%" : "",
+          name: skill.name,
+          name_en: skill.name_en,
+          name_ko: skill.name_ko,
+        };
+        this.buffs[identifier].push(skillObj);
+      }
+    },
     cleanCardDeck() {
       this.isLoading = true;
       localStorage.removeItem("powerCalculatorItems");
       this.loadCardDesk();
+      this.loadBuffList();
       this.isLoading = false;
     },
     addCard() {
@@ -432,9 +565,6 @@ export default {
       if (rank === 5) return attribute;
       return Math.round((attribute / 1.4) * (1 + 0.1 * (rank - 1)));
     },
-    getSkillNumber(lv1num, lv10num, lv) {
-      return lv1num + ((lv10num - lv1num) / 10) * (lv - 1);
-    },
   },
   head() {
     return {
@@ -463,6 +593,9 @@ export default {
     gap: 10px;
     padding: 5px;
   }
+}
+th.icon-header {
+  width: 40px;
 }
 #calcModal {
   background-color: rgba(0, 0, 0, 0.8);

@@ -3,29 +3,29 @@
     class="desktop-sidebar p-4 base-panel"
     :class="{ hide: !$store.state.mobileMenu }"
   >
-    <NuxtLink :to="localePath('/')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.HOME") }}</h2>
-    </NuxtLink>
+    <!-- <NuxtLink :to="localePath('/')" @click="closeMobileMenu">
+      {{ $t("NAV.HOME") }}
+    </NuxtLink> -->
     <NuxtLink :to="localePath('/calculator/resource')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.CARD-RSS-CALC") }}</h2>
+      {{ $t("NAV.CARD-RSS-CALC") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/calculator/power')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.CARD-POWER-CALC") }}</h2>
+      {{ $t("NAV.CARD-POWER-CALC") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/cards')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.CARD-LIST") }}</h2>
+      {{ $t("NAV.CARD-LIST") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/card-acquisition')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.CARD-ACQUISITION") }}</h2>
+      {{ $t("NAV.CARD-ACQUISITION") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/skills')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.SKILL-LIST") }}</h2>
+      {{ $t("NAV.SKILL-LIST") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/merches')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.MERCH-LIST") }}</h2>
+      {{ $t("NAV.MERCH-LIST") }}
     </NuxtLink>
     <NuxtLink :to="localePath('/contact')" @click="closeMobileMenu">
-      <h2>{{ $t("NAV.CONTACT") }}</h2>
+      {{ $t("NAV.CONTACT") }}
     </NuxtLink>
   </section>
 </template>
@@ -57,6 +57,13 @@ export default {
   box-sizing: border-box;
   overflow-y: auto;
   width: calc($sidebar-width - $float-space);
+  a{
+    display: block;
+    padding: 5px;
+  }
+  a:hover, a.nuxt-link-active {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 }
 @media all and (max-width: $lg) {
   .desktop-sidebar {
@@ -69,7 +76,7 @@ export default {
     top: 0;
     bottom: 0;
     right: $float-space;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     &.hide {
       display: none;
     }
