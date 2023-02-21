@@ -1,6 +1,5 @@
 <template>
-  <section>
-    <div><h1 class="text-xl">Fill the form here</h1></div>
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center h-full">
     <a-form id="contact-form" :form="form" @submit="onSubmit">
       <a-form-item>
         <a-input
@@ -10,12 +9,12 @@
               rules: [
                 {
                   required: true,
-                  message: 'Please input your name!',
+                  message: $t('CONTACT.NAME-NOTICE'),
                 },
               ],
             },
           ]"
-          placeholder="Name"
+          :placeholder="$t('CONTACT.NAME')"
         />
       </a-form-item>
       <a-form-item>
@@ -24,28 +23,31 @@
             'email',
             {
               rules: [
-                { required: true, message: 'Please input your Email!' },
                 {
                   pattern: $globalV.emailRegex,
-                  message: 'Please input Email in validated form',
+                  message: $t('CONTACT.EMAIL-NOTICE'),
                 },
               ],
             },
           ]"
-          placeholder="Email"
+          :placeholder="$t('CONTACT.EMAIL')"
         />
       </a-form-item>
       <a-form-item>
         <a-textarea
           v-decorator="['comment']"
-          :auto-size="{ minRows: 3, maxRows: 8 }"
-          placeholder="Comment"
+          :auto-size="{ minRows: 3, maxRows: 10 }"
+          :placeholder="$t('CONTACT.MESSAGE-NOTE')"
         />
       </a-form-item>
       <a-button type="primary" html-type="submit" class="contact-submit-btn">
         {{ isSubmitting ? "SENDING" : "SEND" }}
       </a-button>
     </a-form>
+    <div class="order-first lg:order-last">
+      <h4 class="text-center text-2xl">{{ $t("CONTACT.NOTE") }}</h4>
+      <img class="davis mx-auto" src="~assets/images/初代.png" alt="初代" />
+    </div>
   </section>
 </template>
 
@@ -82,12 +84,14 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.CONTACT")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      title: `${this.$t("NAV.CONTACT")} | ${this.$t("COMMON.TITLE-POSTFIX")}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `${this.$t("NAV.CONTACT")} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+          content: `${this.$t("NAV.CONTACT")} | ${this.$t(
+            "COMMON.TITLE-POSTFIX"
+          )}`,
         },
       ],
     };
@@ -99,5 +103,8 @@ export default {
 form > div {
   display: flex;
   flex-direction: column;
+}
+.davis {
+  max-height: 250px;
 }
 </style>

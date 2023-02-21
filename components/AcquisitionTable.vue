@@ -54,7 +54,7 @@
           </span>
         </td>
         <td>
-          <span class="flex">
+          <span class="flex justify-center">
             <a
               v-if="record.social_media_url"
               :href="record.social_media_url"

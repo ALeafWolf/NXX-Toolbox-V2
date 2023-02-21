@@ -41,7 +41,9 @@
     "INFLUENCE": "설득력",
     "DEFENSE": "방어력",
     "RANK": "등급",
-    "POWER": "전투력"
+    "POWER": "전투력",
+    "SKILL": "스킬",
+    "EXCHANGE": "교환"
   },
   "NAV": {
     "HOME": "홈",
@@ -52,7 +54,8 @@
     "CARD-ACQUISITION": "카드 획득",
     "MERCH-LIST": "공식 굿즈",
     "UPDATE-LOG": "업데이트 로그",
-    "CARD-POWER-CALC": "전투력"
+    "CARD-POWER-CALC": "전투력",
+    "ABOUT": "에 대한"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "스킬 레벨",
@@ -85,5 +88,13 @@
   },
   "HOME": {
     "WELCOME-SLUG": "NXX Toolbox에 어서오세요!"
+  },
+  "CONTACT": {
+    "NOTE": "기능에 대한 제안, 잘못된/누락된 항목을 찾거나 나에게 말하고 싶은 것이 있습니까? \n쪽지 보내주세요。",
+    "NAME-NOTICE": "당신의 이름을 입력 해주세요",
+    "NAME": "이름",
+    "EMAIL": "이메일(연락을 받고 싶은 경우)",
+    "EMAIL-NOTICE": "유효한 형식으로 이메일을 입력하십시오",
+    "MESSAGE-NOTE": "메시지가 여기에 표시됩니다"
   }
 }

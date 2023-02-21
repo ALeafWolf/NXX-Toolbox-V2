@@ -41,7 +41,9 @@
     "INFLUENCE": "Influence",
     "DEFENSE": "Defense",
     "RANK": "Rank",
-    "POWER": "Power"
+    "POWER": "Power",
+    "SKILL": "Skill",
+    "EXCHANGE": "Exhange"
   },
   "NAV": {
     "HOME": "Home",
@@ -52,7 +54,8 @@
     "CARD-ACQUISITION": "Card Acquisition",
     "MERCH-LIST": "Merches",
     "UPDATE-LOG": "Update Log",
-    "CARD-POWER-CALC": "Card Power"
+    "CARD-POWER-CALC": "Card Power",
+    "ABOUT": "About"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "Skill Level",
@@ -84,5 +87,13 @@
   },
   "HOME": {
     "WELCOME-SLUG": "Welcome to NXX Toolbox"
+  },
+  "CONTACT": {
+    "NOTE": "Any suggestion for features, any wrong/missing entries you find, or just want to say something to me? Just send me a message~~",
+    "NAME-NOTICE": "Please enter your name",
+    "NAME": "Name",
+    "EMAIL": "Email (If you want to be contacted)",
+    "EMAIL-NOTICE": "Please enter the email in validated format",
+    "MESSAGE-NOTE": "Your message goes here"
   }
 }

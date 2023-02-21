@@ -41,7 +41,9 @@
     "INFLUENCE": "说服力",
     "DEFENSE": "防御力",
     "RANK": "星级",
-    "POWER": "战力"
+    "POWER": "战力",
+    "SKILL": "技能",
+    "EXCHANGE": "兑换"
   },
   "NAV": {
     "HOME": "主页",
@@ -52,7 +54,8 @@
     "CARD-ACQUISITION": "思绪获取方式",
     "MERCH-LIST": "周边列表",
     "UPDATE-LOG": "更新日志",
-    "CARD-POWER-CALC": "思绪战力"
+    "CARD-POWER-CALC": "思绪战力",
+    "ABOUT": "关于本工具箱"
   },
   "RSS-CALC": {
     "SKILL-LEVEL": "技能等级",
@@ -85,5 +88,13 @@
   },
   "HOME": {
     "WELCOME-SLUG": "牛叉叉牌工具箱，用过都说好！"
+  },
+  "CONTACT": {
+    "NOTE": "如果你有关于本工具箱的任何建议，发现了错误/缺失的数据，或者只是想和我说几句，随时欢迎给我发信息owo",
+    "NAME-NOTICE": "请输入你的称呼",
+    "NAME": "称呼",
+    "EMAIL": "邮箱 (如果你想被联系)",
+    "EMAIL-NOTICE": "请输入正确格式的邮箱",
+    "MESSAGE-NOTE": "在此输入你的信息"
   }
 }

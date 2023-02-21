@@ -24,9 +24,6 @@
     <NuxtLink :to="localePath('/merches')" @click="closeMobileMenu">
       {{ $t("NAV.MERCH-LIST") }}
     </NuxtLink>
-    <NuxtLink :to="localePath('/contact')" @click="closeMobileMenu">
-      {{ $t("NAV.CONTACT") }}
-    </NuxtLink>
   </section>
 </template>
 

@@ -1,22 +1,37 @@
 <template>
   <section>
-    <div class="sub-panel p-4">
+    <div class="p-4">
       <h1 class="text-center text-3xl">
         {{ $t(`COMMON.${card.character.name}`) }} -
         {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
       </h1>
-      <div class="base-panel p-4 card-section">
+      <div
+        class="p-4 base-panel mb-10"
+        :class="
+          card.is_horizontal_img ? 'horizontal-card-section' : 'card-section'
+        "
+      >
         <div>
-          <img
-            :src="`${imgUrl + card.character.name}/${card.name}-full.webp`"
-            :alt="card.name"
-          />
+          <img :src="getImgUrl" :alt="card.name" />
         </div>
-        <div>
-          <table class="text-xl w-full">
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th colspan="2">Statistics</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
               <th>{{ $t("COMMON.RARITY") }}</th>
               <td>{{ card.rarity.value }}</td>
+            </tr>
+            <tr>
+              <th>{{ $t("COMMON.LEVEL") }}</th>
+              <td>100</td>
+            </tr>
+            <tr>
+              <th>{{ $t("COMMON.RANK") }}</th>
+              <td>5</td>
             </tr>
             <tr>
               <th>{{ $t("COMMON.ATTRIBUTE") }}</th>
@@ -37,10 +52,17 @@
               <th>{{ $t("COMMON.DEFENSE") }}</th>
               <td>{{ card.defense }}</td>
             </tr>
-          </table>
-          <div>
-            <div class="skill-row" v-for="(skill, i) in card.skills" :key="i">
-              <div class="flex justify-center items-center">
+          </tbody>
+        </table>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th colspan="2">{{ $t("COMMON.SKILL") }}</th>
+            </tr>
+          </thead>
+          <tbody v-for="(skill, i) in card.skills" :key="i">
+            <tr>
+              <th rowspan="2">
                 <NuxtLink
                   :to="
                     localePath(
@@ -51,29 +73,29 @@
                   "
                 >
                   <img
-                    class="icon"
+                    class="large-icon mx-auto"
                     :src="skill.skill_group.icon.url"
                     :alt="
                       skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
                     "
                   />
                 </NuxtLink>
-              </div>
-              <div>
-                <h2 class="text-lg">
-                  {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
-                </h2>
-                <p>
-                  {{
-                    skill.skill_group[
-                      `description${$globalV.getLocalePostfix($i18n.locale)}`
-                    ]
-                  }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </th>
+              <td>
+                {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{
+                  skill.skill_group[
+                    `description${$globalV.getLocalePostfix($i18n.locale)}`
+                  ]
+                }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <AcquisitionTable
         :entries="card.card_acquisitions"
@@ -84,6 +106,7 @@
 </template>
 <script>
 export default {
+  name: "CardDetailPage",
   data() {
     return {
       imgUrl: this.$globalV.ihs,
@@ -100,6 +123,15 @@ export default {
     return {
       card,
     };
+  },
+  computed: {
+    getImgUrl: function () {
+      return this.card.images
+        ? this.card.images[0].url
+        : `${this.$globalV.ihs + this.card.character.name}/${
+            this.card.name
+          }-full.webp`;
+    },
   },
   head() {
     return {
@@ -122,8 +154,16 @@ export default {
 <style lang="scss" scoped>
 .card-section {
   display: grid;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 250px 1fr 2fr;
   gap: 60px;
+}
+.horizontal-card-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  > div:first-child {
+    grid-column: 1 / span 2;
+  }
 }
 .skill-row {
   display: grid;

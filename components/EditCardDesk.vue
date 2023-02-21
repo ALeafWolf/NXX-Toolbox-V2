@@ -96,7 +96,7 @@
                 target="_blank"
               >
                 <img
-                  class="large-icon"
+                  class="large-icon mx-auto"
                   :src="skill.skill_group.icon.url"
                   :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
                 />

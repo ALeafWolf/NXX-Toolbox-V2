@@ -93,6 +93,7 @@ export default {
           "EVENT-POOL",
           "EVENT-LIMITED-POOL",
           "RERUN-POOL",
+          "EXCHANGE",
           "OTHER",
         ],
         other: ["EVENT-REWARD", "ANOMALY-LEVEL", "TOP-UP-REWARD"],
@@ -103,7 +104,7 @@ export default {
     const acquisition = await $axios
       .$get("/api/card-acquisition/list", {
         params: {
-          sort: ["start:desc", "end:desc"],
+          sort: ["start:desc", "end:desc", 'id:desc'],
         },
       })
       .catch((error) => {
