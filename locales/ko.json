@@ -78,7 +78,19 @@
     "HIDE-DESCRIPTION": "제품 설명 숨기기",
     "SHOW-DESCRIPTION": "제품 설명 보기",
     "PRODUCT-TYPE": "상품 유형",
-    "PRODUCT-PRICE": "가격"
+    "PRODUCT-PRICE": "가격",
+    "ART-SOURCE": "예술의 원천",
+    "CHIBI": "SD캐릭터",
+    "NORMAL": "Normal",
+    "OTHER": "기타",
+    "FIRST-SELL-TIME": "첫 판매일",
+    "ALL": "모두",
+    "NO": "아니요",
+    "YES": "예",
+    "IN-GAME": "게임 내",
+    "ART-STYLE": "예술 스타일",
+    "IS-RELEASED": "배송 여부",
+    "IS-LIMITED-TIME": "기간 한정 상품"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "카드 이름 입력",

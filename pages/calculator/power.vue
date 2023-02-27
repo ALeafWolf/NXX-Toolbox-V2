@@ -444,9 +444,6 @@ export default {
           },
         };
       }
-      // f.publishedAt = {
-      //   $ne: null,
-      // };
       const storeCards = JSON.parse(
         localStorage.getItem("powerCalculatorItems")
       );

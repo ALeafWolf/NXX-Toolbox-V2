@@ -78,7 +78,20 @@
     "HIDE-DESCRIPTION": "隐藏产品描述",
     "SHOW-DESCRIPTION": "显示产品描述",
     "PRODUCT-TYPE": "种类",
-    "PRODUCT-PRICE": "价格"
+    "PRODUCT-PRICE": "价格",
+    "ART-SOURCE": "柄图来源",
+    "CHIBI": "Q版",
+    "NORMAL": "正比",
+    "OTHER": "其他",
+    "SELL-DATE": "贩售日期",
+    "FIRST-SELL-TIME": "首次贩售日期",
+    "IS-RELEASED": "是否发货",
+    "ALL": "全部",
+    "YES": "是",
+    "NO": "否",
+    "ART-STYLE": "柄图美术风格",
+    "IN-GAME": "游戏内",
+    "IS-LIMITED-TIME": "限时贩售"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "输入思绪名称",

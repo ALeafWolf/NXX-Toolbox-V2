@@ -2,17 +2,23 @@
   <table class="w-full general-table">
     <thead>
       <tr>
-        <th @click="toggleSortHeader('start')">
+        <th v-if="toggleSortHeader" @click="toggleSortHeader('start')">
           <div class="table-sort-header">
             {{ $t("CARD-ACQUISITION.START") }}
             <a-icon :type="`caret-${startDateDesc ? 'down' : 'up'}`" />
           </div>
         </th>
-        <th @click="toggleSortHeader('end')">
+        <th v-else>
+          {{ $t("CARD-ACQUISITION.START") }}
+        </th>
+        <th v-if="toggleSortHeader" @click="toggleSortHeader('end')">
           <div class="table-sort-header">
             {{ $t("CARD-ACQUISITION.END") }}
             <a-icon :type="`caret-${endDateDesc ? 'down' : 'up'}`" />
           </div>
+        </th>
+        <th v-else>
+          {{ $t("CARD-ACQUISITION.END") }}
         </th>
         <th>{{ $t("COMMON.SERVER") }}</th>
         <th>{{ $t("CARD-ACQUISITION.TYPE") }}</th>
@@ -92,11 +98,11 @@
 export default {
   name: "AcquisitionTable",
   props: {
-    entries: Array ,
+    entries: Array,
     startDateDesc: Boolean,
     endDateDesc: Boolean,
-    toggleSortHeader: Function ,
-    locale: String ,
+    toggleSortHeader: Function,
+    locale: String,
   },
 };
 </script>
@@ -106,5 +112,6 @@ export default {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 </style>

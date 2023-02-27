@@ -1,26 +1,28 @@
 <template>
   <section>
     <div class="flex justify-between mb-4 base-panel p-4">
-      <a-button class="flex" @click="toggleDateSort">
+      <a-button @click="toggleDateSort">
         <a-icon :type="`arrow-${isDateDesc ? 'down' : 'up'}`" />
-        <span>Sell Date</span>
+        {{ $t("MERCH.FIRST-SELL-TIME") }}
       </a-button>
       <a-button @click="isFilterShow = !isFilterShow">
         <a-icon type="filter" />
         {{ isFilterShow ? $t("COMMON.HIDE-FILTER") : $t("COMMON.SHOW-FILTER") }}
       </a-button>
     </div>
-    <div class="filter-wrapper base-panel p-4" v-if="isFilterShow">
+    <div
+      class="filter-wrapper base-panel p-4 mb-4 grid lg:grid-cols-4 gap-6 md:grid-cols-3 grid-cols-2"
+      v-if="isFilterShow"
+    >
       <div>
-        <h3 class="text-blue-600 text-lg">
+        <h3 class="title">
           {{ $t("COMMON.CHARACTER") }}
         </h3>
         <a-select
           mode="multiple"
           class="w-full custom-select"
-          :defaultValue="[]"
+          v-model="filters.characters"
           dropdownClassName="custom-dropdown"
-          @change="handleCharacterChange"
         >
           <a-select-option key="LUKE">
             {{ $t("COMMON.LUKE") }}
@@ -40,15 +42,14 @@
         </a-select>
       </div>
       <div>
-        <h3 class="text-blue-600 text-lg">
+        <h3 class="title">
           {{ $t("MERCH.PRODUCT-SERIES") }}
         </h3>
         <a-select
           mode="multiple"
           class="w-full custom-select"
           dropdownClassName="custom-dropdown"
-          :defaultValue="[]"
-          @change="handleSeriesChange"
+          v-model="filters.series"
           allowClear
         >
           <a-select-option v-for="s in series" :key="s.attributes.name">
@@ -57,15 +58,47 @@
         </a-select>
       </div>
       <div>
-        <h3 class="text-blue-600 text-lg">
+        <h3 class="title">
+          {{ $t("MERCH.ART-SOURCE") }}
+        </h3>
+        <a-select
+          mode="multiple"
+          class="w-full custom-select"
+          v-model="filters.artSources"
+          dropdownClassName="custom-dropdown"
+        >
+          <a-select-option :key="`IN-GAME`">
+            {{ $t(`MERCH.IN-GAME`) }}
+          </a-select-option>
+          <a-select-option :key="`OTHER`">
+            {{ $t(`MERCH.OTHER`) }}
+          </a-select-option>
+        </a-select>
+      </div>
+      <div>
+        <h3 class="title">
+          {{ $t("MERCH.ART-STYLE") }}
+        </h3>
+        <a-select
+          mode="multiple"
+          class="w-full custom-select"
+          v-model="filters.artStyles"
+          dropdownClassName="custom-dropdown"
+        >
+          <a-select-option v-for="p in artStyles" :key="p.attributes.value">
+            {{ $t(`MERCH.${p.attributes.value}`) }}
+          </a-select-option>
+        </a-select>
+      </div>
+      <div>
+        <h3 class="title">
           {{ $t("MERCH.PRODUCT-TYPE") }}
         </h3>
         <a-select
           mode="multiple"
           class="w-full custom-select"
           dropdownClassName="custom-dropdown"
-          :defaultValue="[]"
-          @change="handleTypeChange"
+          v-model="filters.types"
         >
           <a-select-option v-for="t in types" :key="t.attributes.value">
             {{ t.attributes.value }}
@@ -73,15 +106,14 @@
         </a-select>
       </div>
       <div>
-        <h3 class="text-blue-600 text-lg">
+        <h3 class="title">
           {{ $t("MERCH.PRODUCT-MATERIAL") }}
         </h3>
         <a-select
           mode="multiple"
           class="w-full custom-select"
           dropdownClassName="custom-dropdown"
-          :defaultValue="[]"
-          @change="handleMaterialChange"
+          v-model="filters.materials"
         >
           <a-select-option v-for="m in materials" :key="m.attributes.value">
             {{ m.attributes.value }}
@@ -89,62 +121,109 @@
         </a-select>
       </div>
       <div>
-        <h3 class="text-blue-600 text-lg">
+        <h3 class="title">
           {{ $t("MERCH.PRODUCT-TECHNOLOGY") }}
         </h3>
         <a-select
           mode="multiple"
           class="w-full custom-select"
-          :defaultValue="[]"
+          v-model="filters.technologies"
           dropdownClassName="custom-dropdown"
-          @change="handleTechnologyChange"
         >
           <a-select-option v-for="t in technologies" :key="t.attributes.value">
             {{ t.attributes.value }}
           </a-select-option>
         </a-select>
       </div>
-      <div>
-        <h3 class="text-blue-600 text-lg">
-          {{ $t("MERCH.PRODUCT-PACKAGING") }}
-        </h3>
-        <a-select
-          mode="multiple"
-          class="w-full custom-select"
-          :defaultValue="[]"
-          dropdownClassName="custom-dropdown"
-          @change="handlePackagingChange"
-        >
-          <a-select-option v-for="p in packagings" :key="p.attributes.value">
-            {{ p.attributes.value }}
-          </a-select-option>
-        </a-select>
-      </div>
-      <div>
-        <h3 class="text-blue-600 text-lg">
-          {{ $t("MERCH.PRODUCT-PRICE") }}
-        </h3>
-        <div class="flex">
-          <span>{{ priceRange[0] }}</span>
-          <a-slider
-            class="w-full"
-            range
-            :min="priceRange[0]"
-            :max="priceRange[1]"
-            :default-value="priceRange"
-            @change="handlePriceRangeChange"
-          />
-          <span>{{ priceRange[1] }}</span>
+      <div
+        class="lg:col-span-4 md:col-span-3 col-span-2 grid grid-cols-2 gap-6"
+      >
+        <div>
+          <h3 class="title">
+            {{ $t("MERCH.IS-RELEASED") }}
+          </h3>
+          <div>
+            <a-radio-group v-model="filters.isReleased">
+              <a-radio-button :value="null">
+                {{ $t("MERCH.ALL") }}
+              </a-radio-button>
+              <a-radio-button :value="true">
+                {{ $t("MERCH.YES") }}
+              </a-radio-button>
+              <a-radio-button :value="false">
+                {{ $t("MERCH.NO") }}
+              </a-radio-button>
+            </a-radio-group>
+          </div>
+        </div>
+        <div>
+          <h3 class="title">
+            {{ $t("MERCH.IS-LIMITED-TIME") }}
+          </h3>
+          <div>
+            <a-radio-group v-model="filters.isLimitedTime">
+              <a-radio-button :value="null">
+                {{ $t("MERCH.ALL") }}
+              </a-radio-button>
+              <a-radio-button :value="true">
+                {{ $t("MERCH.YES") }}
+              </a-radio-button>
+              <a-radio-button :value="false">
+                {{ $t("MERCH.NO") }}
+              </a-radio-button>
+            </a-radio-group>
+          </div>
         </div>
       </div>
-      <div>
-        <a-button class="w-full">{{ $t("COMMON.APPLY-FILTER") }}</a-button>
-        <a-button class="w-full">{{ $t("COMMON.RESET-FILTER") }}</a-button>
+      <div
+        class="lg:col-span-4 md:col-span-3 col-span-2 grid md:grid-cols-2 grid-cols-1 gap-6"
+      >
+        <div>
+          <h3 class="title">
+            {{ $t("MERCH.SELL-TIME") }}
+          </h3>
+          <a-range-picker
+            id="sellDateRange"
+            :placeholder="[
+              $t('CARD-ACQUISITION.START'),
+              $t('CARD-ACQUISITION.END'),
+            ]"
+            v-model="filters.sellDateRange"
+          />
+        </div>
+        <div>
+          <h3 class="title">
+            {{
+              `${$t("MERCH.PRODUCT-PRICE")}: ￥${filters.priceRange[0]} - ￥${
+                filters.priceRange[1]
+              }`
+            }}
+          </h3>
+          <div class="flex">
+            <a-slider
+              class="w-full"
+              range
+              :min="priceRange[0]"
+              :max="priceRange[1]"
+              v-model="filters.priceRange"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="lg:col-span-4 md:col-span-3 col-span-2 grid grid-cols-2 gap-4"
+      >
+        <a-button class="w-full" @click="filterMerches">{{
+          $t("COMMON.APPLY-FILTER")
+        }}</a-button>
+        <a-button class="w-full" @click="resetFilters">{{
+          $t("COMMON.RESET-FILTER")
+        }}</a-button>
       </div>
     </div>
-    <div class="card-grid w-full">
+    <div class="item-grid w-full">
       <div v-for="(merch, i) in currentMerches" class="sub-panel p-3" :key="i">
-        <NuxtLink :to="localePath(`/merches/${merch.id}`)">
+        <NuxtLink :to="localePath(`/merches/${merch.id}`)" _target="_blank">
           <img
             class="large-icon m-auto"
             :src="merch.avatar.url"
@@ -162,6 +241,7 @@
 
 <script>
 export default {
+  name: "MerchPage",
   data() {
     return {
       isFilterShow: true,
@@ -171,9 +251,13 @@ export default {
         types: [],
         materials: [],
         technologies: [],
-        packagings: [],
         priceRange: [0, 0],
         characters: [],
+        artStyles: [],
+        artSources: [],
+        isReleased: null,
+        sellDateRange: [null, null],
+        isLimitedTime: null,
       },
       isLoading: false,
     };
@@ -206,7 +290,7 @@ export default {
         fields: ["value"],
       },
     });
-    const packagingsReq = $axios.$get("/api/merch-packagings", {
+    const artStylesReq = $axios.$get("/api/merch-art-styles", {
       params: {
         fields: ["value"],
       },
@@ -218,7 +302,7 @@ export default {
       types,
       materials,
       technologies,
-      packagings,
+      artStyles,
       priceRange,
     ] = await Promise.all([
       merchesReq,
@@ -226,7 +310,7 @@ export default {
       typesReq,
       materialsReq,
       technologiesReq,
-      packagingsReq,
+      artStylesReq,
       priceRangeReq,
     ]).catch((err) => {
       console.log(err);
@@ -241,10 +325,12 @@ export default {
       types: types.data,
       materials: materials.data,
       technologies: technologies.data,
-      packagings: packagings.data,
+      artStyles: artStyles.data,
       priceRange,
-      priceFilter: priceRange,
     };
+  },
+  mounted() {
+    this.filters.priceRange = this.priceRange;
   },
   head() {
     return {
@@ -267,38 +353,10 @@ export default {
       this.isDateDesc = !this.isDateDesc;
       await this.filterMerches();
     },
-    async handleCharacterChange(value) {
-      this.filters.characters = value;
-      await this.filterMerches();
-    },
-    async handleSeriesChange(value) {
-      this.filters.series = value;
-      await this.filterMerches();
-    },
-    async handleTypeChange(value) {
-      this.filters.types = value;
-      await this.filterMerches();
-    },
-    async handleMaterialChange(value) {
-      this.filters.materials = value;
-      await this.filterMerches();
-    },
-    async handleTechnologyChange(value) {
-      this.filters.technologies = value;
-      await this.filterMerches();
-    },
-    async handlePackagingChange(value) {
-      this.filters.packagings = value;
-      await this.filterMerches();
-    },
-    async handlePriceRangeChange(value) {
-      this.priceFilter = value;
-      await this.filterMerches();
-    },
     getFilters() {
       const f = {};
       if (this.filters.characters.length > 0) {
-        const c = this.filters.characters;
+        const c = [...this.filters.characters];
         if (
           (this.filters.characters[0] !== "OTHER" &&
             this.filters.characters.length === 1) ||
@@ -340,18 +398,106 @@ export default {
           },
         };
       }
-      if (this.filters.packagings.length > 0) {
-        f.packagings = {
+      if (this.filters.artStyles.length > 0) {
+        f["art_styles"] = {
           value: {
-            $in: this.filters.packagings,
+            $in: this.filters.artStyles,
           },
         };
       }
+      if (this.filters.artSources.length > 0) {
+        f["art_source"] = {
+          $in: this.filters.artSources,
+        };
+      }
+      if (this.filters.isReleased !== null) {
+        f["is_released"] = {
+          $eq: this.filters.isReleased,
+        };
+      }
+      if (this.filters.isLimitedTime !== null) {
+        if (this.filters.isLimitedTime === true) {
+          f.sell_dates = {
+            $and: [
+              {
+                end: {
+                  date: {
+                    $notNull: true,
+                  },
+                },
+              },
+            ],
+          };
+        } else if (this.filters.isLimitedTime === false) {
+          f.sell_dates = {
+            end: {
+              date: {
+                $null: true,
+              },
+            },
+          };
+        }
+      }
       f["$and"] = [
-        { price: { $lte: this.priceFilter[1] } },
-        { price: { $gte: this.priceFilter[0] } },
+        { price: { $lte: this.filters.priceRange[1] } },
+        { price: { $gte: this.filters.priceRange[0] } },
       ];
+      if (
+        this.filters.sellDateRange[0] !== null &&
+        this.filters.sellDateRange[1] !== null
+      ) {
+        const date = [
+          this.filters.sellDateRange[0].format("YYYY-MM-DD"),
+          this.filters.sellDateRange[1].format("YYYY-MM-DD"),
+        ];
+        // exclude dates that...
+        f["$not"] = {
+          sell_dates: {
+            $or: [
+              {
+                // start date is greater than the end of date range
+                start: {
+                  date: {
+                    $gt: date[1],
+                  },
+                },
+              },
+              {
+                // end date is less than the start of date range
+                end: {
+                  $and: [
+                    {
+                      date: {
+                        $lt: date[0],
+                      },
+                    },
+                    {
+                      date: {
+                        $notNull: true,
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        };
+      }
       return f;
+    },
+    resetFilters() {
+      this.filters = {
+        series: [],
+        types: [],
+        materials: [],
+        technologies: [],
+        priceRange: this.priceRange,
+        characters: [],
+        artStyles: [],
+        artSources: [],
+        isReleased: null,
+        sellDateRange: [null, null],
+      };
     },
     async filterMerches() {
       this.isLoading = true;
@@ -377,33 +523,40 @@ export default {
 };
 </script>
 
+<style lang="scss">
+#sellDateRange {
+  width: 100%;
+}
+</style>
+
 <style lang="scss" scoped>
 .filter-wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 30px;
+  .title {
+    margin-bottom: 8px;
+  }
 }
-.card-grid {
+.item-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
+@media all and (max-width: $xl) {
+  .item-grid {
+    gap: 24px;
+  }
+}
 @media all and (max-width: $lg) {
-  .card-grid {
-    grid-template-columns: repeat(4, 1fr);
+  .item-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media all and (max-width: $md) {
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .filter-wrapper {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media all and (max-width: $sm) {
-  .card-grid {
+  .item-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .filter-wrapper {

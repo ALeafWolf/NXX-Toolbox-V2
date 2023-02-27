@@ -1,6 +1,3 @@
-<!-- <template>
-  <div>yay</div>
-</template> -->
 <template>
   <section>
     <div>
@@ -65,89 +62,98 @@
           <td>{{ cardCount.marius[0] }}</td>
         </tr>
       </table>
-      <div class="base-panel p-4 grid grid-cols-4 gap-4 mb-4">
-        <div>
-          <h3 class="text-lg">
-            {{ $t("COMMON.CHARACTER") }}
-          </h3>
-          <a-select
-            mode="multiple"
-            class="w-full custom-select"
-            :defaultValue="[]"
-            dropdownClassName="custom-dropdown"
-            @change="handleCharacterChange"
-          >
-            <a-select-option key="LUKE">
-              {{ $t("COMMON.LUKE") }}
-            </a-select-option>
-            <a-select-option key="ARTEM">
-              {{ $t("COMMON.ARTEM") }}
-            </a-select-option>
-            <a-select-option key="VYN">
-              {{ $t("COMMON.VYN") }}
-            </a-select-option>
-            <a-select-option key="MARIUS">
-              {{ $t("COMMON.MARIUS") }}
-            </a-select-option>
-          </a-select>
+      <div class="base-panel p-4 mb-4">
+        <div class="mb-4">
+          <a-input-search
+            :placeholder="$t('CARD-ACQUISITION.SEARCH-BY-NAME')"
+            size="large"
+            @search="handleNameChange"
+          />
         </div>
-        <div>
-          <h3 class="text-lg">
-            {{ $t("COMMON.ATTRIBUTE") }}
-          </h3>
-          <a-select
-            mode="multiple"
-            class="w-full custom-select"
-            :defaultValue="[]"
-            dropdownClassName="custom-dropdown"
-            @change="handleAttributesChange"
-          >
-            <a-select-option key="LOGIC">
-              {{ $t("COMMON.LOGIC") }}
-            </a-select-option>
-            <a-select-option key="EMPATHY">
-              {{ $t("COMMON.EMPATHY") }}
-            </a-select-option>
-            <a-select-option key="INTUITION">
-              {{ $t("COMMON.INTUITION") }}
-            </a-select-option>
-          </a-select>
-        </div>
-        <div>
-          <h3 class="text-lg">
-            {{ $t("COMMON.RARITY") }}
-          </h3>
-          <a-select
-            mode="multiple"
-            class="w-full custom-select"
-            :defaultValue="[]"
-            dropdownClassName="custom-dropdown"
-            @change="handleRaritiesChange"
-          >
-            <a-select-option key="R"> R </a-select-option>
-            <a-select-option key="MR"> MR </a-select-option>
-            <a-select-option key="SR"> SR </a-select-option>
-            <a-select-option key="SSR"> SSR </a-select-option>
-          </a-select>
-        </div>
-        <div>
-          <h3 class="text-lg">
-            {{ $t("NAV.CARD-ACQUISITION") }}
-          </h3>
-          <a-select
-            mode="multiple"
-            class="w-full custom-select"
-            :defaultValue="[]"
-            dropdownClassName="custom-dropdown"
-            @change="handleAcquisitionsChange"
-          >
-            <a-select-option key="POOL">
-              {{ $t("COMMON.POOL") }}
-            </a-select-option>
-            <a-select-option key="OTHER">
-              {{ $t("COMMON.OTHER") }}
-            </a-select-option>
-          </a-select>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <h3 class="text-lg">
+              {{ $t("COMMON.CHARACTER") }}
+            </h3>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleCharacterChange"
+            >
+              <a-select-option key="LUKE">
+                {{ $t("COMMON.LUKE") }}
+              </a-select-option>
+              <a-select-option key="ARTEM">
+                {{ $t("COMMON.ARTEM") }}
+              </a-select-option>
+              <a-select-option key="VYN">
+                {{ $t("COMMON.VYN") }}
+              </a-select-option>
+              <a-select-option key="MARIUS">
+                {{ $t("COMMON.MARIUS") }}
+              </a-select-option>
+            </a-select>
+          </div>
+          <div>
+            <h3 class="text-lg">
+              {{ $t("COMMON.ATTRIBUTE") }}
+            </h3>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleAttributesChange"
+            >
+              <a-select-option key="LOGIC">
+                {{ $t("COMMON.LOGIC") }}
+              </a-select-option>
+              <a-select-option key="EMPATHY">
+                {{ $t("COMMON.EMPATHY") }}
+              </a-select-option>
+              <a-select-option key="INTUITION">
+                {{ $t("COMMON.INTUITION") }}
+              </a-select-option>
+            </a-select>
+          </div>
+          <div>
+            <h3 class="text-lg">
+              {{ $t("COMMON.RARITY") }}
+            </h3>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleRaritiesChange"
+            >
+              <a-select-option key="R"> R </a-select-option>
+              <a-select-option key="MR"> MR </a-select-option>
+              <a-select-option key="SR"> SR </a-select-option>
+              <a-select-option key="SSR"> SSR </a-select-option>
+            </a-select>
+          </div>
+          <div>
+            <h3 class="text-lg">
+              {{ $t("NAV.CARD-ACQUISITION") }}
+            </h3>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleAcquisitionsChange"
+            >
+              <a-select-option key="POOL">
+                {{ $t("COMMON.POOL") }}
+              </a-select-option>
+              <a-select-option key="OTHER">
+                {{ $t("COMMON.OTHER") }}
+              </a-select-option>
+            </a-select>
+          </div>
         </div>
       </div>
       <div class="w-full flex justify-end mb-6">
@@ -270,6 +276,7 @@ export default {
     return {
       isGrid: true,
       filters: {
+        name: "",
         attributes: [],
         characters: [],
         rarities: [],
@@ -314,6 +321,10 @@ export default {
     setIsGrid(bool) {
       this.isGrid = bool;
     },
+    async handleNameChange(value) {
+      this.filters.name = value;
+      await this.filterCards();
+    },
     async handleCharacterChange(value) {
       this.filters.characters = value;
       await this.filterCards();
@@ -332,6 +343,25 @@ export default {
     },
     getFilters() {
       const f = {};
+      if (this.filters.name !== "") {
+        f["$or"] = [
+          {
+            name: {
+              $eq: this.filters.name,
+            },
+          },
+          {
+            name_en: {
+              $eq: this.filters.name,
+            },
+          },
+          {
+            name_ko: {
+              $eq: this.filters.name,
+            },
+          },
+        ];
+      }
       if (this.filters.characters.length > 0) {
         f.character = {
           name: {
@@ -416,22 +446,22 @@ export default {
 <style lang="scss" scoped>
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
 }
 @media all and (max-width: $lg) {
   .card-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 @media all and (max-width: $md) {
   .card-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 @media all and (max-width: $sm) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>

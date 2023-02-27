@@ -77,7 +77,20 @@
     "HIDE-DESCRIPTION": "Hide Product Description",
     "SHOW-DESCRIPTION": "Show Product Description",
     "PRODUCT-TYPE": "Merch Type",
-    "PRODUCT-PRICE": "Merch Price"
+    "PRODUCT-PRICE": "Merch Price",
+    "ART-SOURCE": "Source of Art",
+    "CHIBI": "Chibi",
+    "NORMAL": "Normal",
+    "OTHER": "Other",
+    "SELL-DATE": "Sell Dates",
+    "FIRST-SELL-TIME": "First Sell Date",
+    "IS-RELEASED": "Is the Merch Released",
+    "ALL": "All",
+    "YES": "Yes",
+    "NO": "No",
+    "ART-STYLE": "Art Style",
+    "IN-GAME": "In game",
+    "IS-LIMITED-TIME": "Limited Time Merch"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "Enter Card Name",

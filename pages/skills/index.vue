@@ -81,7 +81,8 @@
                 "
               >
                 <img
-                  :src="`${imgUrl}/技能/${group.name}.webp`"
+                  class="mx-auto"
+                  :src="group.icon.url"
                   :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
                 />
               </NuxtLink>
@@ -153,7 +154,9 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.SKILL-LIST")} | ${this.$t("COMMON.TITLE-POSTFIX")}`,
+      title: `${this.$t("NAV.SKILL-LIST")} | ${this.$t(
+        "COMMON.TITLE-POSTFIX"
+      )}`,
       meta: [
         {
           hid: "description",

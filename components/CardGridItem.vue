@@ -1,6 +1,6 @@
 <template>
   <div class="sub-panel p-3 flex flex-col justify-center">
-    <NuxtLink v-if="url" class="m-auto inline-block" :to="localePath(url)">
+    <NuxtLink v-if="url" class="mx-auto inline-block mb-2" :to="localePath(url)">
       <img
         class="large-icon"
         :src="card.thumbnail.url"

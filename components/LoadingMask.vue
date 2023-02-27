@@ -1,12 +1,6 @@
 <template>
-  <div v-if="isShow" class="loading-mask-container">
-    <a-icon
-      type="loading"
-      :style="{
-        fontSize: '40px',
-        color: '#8e8baf',
-      }"
-    />
+  <div v-if="isShow" id="loadingMaskContainer">
+    <a-icon type="loading" />
   </div>
 </template>
 
@@ -19,8 +13,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.loading-mask-container {
+<style lang="scss">
+#loadingMaskContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,5 +24,9 @@ export default {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  svg {
+    font-size: 60px;
+    fill: #8e8baf;
+  }
 }
 </style>
