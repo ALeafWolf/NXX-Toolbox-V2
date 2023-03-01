@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="base-panel px-6 py-3 merch-detail-container">
-      <a-tabs type="card">
+      <a-tabs type="card" class="custom-card-tab">
         <a-tab-pane class="tab-content" key="`image-1`" tab="1">
           <img
             class="img-fluid"
@@ -209,22 +209,22 @@ export default {
     font-weight: 500;
   }
 }
-.merch-detail-container {
-  .ant-tabs-bar {
-    border: none;
-    border-top: 1px solid rgb(62, 62, 62);
-    border-bottom: 1px solid rgb(62, 62, 62);
-  }
-  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-    background-color: rgba(35, 38, 50, 0.5);
-    border: none;
-  }
-  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-    border-bottom: 2px solid #fff;
-    background: linear-gradient(
-      rgba(60, 64, 77, 0.75) 0%,
-      rgba(76, 76, 133, 1) 100%
-    );
-  }
-}
+// .merch-detail-container {
+//   .ant-tabs-bar {
+//     border: none;
+//     border-top: 1px solid rgb(62, 62, 62);
+//     border-bottom: 1px solid rgb(62, 62, 62);
+//   }
+//   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+//     background-color: rgba(35, 38, 50, 0.5);
+//     border: none;
+//   }
+//   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+//     border-bottom: 2px solid #fff;
+//     background: linear-gradient(
+//       rgba(60, 64, 77, 0.75) 0%,
+//       rgba(76, 76, 133, 1) 100%
+//     );
+//   }
+// }
 </style>

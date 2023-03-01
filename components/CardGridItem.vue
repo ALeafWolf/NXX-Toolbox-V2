@@ -1,6 +1,10 @@
 <template>
-  <div class="sub-panel p-3 flex flex-col justify-center">
-    <NuxtLink v-if="url" class="mx-auto inline-block mb-2" :to="localePath(url)">
+  <div class="sub-panel p-3 flex flex-col justify-center card-grid-item">
+    <NuxtLink
+      v-if="url"
+      class="mx-auto inline-block mb-2"
+      :to="localePath(url)"
+    >
       <img
         class="large-icon"
         :src="card.thumbnail.url"
@@ -20,13 +24,13 @@
     </div>
     <div class="flex justify-center">
       <img
-        class="icon"
+        class="icon mr-1"
         :src="require(`~/assets/images/${card.attribute}.png`)"
         :alt="card.attribute"
       />
-      <h2>
+      <h5>
         {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
-      </h2>
+      </h5>
     </div>
     <div class="flex justify-center">
       <span v-for="(skill, i) in card.skills" :key="i">
@@ -66,3 +70,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card-grid-item {
+  height: 200px;
+}
+</style>

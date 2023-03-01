@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="p-4">
-      <h1 class="text-center text-3xl">
+      <h1 class="text-center">
         {{ $t(`COMMON.${card.character.name}`) }} -
         {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
       </h1>
@@ -11,13 +11,27 @@
           card.is_horizontal_img ? 'horizontal-card-section' : 'card-section'
         "
       >
-        <div>
+        <a-tabs v-if="card.images" type="card" class="custom-card-tab">
+          <a-tab-pane
+            class="tab-content"
+            v-for="(image, i) in card.images"
+            :key="`image-${i}`"
+            :tab="i"
+          >
+            <img
+              class="img-fluid"
+              :src="image.url"
+              :alt="`${card.name}-${i + 1}`"
+            />
+          </a-tab-pane>
+        </a-tabs>
+        <div v-else>
           <img :src="getImgUrl" :alt="card.name" />
         </div>
         <table class="general-table">
           <thead>
             <tr>
-              <th colspan="2">Statistics</th>
+              <th colspan="2">{{ $t("COMMON.BASIC-INFO") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -169,5 +183,13 @@ export default {
   display: grid;
   grid-template-columns: 50px auto;
   gap: 10px;
+}
+.tab-content {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+@media all and (max-width: $lg) {
+  .horizontal-card-section {
+    gap: 60px 30px;
+  }
 }
 </style>

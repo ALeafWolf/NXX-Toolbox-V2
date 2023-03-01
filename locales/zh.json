@@ -43,7 +43,12 @@
     "RANK": "星级",
     "POWER": "战力",
     "SKILL": "技能",
-    "EXCHANGE": "兑换"
+    "EXCHANGE": "兑换",
+    "BASIC-INFO": "基本信息",
+    "THUMBNAIL": "图标",
+    "NAME": "思绪名",
+    "GRID": "网格",
+    "TABLE": "表格"
   },
   "NAV": {
     "HOME": "主页",
@@ -109,5 +114,9 @@
     "EMAIL": "邮箱 (如果你想被联系)",
     "EMAIL-NOTICE": "请输入正确格式的邮箱",
     "MESSAGE-NOTE": "在此输入你的信息"
+  },
+  "POWER-CALC": {
+    "NOTE": "此计算器目前不包括助战思绪和研修室的战力加成，战力数值仅供参考。",
+    "BUFF-LIST": "加成列表"
   }
 }

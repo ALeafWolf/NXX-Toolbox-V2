@@ -1,20 +1,69 @@
 @import "utils";
 
-* {
-    color: #fff;
-    @media all and (max-width: $md) {
-        font-size: 14px;
-    }
-}
+*,
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+    color: #fff;
+}
+body {
+    font-size: 16px;
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+h4 {
+    font-size: 1.5rem;
+}
+h5 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+h6 {
+    font-size: 1rem;
+}
 p {
     color: #fff;
-    margin-bottom: 0;
+}
+
+@media all and (max-width: $md) {
+    body {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+    h3 {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    h4 {
+        font-size: 1.25rem;
+    }
+    h5 {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    h6 {
+        font-size: 1rem;
+    }
 }
 
 /*Ant design components*/
@@ -46,6 +95,22 @@ p {
     }
 }
 
+.custom-card-tab {
+    .ant-tabs-bar {
+        border: none;
+        border-top: 1px solid rgb(62, 62, 62);
+        border-bottom: 1px solid rgb(62, 62, 62);
+    }
+    &.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+        background-color: rgba(35, 38, 50, 0.5);
+        border: none;
+    }
+    &.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+        border-bottom: 2px solid #fff;
+        background: linear-gradient(rgba(60, 64, 77, 0.75) 0%, rgba(76, 76, 133, 1) 100%);
+    }
+}
+
 .ant-input-group-addon {
     background: none;
 }
@@ -53,7 +118,7 @@ p {
 .ant-btn svg {
     vertical-align: baseline;
 }
-.ant-select-selection__choice svg{
+.ant-select-selection__choice svg {
     vertical-align: bottom;
 }
 // date picker

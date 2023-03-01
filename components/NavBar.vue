@@ -7,12 +7,23 @@
         alt="NXX Toolbox"
       />
     </NuxtLink>
-    <div>
+    <!-- <div>
       <NuxtLink :to="switchLocalePath('zh')">ZH</NuxtLink>
       <NuxtLink :to="switchLocalePath('en')">EN</NuxtLink>
       <NuxtLink :to="switchLocalePath('ko')">KO</NuxtLink>
-    </div>
-    <button class="nav-btn" @click="toggleMobileMenu">Nav</button>
+    </div> -->
+    <button class="nav-btn" @click="toggleMobileMenu">
+      <a-icon
+        v-if="!$store.state.mobileMenu"
+        type="menu"
+        :style="{ fontSize: '30px' }"
+      />
+      <a-icon
+        v-if="$store.state.mobileMenu"
+        type="close"
+        :style="{ fontSize: '30px' }"
+      />
+    </button>
   </nav>
 </template>
 
@@ -45,6 +56,10 @@ nav {
   .nav-btn {
     display: block;
   }
+  nav {
+    margin: 0;
+    width: 100%;
+  }
 }
 @media all and (max-width: $sm) {
   nav {
@@ -52,7 +67,7 @@ nav {
     width: 100%;
   }
   .logo {
-    width: 70px;
+    width: 100px;
   }
 }
 </style>

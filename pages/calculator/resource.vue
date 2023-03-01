@@ -1,6 +1,6 @@
 <template>
-  <section class="h-full grid gap-5 lg:grid-cols-5">
-    <div class="col-span-1 lg:col-span-3 grid gap-5">
+  <div class="h-full grid gap-5 lg:grid-cols-6">
+    <section class="col-span-1 lg:col-span-4 grid gap-5">
       <div class="sub-panel flex flex-col items-center justify-center p-3">
         <h2>{{ $t("NAV.CARD-LIST") }}</h2>
         <table class="w-full text-center card-table">
@@ -73,16 +73,16 @@
               <td>
                 <a-radio-group v-model="filters.rarity">
                   <a-radio-button value="R">
-                    <h1>R</h1>
+                    <p>R</p>
                   </a-radio-button>
                   <a-radio-button value="MR">
-                    <h1>MR</h1>
+                    <p>MR</p>
                   </a-radio-button>
                   <a-radio-button value="SR">
-                    <h1>SR</h1>
+                    <p>SR</p>
                   </a-radio-button>
                   <a-radio-button value="SSR">
-                    <h1>SSR</h1>
+                    <p>SSR</p>
                   </a-radio-button>
                 </a-radio-group>
               </td>
@@ -127,7 +127,7 @@
               <tr>
                 <td v-for="i in options.expChips.ranks" :key="`Expchip-${i}`">
                   <img
-                    class="medium-icon mx-auto"
+                    class="medium-icon mx-auto mb-2"
                     :src="require(`~/assets/images/rss/法理之谕 ${i}.webp`)"
                     :alt="`法理之谕 ${i}`"
                   />
@@ -182,9 +182,9 @@
           </table>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="col-span-1 lg:col-span-2 grid gap-5">
+    <section class="col-span-1 lg:col-span-2 grid lg:grid-cols-1 grid-cols-2 gap-5">
       <div
         class="sub-panel p-3 text-center flex flex-col items-center justify-center"
       >
@@ -391,8 +391,8 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>

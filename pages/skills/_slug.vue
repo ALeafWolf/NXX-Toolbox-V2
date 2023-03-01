@@ -25,7 +25,7 @@
     <div
       class="flex justify-center items-center flex-col text-center skill-detail-block"
     >
-      <h2 class="text-center text-xl">{{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}</h2>
+      <h2 class="text-center">{{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}</h2>
       <div>
         {{
           $globalV.getDesWithRound(skill.skill_group[`description${$globalV.getLocalePostfix($i18n.locale)}`], skill.variant)

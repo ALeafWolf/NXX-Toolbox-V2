@@ -45,7 +45,7 @@
       </a-button>
     </a-form>
     <div class="order-first lg:order-last">
-      <h4 class="text-center text-2xl">{{ $t("CONTACT.NOTE") }}</h4>
+      <h4 class="text-center">{{ $t("CONTACT.NOTE") }}</h4>
       <img class="davis mx-auto" src="~assets/images/初代.png" alt="初代" />
     </div>
   </section>

@@ -10,7 +10,7 @@
       </div>
       <div class="grid grid-cols-3 gap-4">
         <div>
-          <h3 class="text-lg">
+          <h3>
             {{ $t("COMMON.SERVER") }}
           </h3>
           <a-select
@@ -29,7 +29,7 @@
           </a-select>
         </div>
         <div class="col-span-2">
-          <h3 class="text-lg">
+          <h3>
             {{ $t("CARD-ACQUISITION.TYPE") }}
           </h3>
           <div class="grid grid-cols-2 gap-4">

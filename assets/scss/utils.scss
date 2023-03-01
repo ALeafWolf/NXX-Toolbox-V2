@@ -106,8 +106,8 @@
   border-radius: 10px;
   th,
   td {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border: 1px solid #60627a;
     text-align: center;
   }
@@ -123,6 +123,6 @@
 }
 @media all and (max-width: $sm) {
   .general-table {
-    font-size: 12px;
+    font-size: 14px;
   }
 }

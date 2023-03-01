@@ -10,7 +10,7 @@
       </div>
       <div class="grid grid-cols-3 gap-4">
         <div>
-          <h3 class="text-lg">
+          <h3>
             {{ $t("COMMON.CHARACTER") }}
           </h3>
           <a-select
@@ -35,7 +35,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-lg">
+          <h3>
             {{ $t("COMMON.ATTRIBUTE") }}
           </h3>
           <a-select
@@ -57,7 +57,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-lg">
+          <h3>
             {{ $t("COMMON.RARITY") }}
           </h3>
           <a-select

@@ -43,7 +43,12 @@
     "RANK": "Rank",
     "POWER": "Power",
     "SKILL": "Skill",
-    "EXCHANGE": "Exhange"
+    "EXCHANGE": "Exhange",
+    "BASIC-INFO": "Information",
+    "THUMBNAIL": "Thumbnail",
+    "NAME": "Card Name",
+    "GRID": "Grid",
+    "TABLE": "Table"
   },
   "NAV": {
     "HOME": "Home",
@@ -108,5 +113,9 @@
     "EMAIL": "Email (If you want to be contacted)",
     "EMAIL-NOTICE": "Please enter the email in validated format",
     "MESSAGE-NOTE": "Your message goes here"
+  },
+  "POWER-CALC": {
+    "NOTE": "This calculator does not include power boost from Support Cards and Study Room. Result from the calculator is for reference only.",
+    "BUFF-LIST": "Buff List"
   }
 }

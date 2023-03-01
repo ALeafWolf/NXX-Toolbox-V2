@@ -1,10 +1,10 @@
 <template>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="base-panel col-span-2 p-6">
-      <p>owo</p>
+  <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+    <div class="base-panel lg:col-span-2 p-6">
+      <p class="text-center">{{ $t("POWER-CALC.NOTE") }}</p>
     </div>
     <section class="base-panel buffs p-6">
-      <h3>Buff List</h3>
+      <h3>{{ $t("POWER-CALC.BUFF-LIST") }}</h3>
       <table class="general-table w-full">
         <tbody>
           <template v-for="row in buffRows">
@@ -52,7 +52,7 @@
     </section>
     <section class="base-panel p-6">
       <div class="flex justify-between">
-        <h3>Power: {{ totalPower }}</h3>
+        <h3>{{ `${$t("COMMON.POWER")}: ${totalPower}` }}</h3>
         <button>
           <img
             class="icon"
@@ -358,6 +358,7 @@ export default {
       localStorage.removeItem("powerCalculatorItems");
       this.loadCardDesk();
       this.loadBuffList();
+      this.totalPower = 0;
       this.isLoading = false;
     },
     addCard() {

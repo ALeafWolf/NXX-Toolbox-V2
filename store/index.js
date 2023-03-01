@@ -1,5 +1,6 @@
 export const state = () => ({
   mobileMenu: false,
+  lang: 'zh'
 });
 
 export const getters = {

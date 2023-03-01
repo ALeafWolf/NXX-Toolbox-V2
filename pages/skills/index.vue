@@ -1,10 +1,10 @@
 <template>
   <section>
     <div class="wrapper">
-      <h1 class="text-xl">{{ $t("NAV.SKILL-LIST") }}</h1>
+      <h1>{{ $t("NAV.SKILL-LIST") }}</h1>
       <div class="filter-wrapper">
         <div>
-          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.SKILL-SLOT") }}</h3>
+          <h3>{{ $t("COMMON.SKILL-SLOT") }}</h3>
           <a-select
             mode="multiple"
             class="w-full custom-select"
@@ -19,7 +19,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.CHARACTER") }}</h3>
+          <h3>{{ $t("COMMON.CHARACTER") }}</h3>
           <a-select
             mode="multiple"
             class="w-full custom-select"
@@ -37,7 +37,7 @@
           </a-select>
         </div>
         <div>
-          <h3 class="text-blue-600 text-lg">{{ $t("COMMON.ATTRIBUTE") }}</h3>
+          <h3>{{ $t("COMMON.ATTRIBUTE") }}</h3>
           <a-select
             mode="multiple"
             class="w-full custom-select"
