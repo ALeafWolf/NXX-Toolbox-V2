@@ -280,7 +280,7 @@
 export default {
   data() {
     return {
-      isGrid: false,
+      isGrid: true,
       filters: {
         name: "",
         attributes: [],

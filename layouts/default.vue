@@ -51,7 +51,6 @@
 .content-container {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - $float-space);
   position: relative;
 }
 .content {

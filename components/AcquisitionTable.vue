@@ -122,13 +122,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-// .acquisition-table-container {
-//   overflow-x: auto;
-//   width: calc(100vw - 3 * $float-space - $sidebar-width);
-// }
-// .general-table {
-//   min-width: 500px;
-// }
 @media all and (max-width: $lg) {
   .general-table {
     min-width: 790px;

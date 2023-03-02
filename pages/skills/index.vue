@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="wrapper">
-      <h1>{{ $t("NAV.SKILL-LIST") }}</h1>
+      <!-- <h1>{{ $t("NAV.SKILL-LIST") }}</h1> -->
       <div class="filter-wrapper">
         <div>
           <h3>{{ $t("COMMON.SKILL-SLOT") }}</h3>
@@ -55,68 +55,72 @@
           </a-select>
         </div>
       </div>
-      <table class="w-full text-center general-table">
-        <thead>
-          <tr>
-            <th rowspan="2">Icon</th>
-            <th rowspan="2">Name</th>
-            <th rowspan="2">Description</th>
-            <th colspan="2">Numbers</th>
-          </tr>
-          <tr>
-            <th>Lv 1</th>
-            <th>Lv 10</th>
-          </tr>
-        </thead>
-        <tbody v-for="(group, i) in currentSkillGroups" :key="i">
-          <tr v-for="(skill, j) in group.skills" :key="j">
-            <td v-if="j === 0" :rowspan="group.skills.length">
-              <NuxtLink
-                :to="
-                  localePath(
-                    `/skills/${$globalV.nameToSlug(
+      <section class="skill-table-container">
+        <table class="w-full text-center general-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Icon</th>
+              <th rowspan="2">Name</th>
+              <th rowspan="2">Description</th>
+              <th colspan="2">Numbers</th>
+            </tr>
+            <tr>
+              <th>Lv 1</th>
+              <th>Lv 10</th>
+            </tr>
+          </thead>
+          <tbody v-for="(group, i) in currentSkillGroups" :key="i">
+            <tr v-for="(skill, j) in group.skills" :key="j">
+              <td v-if="j === 0" :rowspan="group.skills.length">
+                <NuxtLink
+                  :to="
+                    localePath(
+                      `/skills/${$globalV.nameToSlug(
+                        skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                      )}`
+                    )
+                  "
+                >
+                  <img
+                    class="mx-auto"
+                    :src="group.icon.url"
+                    :alt="
                       skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                    )}`
-                  )
-                "
-              >
-                <img
-                  class="mx-auto"
-                  :src="group.icon.url"
-                  :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
-                />
-              </NuxtLink>
-            </td>
-            <td>
-              <NuxtLink
-                :to="
-                  localePath(
-                    `/skills/${$globalV.nameToSlug(
-                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                    )}`
-                  )
-                "
-              >
+                    "
+                  />
+                </NuxtLink>
+              </td>
+              <td>
+                <NuxtLink
+                  :to="
+                    localePath(
+                      `/skills/${$globalV.nameToSlug(
+                        skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                      )}`
+                    )
+                  "
+                >
+                  {{
+                    skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                  }}</NuxtLink
+                >
+              </td>
+              <td>
                 {{
-                  skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                }}</NuxtLink
-              >
-            </td>
-            <td>
-              {{
-                $globalV.getDesWithRound(
-                  group[
-                    `description${$globalV.getLocalePostfix($i18n.locale)}`
-                  ],
-                  skill.variant
-                )
-              }}
-            </td>
-            <td>{{ skill.number.lv1 }}</td>
-            <td>{{ skill.number.lv10 }}</td>
-          </tr>
-        </tbody>
-      </table>
+                  $globalV.getDesWithRound(
+                    group[
+                      `description${$globalV.getLocalePostfix($i18n.locale)}`
+                    ],
+                    skill.variant
+                  )
+                }}
+              </td>
+              <td>{{ skill.number.lv1 }}</td>
+              <td>{{ skill.number.lv10 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </div>
     <LoadingMask :isShow="isLoading" />
   </section>
@@ -226,14 +230,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  display: flex;
-  justify-content: center;
-}
 .filter-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   margin-bottom: 30px;
+  width: calc(100vw - 6 * $float-space - $sidebar-width);
+}
+.skill-table-container {
+  width: calc(100vw - 6 * $float-space - $sidebar-width);
+}
+@media all and (max-width: $xl) {
+  .skill-table-container {
+    overflow-x: auto;
+  }
+  .general-table {
+    min-width: $md;
+  }
+}
+@media all and (max-width: $lg) {
+  .skill-table-container {
+    width: calc(100vw - 6 * $float-space - $sidebar-width-mobile);
+  }
+  .filter-wrapper {
+    gap: 20px;
+    width: calc(100vw - 6 * $float-space - $sidebar-width-mobile);
+  }
+}
+@media all and (max-width: $md) {
+  .skill-table-container {
+    width: calc(100vw - 3 * $float-space);
+  }
+  .filter-wrapper {
+    gap: 20px;
+    width: calc(100vw - 3 * $float-space);
+  }
+}
+@media all and (max-width: $sm) {
+  .filter-wrapper {
+    grid-template-columns: 1fr;
+    width: calc(100vw - 3 * $float-space);
+  }
 }
 </style>
