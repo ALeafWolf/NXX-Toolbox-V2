@@ -42,7 +42,6 @@
         </h6>
       </NuxtLink>
     </section>
-
   </div>
 </template>
 
@@ -69,15 +68,14 @@ export default {
 <style lang="scss">
 #sideNavbar {
   display: block;
-  position: absolute;
-  top: 0;
-  bottom: $float-space;
-  left: $float-space;
+  // position: absolute;
+  // top: 0;
+  // bottom: $float-space;
+  // left: $float-space;
   z-index: 3;
   outline: 0;
   box-sizing: border-box;
   overflow-y: auto;
-  width: calc($sidebar-width - $float-space);
   a {
     display: block;
     padding: 5px;
@@ -88,16 +86,13 @@ export default {
     background-color: rgba(0, 0, 0, 0.8);
   }
 }
-@media all and (max-width: $lg) {
-  #sideNavbar {
-    width: calc($sidebar-width-mobile - $float-space);
-  }
-}
+
 @media all and (max-width: $md) {
   #sideNavbar {
     position: fixed;
     width: 100%;
     top: $nav-height;
+    z-index: 3;
     bottom: 0;
     left: 0;
     right: 0;

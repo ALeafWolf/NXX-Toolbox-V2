@@ -6,7 +6,7 @@
       <SideBar />
       <div class="content-container">
         <div class="content">
-          <div class="base-panel">
+          <div class="page base-panel">
             <Nuxt />
           </div>
           <Footer />
@@ -40,14 +40,15 @@
   position: relative;
   z-index: 1;
   box-sizing: border-box;
-  display: block;
+  display: grid;
+  grid-template-columns: $sidebar-width auto;
+  gap: $float-space;
   max-height: calc(100vh - $nav-height);
   overflow: hidden;
   width: 100%;
   padding: 0 $float-space;
 }
 .content-container {
-  margin-left: $sidebar-width;
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100% - $float-space);
@@ -58,25 +59,26 @@
   display: grid;
   gap: $float-space;
 }
+.page {
+  padding: $float-space;
+}
 @media all and (max-width: $lg) {
-  .content {
-    margin-left: $sidebar-width-mobile;
+  .page {
+    padding: $float-space;
+  }
+  .component-container {
+    grid-template-columns: $sidebar-width-mobile auto;
   }
 }
 @media all and (max-width: $md) {
-  .content {
-    margin-left: 0;
+  .component-container {
+    padding: 0;
   }
   .component-container {
-    padding: 25px 0;
+    display: block;
   }
-}
-@media all and (max-width: $sm) {
-  .content {
-    padding: 15px;
-  }
-  .component-container {
-    padding: $float-space 0;
+  .content-container {
+    height: 100%;
   }
 }
 </style>

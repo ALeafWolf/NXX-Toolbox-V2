@@ -1,121 +1,117 @@
 <template>
   <section>
-    <div class="p-4">
-      <h1 class="text-center">
-        {{ $t(`COMMON.${card.character.name}`) }} -
-        {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
-      </h1>
-      <div
-        class="p-4 base-panel mb-10"
-        :class="
-          card.is_horizontal_img ? 'horizontal-card-section' : 'card-section'
-        "
-      >
-        <a-tabs v-if="card.images" type="card" class="custom-card-tab">
-          <a-tab-pane
-            class="tab-content"
-            v-for="(image, i) in card.images"
-            :key="`image-${i}`"
-            :tab="i"
-          >
-            <img
-              class="img-fluid"
-              :src="image.url"
-              :alt="`${card.name}-${i + 1}`"
-            />
-          </a-tab-pane>
-        </a-tabs>
-        <div v-else>
-          <img :src="getImgUrl" :alt="card.name" />
-        </div>
-        <table class="general-table">
-          <thead>
-            <tr>
-              <th colspan="2">{{ $t("COMMON.BASIC-INFO") }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>{{ $t("COMMON.RARITY") }}</th>
-              <td>{{ card.rarity.value }}</td>
-            </tr>
-            <tr>
-              <th>{{ $t("COMMON.LEVEL") }}</th>
-              <td>100</td>
-            </tr>
-            <tr>
-              <th>{{ $t("COMMON.RANK") }}</th>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th>{{ $t("COMMON.ATTRIBUTE") }}</th>
-              <td>
-                <img
-                  class="icon inline"
-                  :src="require(`assets/images/${card.attribute}.png`)"
-                  :alt="card.attribute"
-                />
-                {{ $t(`COMMON.${card.attribute}`) }}
-              </td>
-            </tr>
-            <tr>
-              <th>{{ $t("COMMON.INFLUENCE") }}</th>
-              <td>{{ card.influence }}</td>
-            </tr>
-            <tr>
-              <th>{{ $t("COMMON.DEFENSE") }}</th>
-              <td>{{ card.defense }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="general-table">
-          <thead>
-            <tr>
-              <th colspan="2">{{ $t("COMMON.SKILL") }}</th>
-            </tr>
-          </thead>
-          <tbody v-for="(skill, i) in card.skills" :key="i">
-            <tr>
-              <th rowspan="2">
-                <NuxtLink
-                  :to="
-                    localePath(
-                      `/skills/${$globalV.nameToSlug(
-                        skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                      )}`
-                    )
-                  "
-                >
-                  <img
-                    class="large-icon mx-auto"
-                    :src="skill.skill_group.icon.url"
-                    :alt="
-                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-                    "
-                  />
-                </NuxtLink>
-              </th>
-              <td>
-                {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                {{
-                  skill.skill_group[
-                    `description${$globalV.getLocalePostfix($i18n.locale)}`
-                  ]
-                }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <h1 class="text-center">
+      {{ $t(`COMMON.${card.character.name}`) }} -
+      {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+    </h1>
+    <div
+      class="p-4 base-panel mb-10"
+      :class="
+        card.is_horizontal_img ? 'horizontal-card-section' : 'card-section'
+      "
+    >
+      <a-tabs v-if="card.images" type="card" class="custom-card-tab">
+        <a-tab-pane
+          class="tab-content"
+          v-for="(image, i) in card.images"
+          :key="`image-${i}`"
+          :tab="i + 1"
+        >
+          <img
+            class="img-fluid"
+            :src="image.url"
+            :alt="`${card.name}-${i + 1}`"
+          />
+        </a-tab-pane>
+      </a-tabs>
+      <div v-else>
+        <img :src="getImgUrl" :alt="card.name" />
       </div>
-      <AcquisitionTable
-        :entries="card.card_acquisitions"
-        :locale="$i18n.locale"
-      />
+      <table class="general-table">
+        <thead>
+          <tr>
+            <th colspan="2">{{ $t("COMMON.BASIC-INFO") }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ $t("COMMON.RARITY") }}</th>
+            <td>{{ card.rarity.value }}</td>
+          </tr>
+          <tr>
+            <th>{{ $t("COMMON.LEVEL") }}</th>
+            <td>100</td>
+          </tr>
+          <tr>
+            <th>{{ $t("COMMON.RANK") }}</th>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th>{{ $t("COMMON.ATTRIBUTE") }}</th>
+            <td>
+              <img
+                class="icon inline"
+                :src="require(`assets/images/${card.attribute}.png`)"
+                :alt="card.attribute"
+              />
+              {{ $t(`COMMON.${card.attribute}`) }}
+            </td>
+          </tr>
+          <tr>
+            <th>{{ $t("COMMON.INFLUENCE") }}</th>
+            <td>{{ card.influence }}</td>
+          </tr>
+          <tr>
+            <th>{{ $t("COMMON.DEFENSE") }}</th>
+            <td>{{ card.defense }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="general-table">
+        <thead>
+          <tr>
+            <th colspan="2">{{ $t("COMMON.SKILL") }}</th>
+          </tr>
+        </thead>
+        <tbody v-for="(skill, i) in card.skills" :key="i">
+          <tr>
+            <th rowspan="2">
+              <NuxtLink
+                :to="
+                  localePath(
+                    `/skills/${$globalV.nameToSlug(
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
+                <img
+                  class="large-icon mx-auto"
+                  :src="skill.skill_group.icon.url"
+                  :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+                />
+              </NuxtLink>
+            </th>
+            <td>
+              {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{
+                skill.skill_group[
+                  `description${$globalV.getLocalePostfix($i18n.locale)}`
+                ]
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <AcquisitionTable
+      :entries="card.card_acquisitions"
+      :locale="$i18n.locale"
+    />
   </section>
 </template>
 <script>

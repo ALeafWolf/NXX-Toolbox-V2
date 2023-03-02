@@ -122,10 +122,30 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.acquisition-table-container{
-  overflow-x: auto;
+// .acquisition-table-container {
+//   overflow-x: auto;
+//   width: calc(100vw - 3 * $float-space - $sidebar-width);
+// }
+// .general-table {
+//   min-width: 500px;
+// }
+@media all and (max-width: $lg) {
+  .general-table {
+    min-width: 790px;
+  }
+  .acquisition-table-container {
+    overflow-x: auto;
+    width: calc(100vw - 3 * $float-space - $sidebar-width);
+  }
 }
-.general-table{
-  min-width: 1000px;
+@media all and (max-width: $md) {
+  .large-icon {
+    max-width: 60px;
+    max-height: 60px;
+  }
+  .acquisition-table-container {
+    overflow-x: auto;
+    width: calc(100vw - 3 * $float-space);
+  }
 }
 </style>

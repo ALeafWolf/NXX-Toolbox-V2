@@ -70,11 +70,11 @@
             @search="handleNameChange"
           />
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <h3>
+            <h4>
               {{ $t("COMMON.CHARACTER") }}
-            </h3>
+            </h4>
             <a-select
               mode="multiple"
               class="w-full custom-select"
@@ -97,9 +97,9 @@
             </a-select>
           </div>
           <div>
-            <h3>
+            <h4>
               {{ $t("COMMON.ATTRIBUTE") }}
-            </h3>
+            </h4>
             <a-select
               mode="multiple"
               class="w-full custom-select"
@@ -119,9 +119,9 @@
             </a-select>
           </div>
           <div>
-            <h3>
+            <h4>
               {{ $t("COMMON.RARITY") }}
-            </h3>
+            </h4>
             <a-select
               mode="multiple"
               class="w-full custom-select"
@@ -136,9 +136,9 @@
             </a-select>
           </div>
           <div>
-            <h3>
+            <h4>
               {{ $t("NAV.CARD-ACQUISITION") }}
-            </h3>
+            </h4>
             <a-select
               mode="multiple"
               class="w-full custom-select"
@@ -163,14 +163,14 @@
             :class="{ ['selected']: isGrid }"
             @click="setIsGrid(true)"
           >
-            {{ $t('COMMON.GRID') }}
+            {{ $t("COMMON.GRID") }}
           </button>
           <button
             class="switch-btn"
             :class="{ ['selected']: !isGrid }"
             @click="setIsGrid(false)"
           >
-            {{ $t('COMMON.TABLE') }}
+            {{ $t("COMMON.TABLE") }}
           </button>
         </div>
       </div>
@@ -188,7 +188,7 @@
         <table class="w-full text-center general-table">
           <thead>
             <tr>
-              <th>{{ $t('COMMON.THUMBNAIL') }}</th>
+              <th>{{ $t("COMMON.THUMBNAIL") }}</th>
               <th>{{ $t("COMMON.NAME") }}</th>
               <th>{{ $t("COMMON.RARITY") }}</th>
               <th>{{ $t("COMMON.ATTRIBUTE") }}</th>
@@ -280,7 +280,7 @@
 export default {
   data() {
     return {
-      isGrid: true,
+      isGrid: false,
       filters: {
         name: "",
         attributes: [],
@@ -456,10 +456,10 @@ export default {
   gap: 20px;
 }
 .list-table {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .general-table {
-  min-width: 500px;
+  min-width: $sm;
 }
 @media all and (max-width: $lg) {
   .card-grid {
@@ -480,6 +480,9 @@ export default {
 @media all and (max-width: $sm) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .list-table {
+    width: calc(100vw - 2 * $float-space);
   }
 }
 </style>
