@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="wrapper">
+    <div>
       <!-- <h1>{{ $t("NAV.SKILL-LIST") }}</h1> -->
       <div class="filter-wrapper">
         <div>
