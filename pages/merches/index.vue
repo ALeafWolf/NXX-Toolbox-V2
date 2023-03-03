@@ -10,10 +10,7 @@
         {{ isFilterShow ? $t("COMMON.HIDE-FILTER") : $t("COMMON.SHOW-FILTER") }}
       </a-button>
     </div>
-    <div
-      class="filter-wrapper base-panel p-4 mb-4 grid lg:grid-cols-4 gap-6 md:grid-cols-3 grid-cols-2"
-      v-if="isFilterShow"
-    >
+    <div class="filter-wrapper base-panel p-4 mb-4" v-if="isFilterShow">
       <div>
         <h3 class="title">
           {{ $t("COMMON.CHARACTER") }}
@@ -135,9 +132,7 @@
           </a-select-option>
         </a-select>
       </div>
-      <div
-        class="lg:col-span-4 md:col-span-3 col-span-2 grid grid-cols-2 gap-6"
-      >
+      <div class="selection-block">
         <div>
           <h3 class="title">
             {{ $t("MERCH.IS-RELEASED") }}
@@ -175,9 +170,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="lg:col-span-4 md:col-span-3 col-span-2 grid md:grid-cols-2 grid-cols-1 gap-6"
-      >
+      <div class="complex-filter-block">
         <div>
           <h3 class="title">
             {{ $t("MERCH.SELL-TIME") }}
@@ -210,9 +203,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="lg:col-span-4 md:col-span-3 col-span-2 grid grid-cols-2 gap-4"
-      >
+      <div class="btn-block">
         <a-button class="w-full" @click="filterMerches">{{
           $t("COMMON.APPLY-FILTER")
         }}</a-button>
@@ -231,7 +222,7 @@
           />
         </NuxtLink>
         <div class="flex justify-center">
-          <h2>{{ merch.name }}</h2>
+          <h5>{{ merch.name }}</h5>
         </div>
       </div>
     </div>
@@ -418,15 +409,11 @@ export default {
       if (this.filters.isLimitedTime !== null) {
         if (this.filters.isLimitedTime === true) {
           f.sell_dates = {
-            $and: [
-              {
-                end: {
-                  date: {
-                    $notNull: true,
-                  },
-                },
+            end: {
+              date: {
+                $notNull: true,
               },
-            ],
+            },
           };
         } else if (this.filters.isLimitedTime === false) {
           f.sell_dates = {
@@ -531,9 +518,20 @@ export default {
 
 <style lang="scss" scoped>
 .filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
   .title {
     margin-bottom: 8px;
   }
+}
+.selection-block,
+.complex-filter-block,
+.btn-block {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  grid-column: 1 / span 4;
 }
 .item-grid {
   display: grid;
@@ -541,17 +539,45 @@ export default {
   gap: 20px;
 }
 @media all and (max-width: $xl) {
+  .filter-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .selection-block {
+    grid-column: span 2 / span 2;
+  }
+  .complex-filter-block,
+  .btn-block {
+    grid-column: 1 / span 3;
+  }
   .item-grid {
     gap: 24px;
   }
 }
 @media all and (max-width: $lg) {
+  .filter-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .selection-block,
+  .complex-filter-block,
+  .btn-block {
+    grid-column: 1 / span 2;
+  }
   .item-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media all and (max-width: $md) {
   .filter-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .selection-block {
+    grid-column: span 2 / span 2;
+  }
+  .complex-filter-block,
+  .btn-block {
+    grid-column: 1 / span 3;
+  }
+  .item-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -561,6 +587,14 @@ export default {
   }
   .filter-wrapper {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .complex-filter-block {
+    grid-template-columns: 1fr;
+  }
+  .selection-block,
+  .complex-filter-block,
+  .btn-block {
+    grid-column: 1 / span 2;
   }
 }
 </style>

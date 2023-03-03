@@ -22,7 +22,7 @@
         <h6>{{ $t("NAV.UPDATE-LOG") }}</h6>
       </NuxtLink>
     </div>
-    <h5>ALeafWolf {{ getCurrentYear() }}</h5>
+    <h5>ALeafWolf © {{ getCurrentYear() }}</h5>
     <a-radio-group v-model="lang" @change="switchLanguage">
       <a-radio-button value="zh"> 中文 </a-radio-button>
       <a-radio-button value="en"> English </a-radio-button>

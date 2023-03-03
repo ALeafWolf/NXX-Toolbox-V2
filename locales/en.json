@@ -48,7 +48,9 @@
     "THUMBNAIL": "Thumbnail",
     "NAME": "Card Name",
     "GRID": "Grid",
-    "TABLE": "Table"
+    "TABLE": "Table",
+    "ICON": "Icon",
+    "NUMBER": "Numbers"
   },
   "NAV": {
     "HOME": "Home",
@@ -112,7 +114,10 @@
     "NAME": "Name",
     "EMAIL": "Email (If you want to be contacted)",
     "EMAIL-NOTICE": "Please enter the email in validated format",
-    "MESSAGE-NOTE": "Your message goes here"
+    "MESSAGE-NOTE": "Your message goes here",
+    "SENDING": "Sending",
+    "SEND": "Send",
+    "SUCCESS-MESSAGE": "Form submission success."
   },
   "POWER-CALC": {
     "NOTE": "This calculator does not include power boost from Support Cards and Study Room. Result from the calculator is for reference only.",

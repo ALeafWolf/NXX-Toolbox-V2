@@ -48,7 +48,9 @@
     "THUMBNAIL": "图标",
     "NAME": "思绪名",
     "GRID": "网格",
-    "TABLE": "表格"
+    "TABLE": "表格",
+    "ICON": "图标",
+    "NUMBER": "数值"
   },
   "NAV": {
     "HOME": "主页",
@@ -113,7 +115,10 @@
     "NAME": "称呼",
     "EMAIL": "邮箱 (如果你想被联系)",
     "EMAIL-NOTICE": "请输入正确格式的邮箱",
-    "MESSAGE-NOTE": "在此输入你的信息"
+    "MESSAGE-NOTE": "在此输入你的信息",
+    "SENDING": "发送中",
+    "SEND": "发送",
+    "SUCCESS-MESSAGE": "信息提交成功"
   },
   "POWER-CALC": {
     "NOTE": "此计算器目前不包括助战思绪和研修室的战力加成，战力数值仅供参考。",

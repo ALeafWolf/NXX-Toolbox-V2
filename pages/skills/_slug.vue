@@ -25,10 +25,17 @@
     <div
       class="flex justify-center items-center flex-col text-center skill-detail-block"
     >
-      <h2 class="text-center">{{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}</h2>
+      <h2 class="text-center">
+        {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+      </h2>
       <div>
         {{
-          $globalV.getDesWithRound(skill.skill_group[`description${$globalV.getLocalePostfix($i18n.locale)}`], skill.variant)
+          $globalV.getDesWithRound(
+            skill.skill_group[
+              `description${$globalV.getLocalePostfix($i18n.locale)}`
+            ],
+            skill.variant
+          )
         }}
       </div>
       <div class="skill-num-grid w-full">
@@ -48,18 +55,19 @@
           v-for="(card, j) in skill.relate_cards"
           :key="j"
           :to="
-          localePath(
-            `/cards/${$globalV.nameToSlug(
-              card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
-            )}`
-          )
-        "
+            localePath(
+              `/cards/${$globalV.nameToSlug(
+                card[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+              )}`
+            )
+          "
         >
           <img
             class="img-fluid"
             :src="card.thumbnail.url"
             :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
           />
+          <h6>{{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}</h6>
         </NuxtLink>
       </div>
     </div>
@@ -96,7 +104,9 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.SKILL-LIST")}: ${this.skill[`name${this.$globalV.getLocalePostfix(this.$i18n.locale)}`]} | ${this.$t("COMMON.TITLE-POSTFIX")}`,
+      title: `${this.$t("NAV.SKILL-LIST")}: ${
+        this.skill[`name${this.$globalV.getLocalePostfix(this.$i18n.locale)}`]
+      } | ${this.$t("COMMON.TITLE-POSTFIX")}`,
       meta: [
         {
           hid: "description",
@@ -137,5 +147,20 @@ export default {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
+}
+@media all and (max-width: $xl) {
+  .card-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media all and (max-width: $md) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media all and (max-width: $sm) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>

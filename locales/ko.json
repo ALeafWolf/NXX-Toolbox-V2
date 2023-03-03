@@ -48,7 +48,9 @@
     "THUMBNAIL": "썸네일",
     "NAME": "이름",
     "GRID": "그리드",
-    "TABLE": "시트"
+    "TABLE": "시트",
+    "ICON": "상",
+    "NUMBER": "숫자"
   },
   "NAV": {
     "HOME": "홈",
@@ -112,7 +114,10 @@
     "NAME": "이름",
     "EMAIL": "이메일(연락을 받고 싶은 경우)",
     "EMAIL-NOTICE": "유효한 형식으로 이메일을 입력하십시오",
-    "MESSAGE-NOTE": "메시지가 여기에 표시됩니다"
+    "MESSAGE-NOTE": "메시지가 여기에 표시됩니다",
+    "SENDING": "배상",
+    "SEND": "보내다",
+    "SUCCESS-MESSAGE": "양식 제출 성공."
   },
   "POWER-CALC": {
     "NOTE": "이 계산기는 전투력 보너스와 연수실의 효과를 포함하지 않습니다. 참고용으로만 이용해주세요.",

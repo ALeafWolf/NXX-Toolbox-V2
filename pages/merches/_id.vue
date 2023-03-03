@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="base-panel px-6 py-3 merch-detail-container">
+    <div class="px-6 py-3 merch-detail-container">
       <a-tabs type="card" class="custom-card-tab">
         <a-tab-pane class="tab-content" key="`image-1`" tab="1">
           <img
@@ -153,12 +153,16 @@ export default {
   },
   head() {
     return {
-      title: `${this.$t("NAV.MERCH-LIST")}: ${this.merch.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+      title: `${this.$t("NAV.MERCH-LIST")}: ${this.merch.name} | ${this.$t(
+        "COMMON.TITLE-POSTFIX"
+      )}`,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: `${this.$t("NAV.MERCH-LIST")}: ${this.merch.name} | ${this.$t('COMMON.TITLE-POSTFIX')}`,
+          content: `${this.$t("NAV.MERCH-LIST")}: ${
+            this.merch.name
+          } | ${this.$t("COMMON.TITLE-POSTFIX")}`,
         },
       ],
     };
@@ -174,6 +178,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
   }
 }
+
 .merch-detail-content {
   table th,
   table td {
@@ -198,33 +203,7 @@ export default {
 }
 @media all and (max-width: $lg) {
   .merch-detail-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
-</style>
-<style lang="scss">
-.merch-detail-content {
-  h2 {
-    font-size: 18px;
-    font-weight: 500;
-  }
-}
-// .merch-detail-container {
-//   .ant-tabs-bar {
-//     border: none;
-//     border-top: 1px solid rgb(62, 62, 62);
-//     border-bottom: 1px solid rgb(62, 62, 62);
-//   }
-//   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-//     background-color: rgba(35, 38, 50, 0.5);
-//     border: none;
-//   }
-//   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-//     border-bottom: 2px solid #fff;
-//     background: linear-gradient(
-//       rgba(60, 64, 77, 0.75) 0%,
-//       rgba(76, 76, 133, 1) 100%
-//     );
-//   }
-// }
 </style>

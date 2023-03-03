@@ -124,7 +124,7 @@ export default {
 }
 @media all and (max-width: $lg) {
   .general-table {
-    min-width: 790px;
+    min-width: 650px;
   }
   .acquisition-table-container {
     overflow-x: auto;
