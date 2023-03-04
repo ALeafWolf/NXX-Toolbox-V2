@@ -226,6 +226,9 @@ export default {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 60px;
+  .custom-card-tab {
+    grid-column: span 2 / span 2;
+  }
 }
 
 .skill-row {
@@ -239,9 +242,9 @@ export default {
 @media all and (max-width: $xl) {
   .card-section {
     grid-template-columns: 250px 1fr;
-  }
-  .skill-block {
-    grid-column: 1 / span 2;
+    .skill-block {
+      grid-column: 1 / span 2;
+    }
   }
 }
 @media all and (max-width: $lg) {
@@ -263,8 +266,8 @@ export default {
 @media all and (max-width: $sm) {
   .horizontal-card-section {
     grid-template-columns: 1fr;
-    > div:first-child {
-      grid-column: 1 / 1;
+    .custom-card-tab {
+      grid-column: span 1 / span 1;
     }
   }
 }
