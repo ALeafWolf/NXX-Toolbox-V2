@@ -6,6 +6,7 @@
           class="icon"
           src="~/assets/images/icons/icon_back.png"
           alt="Back to add card"
+          lazy
         />
       </button>
       <div class="flex">
@@ -14,6 +15,7 @@
             class="icon"
             src="~/assets/images/icons/icon_delete.png"
             alt="Save card"
+            lazy
           />
         </button>
         <button
@@ -27,6 +29,7 @@
             class="icon"
             src="~/assets/images/icons/icon_ok.png"
             alt="Save card"
+            lazy
           />
         </button>
       </div>
@@ -43,6 +46,7 @@
               class="large-icon m-auto"
               :src="card.thumbnail.url"
               :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+              lazy
             />
           </td>
           <td>{{ $t("COMMON.POWER") }}</td>
@@ -99,6 +103,7 @@
                   class="large-icon mx-auto"
                   :src="skill.skill_group.icon.url"
                   :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+                  lazy
                 />
               </NuxtLink>
             </th>

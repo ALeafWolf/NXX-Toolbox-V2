@@ -219,6 +219,7 @@
             class="large-icon m-auto"
             :src="merch.avatar.url"
             :alt="merch.name"
+            lazy
           />
         </NuxtLink>
         <div class="flex justify-center">

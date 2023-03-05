@@ -58,6 +58,7 @@
                   class="large-icon"
                   :src="card.thumbnail.url"
                   :alt="card[`name${$globalV.getLocalePostfix(locale)}`]"
+                  lazy
                 />
               </NuxtLink>
             </span>
@@ -77,6 +78,7 @@
                     }.png`)
                   "
                   :alt="record.server === 'CN' ? 'weibo' : 'twitter'"
+                  lazy
                 />
               </a>
               <a
@@ -92,6 +94,7 @@
                     }.png`)
                   "
                   :alt="record.server === 'CN' ? 'bilibili' : 'youtube'"
+                  lazy
                 />
               </a>
             </span>

@@ -9,6 +9,7 @@
         class="large-icon"
         :src="card.thumbnail.url"
         :alt="card[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+        lazy
       />
     </NuxtLink>
     <div
@@ -27,6 +28,7 @@
         class="icon mr-1"
         :src="require(`~/assets/images/${card.attribute}.png`)"
         :alt="card.attribute"
+        lazy
       />
       <h5>
         {{ card[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
@@ -48,6 +50,7 @@
             class="icon"
             :src="skill.skill_group.icon.url"
             :alt="skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]"
+            lazy
           />
         </NuxtLink>
       </span>

@@ -59,10 +59,10 @@
         <table class="w-full text-center general-table">
           <thead>
             <tr>
-              <th rowspan="2">{{ $t('COMMON.ICON') }}</th>
+              <th rowspan="2">{{ $t("COMMON.ICON") }}</th>
               <th rowspan="2">Name</th>
               <th rowspan="2">Description</th>
-              <th colspan="2">{{$t('COMMON.NUMBER')}}</th>
+              <th colspan="2">{{ $t("COMMON.NUMBER") }}</th>
             </tr>
             <tr>
               <th>Lv 1</th>
@@ -87,6 +87,7 @@
                     :alt="
                       skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
                     "
+                    lazy
                   />
                 </NuxtLink>
               </td>

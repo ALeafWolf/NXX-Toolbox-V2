@@ -37,7 +37,7 @@
               <th>{{ $t("MERCH.PRICE") }}</th>
               <td>¥{{ merch.price }}</td>
             </tr>
-            <tr>
+            <tr v-if="sellTimes.length > 0">
               <th>{{ $t("MERCH.SELL-TIME") }}</th>
               <td>
                 <div v-for="(d, i) in sellTimes" :key="i">{{ d }}</div>
@@ -133,14 +133,7 @@ export default {
       });
 
     let sellTimes = [];
-    if (merch.sell_date_index[0] === -1 && merch.sell_date_index.length === 1) {
-      sellTimes = merch.series.sell_times;
-    } else {
-      for (let i = 0; i < merch.sell_date_index.length; i++) {
-        const index = merch.sell_date_index[i];
-        sellTimes.push(merch.series.sell_times[index]);
-      }
-    }
+      
     return {
       merch,
       sellTimes,
