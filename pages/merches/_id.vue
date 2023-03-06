@@ -23,24 +23,26 @@
         </a-tab-pane>
       </a-tabs>
       <div class="merch-detail-content">
-        <table class="w-full">
+        <table class="w-full general-table mb-4">
           <tbody>
-            <tr>
+            <tr v-if="merch.name">
               <th>{{ $t("MERCH.PRODUCT-NAME") }}</th>
               <td>{{ merch.name }}</td>
             </tr>
-            <tr>
+            <tr v-if="merch.series">
               <th>{{ $t("MERCH.PRODUCT-SERIES") }}</th>
               <td>{{ merch.series.name }}</td>
             </tr>
-            <tr>
+            <tr v-if="merch.price">
               <th>{{ $t("MERCH.PRICE") }}</th>
               <td>¥{{ merch.price }}</td>
             </tr>
-            <tr v-if="sellTimes.length > 0">
+            <tr v-if="merch.sell_date_ranges.length > 0">
               <th>{{ $t("MERCH.SELL-TIME") }}</th>
               <td>
-                <div v-for="(d, i) in sellTimes" :key="i">{{ d }}</div>
+                <div v-for="(t, i) in merch.sell_date_ranges" :key="i">
+                  {{ t.value }}
+                </div>
               </td>
             </tr>
             <tr v-if="merch.materials.length > 0">
@@ -102,7 +104,7 @@
             </tr>
           </tbody>
         </table>
-        <div v-if="merch.description" class="px-2">
+        <div v-if="merch.description">
           <button
             class="w-full py-2 merch-des-btn text-base"
             @click="showProductDescription = !showProductDescription"
@@ -131,12 +133,8 @@ export default {
       .catch((error) => {
         console.log(error.toJSON());
       });
-
-    let sellTimes = [];
-      
     return {
       merch,
-      sellTimes,
     };
   },
   data() {
