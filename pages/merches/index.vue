@@ -417,11 +417,9 @@ export default {
             },
           };
         } else if (this.filters.isLimitedTime === false) {
-          f.sell_dates = {
+          f.sell_date_ranges = {
             end: {
-              date: {
-                $null: true,
-              },
+              $null: true,
             },
           };
         }
@@ -439,33 +437,75 @@ export default {
           this.filters.sellDateRange[1].format("YYYY-MM-DD"),
         ];
         // exclude dates that...
+        // f["$not"] = {
+        //   sell_dates: {
+        //     $or: [
+        //       {
+        //         // start date is greater than the end of date range
+        //         start: {
+        //           date: {
+        //             $gt: date[1],
+        //           },
+        //         },
+        //       },
+        //       {
+        //         // end date is less than the start of date range
+        //         end: {
+        //           $and: [
+        //             {
+        //               date: {
+        //                 $lt: date[0],
+        //               },
+        //             },
+        //             {
+        //               date: {
+        //                 $notNull: true,
+        //               },
+        //             },
+        //           ],
+        //         },
+        //       },
+        //     ],
+        //   },
+        // };
         f["$not"] = {
-          sell_dates: {
+          sell_date_ranges: {
             $or: [
               {
                 // start date is greater than the end of date range
                 start: {
-                  date: {
-                    $gt: date[1],
-                  },
+                  $gt: date[1],
                 },
               },
               {
+                // start date is less than the end of date range and no end date
+                $and: [
+                  {
+                    start: {
+                      $lt: date[0],
+                    },
+                  },
+                  {
+                    end: {
+                      $null: true,
+                    },
+                  },
+                ],
+              },
+              {
                 // end date is less than the start of date range
-                end: {
-                  $and: [
-                    {
-                      date: {
-                        $lt: date[0],
-                      },
+                $and: [
+                  {
+                    end: {
+                      $lt: date[0],
                     },
-                    {
-                      date: {
-                        $notNull: true,
-                      },
+                  },
+                  {
+                    end: {
+                      $notNull: true,
                     },
-                  ],
-                },
+                  },
+                ],
               },
             ],
           },
