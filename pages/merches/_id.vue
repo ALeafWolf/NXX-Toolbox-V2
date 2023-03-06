@@ -168,6 +168,11 @@ export default {
   .tab-content {
     background-color: rgba(0, 0, 0, 0.5);
   }
+  .general-table{
+    th, td{
+      text-align: left;
+    }
+  }
 }
 
 .merch-detail-content {
