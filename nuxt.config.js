@@ -12,6 +12,17 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    head: {
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-JX8MY3VB1F",
+          async: true,
+        },
+        {
+          src: "js/ga.js",
+        },
+      ],
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -22,7 +33,6 @@ export default {
     "~/plugins/global-variables.js",
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
-    '~/plugins/gtag.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -35,11 +45,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/style-resources",
-    "@nuxtjs/i18n",
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n"],
   i18n: {
     vueI18nLoader: true,
     langDir: "~/locales/",
