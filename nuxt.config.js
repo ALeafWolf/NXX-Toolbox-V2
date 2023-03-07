@@ -22,6 +22,7 @@ export default {
     "~/plugins/global-variables.js",
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
+    '~/plugins/gtag.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
