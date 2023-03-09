@@ -37,14 +37,59 @@
               <th>{{ $t("MERCH.PRICE") }}</th>
               <td>¥{{ merch.price }}</td>
             </tr>
-            <tr v-if="merch.sell_date_ranges.length > 0">
-              <th>{{ $t("MERCH.SELL-TIME") }}</th>
-              <td>
-                <div v-for="(t, i) in merch.sell_date_ranges" :key="i">
-                  {{ t.value }}
-                </div>
-              </td>
-            </tr>
+            <template v-if="merch.sell_date_ranges.length > 0">
+              <tr>
+                <th :rowspan="merch.sell_date_ranges.length">
+                  {{ $t("MERCH.SELL-TIME") }}
+                </th>
+                <td>
+                  <NuxtLink
+                    :to="
+                      localePath(
+                        `/merches/sell-dates/${merch.sell_date_ranges[0].start}`
+                      )
+                    "
+                    class="active-link"
+                    >{{ merch.sell_date_ranges[0].value }}</NuxtLink
+                  >
+                  <a
+                    class="inline-block"
+                    v-if="merch.sell_date_ranges[0].url"
+                    :href="merch.sell_date_ranges[0].url"
+                    target="_blank"
+                  >
+                    <img
+                      class="icon"
+                      :src="require(`~/assets/images/icons/icon-weibo.png`)"
+                      :alt="`${merch.name}-新浪微博`"
+                    />
+                  </a>
+                </td>
+              </tr>
+              <template v-for="(t, i) in merch.sell_date_ranges">
+                <tr :key="i" v-if="i > 0">
+                  <td>
+                    <NuxtLink
+                      :to="
+                        localePath(
+                          `/merches/sell-dates/${t.start}`
+                        )
+                      "
+                      class="active-link"
+                    >
+                      {{ t.value }}
+                    </NuxtLink>
+                    <a class="inline-block" v-if="t.url" :href="t.url" target="_blank">
+                      <img
+                        class="icon"
+                        :src="require(`~/assets/images/icons/icon-weibo.png`)"
+                        :alt="`${merch.name}-新浪微博`"
+                      />
+                    </a>
+                  </td>
+                </tr>
+              </template>
+            </template>
             <tr v-if="merch.materials.length > 0">
               <th>{{ $t("MERCH.PRODUCT-MATERIAL") }}</th>
               <td>
@@ -168,8 +213,9 @@ export default {
   .tab-content {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  .general-table{
-    th, td{
+  .general-table {
+    th,
+    td {
       text-align: left;
     }
   }

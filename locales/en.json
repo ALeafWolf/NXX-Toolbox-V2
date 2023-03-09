@@ -97,7 +97,10 @@
     "NO": "No",
     "ART-STYLE": "Art Style",
     "IN-GAME": "In game",
-    "IS-LIMITED-TIME": "Limited Time Merch"
+    "IS-LIMITED-TIME": "Limited Time Merch",
+    "PERMANENT": "Permanent Selling",
+    "LIMITED-TIME": "Limited Time Selling",
+    "UNTIL": "Until"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "Enter Card Name",

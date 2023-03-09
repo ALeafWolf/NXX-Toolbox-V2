@@ -97,7 +97,11 @@
     "IN-GAME": "게임 내",
     "ART-STYLE": "예술 스타일",
     "IS-RELEASED": "배송 여부",
-    "IS-LIMITED-TIME": "기간 한정 상품"
+    "IS-LIMITED-TIME": "기간 한정 상품",
+    "PERMANENT": "영구 판매",
+    "LIMITED-TIME": "기간 한정 판매",
+    "UNTIL": "까지",
+    "SELL-DATE": "판매 날짜"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "카드 이름 입력",

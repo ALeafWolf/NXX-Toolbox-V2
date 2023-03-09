@@ -64,6 +64,7 @@ export default {
         file: "ko.json",
       },
     ],
+    baseUrl: 'https://nxxtoolbox.com',
     defaultLocale: "zh",
     seo: true,
     detectBrowserLanguage: {

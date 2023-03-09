@@ -60,6 +60,7 @@
 }
 .page {
   padding: $float-space;
+  // min-height: calc(100vh - 3 * $float-space - $footer-height - $nav-height);
 }
 @media all and (max-width: $lg) {
   .page {

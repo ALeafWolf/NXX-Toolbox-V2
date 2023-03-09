@@ -116,6 +116,13 @@
   }
 }
 
+.active-link{
+  color: rgb(170 170 255);
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
 @media all and (max-width: $md) {
   .general-table {
     font-size: 14px;

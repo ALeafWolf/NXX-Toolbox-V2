@@ -98,7 +98,10 @@
     "NO": "否",
     "ART-STYLE": "柄图美术风格",
     "IN-GAME": "游戏内",
-    "IS-LIMITED-TIME": "限时贩售"
+    "IS-LIMITED-TIME": "限时贩售",
+    "PERMANENT": "常驻贩售",
+    "LIMITED-TIME": "限时贩售",
+    "UNTIL": "直至"
   },
   "CARD-ACQUISITION": {
     "SEARCH-BY-NAME": "输入思绪名称",

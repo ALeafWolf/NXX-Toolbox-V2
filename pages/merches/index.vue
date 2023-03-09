@@ -12,9 +12,9 @@
     </div>
     <div class="filter-wrapper base-panel p-4 mb-4" v-if="isFilterShow">
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("COMMON.CHARACTER") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -39,9 +39,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.PRODUCT-SERIES") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -55,9 +55,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.ART-SOURCE") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -73,9 +73,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.ART-STYLE") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -88,9 +88,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.PRODUCT-TYPE") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -103,9 +103,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.PRODUCT-MATERIAL") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -118,9 +118,9 @@
         </a-select>
       </div>
       <div>
-        <h3 class="title">
+        <h5 class="title">
           {{ $t("MERCH.PRODUCT-TECHNOLOGY") }}
-        </h3>
+        </h5>
         <a-select
           mode="multiple"
           class="w-full custom-select"
@@ -134,9 +134,9 @@
       </div>
       <div class="selection-block">
         <div>
-          <h3 class="title">
+          <h5 class="title">
             {{ $t("MERCH.IS-RELEASED") }}
-          </h3>
+          </h5>
           <div>
             <a-radio-group v-model="filters.isReleased">
               <a-radio-button :value="null">
@@ -152,9 +152,9 @@
           </div>
         </div>
         <div>
-          <h3 class="title">
+          <h5 class="title">
             {{ $t("MERCH.IS-LIMITED-TIME") }}
-          </h3>
+          </h5>
           <div>
             <a-radio-group v-model="filters.isLimitedTime">
               <a-radio-button :value="null">
@@ -172,9 +172,9 @@
       </div>
       <div class="complex-filter-block">
         <div>
-          <h3 class="title">
+          <h5 class="title">
             {{ $t("MERCH.SELL-TIME") }}
-          </h3>
+          </h5>
           <a-range-picker
             id="sellDateRange"
             :placeholder="[
@@ -185,13 +185,13 @@
           />
         </div>
         <div>
-          <h3 class="title">
+          <h5 class="title">
             {{
               `${$t("MERCH.PRODUCT-PRICE")}: ￥${filters.priceRange[0]} - ￥${
                 filters.priceRange[1]
               }`
             }}
-          </h3>
+          </h5>
           <div class="flex">
             <a-slider
               class="w-full"
@@ -213,19 +213,11 @@
       </div>
     </div>
     <div class="item-grid w-full">
-      <div v-for="(merch, i) in currentMerches" class="sub-panel p-3" :key="i">
-        <NuxtLink :to="localePath(`/merches/${merch.id}`)" _target="_blank">
-          <img
-            class="large-icon m-auto"
-            :src="merch.avatar.url"
-            :alt="merch.name"
-            lazy
-          />
-        </NuxtLink>
-        <div class="flex justify-center">
-          <h5>{{ merch.name }}</h5>
-        </div>
-      </div>
+      <MerchGridItem
+        v-for="(merch, i) in currentMerches"
+        :merch="merch"
+        :key="i"
+      />
     </div>
     <LoadingMask :isShow="isLoading" />
   </section>
@@ -436,38 +428,6 @@ export default {
           this.filters.sellDateRange[0].format("YYYY-MM-DD"),
           this.filters.sellDateRange[1].format("YYYY-MM-DD"),
         ];
-        // exclude dates that...
-        // f["$not"] = {
-        //   sell_dates: {
-        //     $or: [
-        //       {
-        //         // start date is greater than the end of date range
-        //         start: {
-        //           date: {
-        //             $gt: date[1],
-        //           },
-        //         },
-        //       },
-        //       {
-        //         // end date is less than the start of date range
-        //         end: {
-        //           $and: [
-        //             {
-        //               date: {
-        //                 $lt: date[0],
-        //               },
-        //             },
-        //             {
-        //               date: {
-        //                 $notNull: true,
-        //               },
-        //             },
-        //           ],
-        //         },
-        //       },
-        //     ],
-        //   },
-        // };
         f["$not"] = {
           sell_date_ranges: {
             $or: [
