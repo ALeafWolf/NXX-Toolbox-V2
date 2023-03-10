@@ -18,9 +18,9 @@
       <NuxtLink :to="localePath('/contact')">
         <h6>{{ $t("NAV.CONTACT") }}</h6>
       </NuxtLink>
-      <!-- <NuxtLink :to="localePath('/update-logs')">
+      <NuxtLink :to="localePath('/update-logs')">
         <h6>{{ $t("NAV.UPDATE-LOG") }}</h6>
-      </NuxtLink> -->
+      </NuxtLink>
     </div>
     <h5>ALeafWolf © {{ getCurrentYear() }}</h5>
     <a-radio-group v-model="$i18n.locale" @change="switchLanguage">

@@ -1,12 +1,28 @@
 <template>
-  <section></section>
+  <div class="grid gap-4">
+    <section class="p-4 base-panel" v-for="l, i in logs.data.attributes.item" :key="i">
+      <h4>{{ l.date }}</h4>
+      <div v-html="l.content"></div>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
   name: "UpdateLogsPage",
-  data() {
-    return {};
+  async asyncData({ $axios }) {
+    const logs = await $axios
+      .$get(`/api/update-log`, {
+        params: {
+          populate: "*",
+        },
+      })
+      .catch((error) => {
+        console.log(error.toJSON());
+      });
+    return {
+      logs,
+    };
   },
   methods: {},
   head() {
