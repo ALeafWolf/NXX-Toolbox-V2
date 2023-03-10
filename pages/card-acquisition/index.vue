@@ -5,6 +5,7 @@
         <a-input-search
           :placeholder="$t('CARD-ACQUISITION.SEARCH-BY-NAME')"
           size="large"
+          v-model="filters.name"
           @search="handleNameChange"
         />
       </div>
@@ -18,6 +19,7 @@
             class="w-full custom-select"
             :defaultValue="[]"
             dropdownClassName="custom-dropdown"
+            v-model="filters.server"
             @change="handleServerChange"
           >
             <a-select-option key="CN">
@@ -38,6 +40,7 @@
               class="w-full custom-select"
               :defaultValue="[]"
               dropdownClassName="custom-dropdown"
+              v-model="filters.type"
               @change="handleTypeChange"
             >
               <a-select-option key="POOL">
@@ -52,6 +55,7 @@
               class="w-full custom-select"
               :defaultValue="[]"
               dropdownClassName="custom-dropdown"
+              v-model="filters.subtype"
               @change="handleSubtypeChange"
             >
               <a-select-option v-for="o in getSubtypeOptions" :key="o">
@@ -74,6 +78,7 @@
 </template>
 
 <script>
+import qs from "qs";
 export default {
   data() {
     return {
@@ -100,12 +105,18 @@ export default {
       },
     };
   },
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, query }) {
+    let params = {
+      sort: ["start:desc", "end:desc", "id:desc"],
+    };
+    //get filters and sorts from url's query
+    if (query) {
+      params = qs.parse(qs.stringify(query));
+    }
+    // console.log(params);
     const acquisition = await $axios
       .$get("/api/card-acquisition/list", {
-        params: {
-          sort: ["start:desc", "end:desc", 'id:desc'],
-        },
+        params: params,
       })
       .catch((error) => {
         console.log(error.toJSON());
@@ -113,6 +124,33 @@ export default {
     return {
       acquisition,
     };
+  },
+  mounted() {
+    const p = qs.parse(window.location.search.replace("?", ""));
+    if (p.sort) {
+      const sort = p.sort;
+      if (!sort[0].includes("desc")) {
+        this.startDateDesc = false;
+      }
+      if (!sort[1].includes("desc")) {
+        this.endDateDesc = false;
+      }
+    }
+    if (p.filters) {
+      const filters = p.filters;
+      if (filters.server) {
+        this.filters.server = filters.server["$in"];
+      }
+      if (filters.type) {
+        this.filters.type = filters.type["$in"];
+      }
+      if (filters.subtype) {
+        this.filters.subtype = filters.subtype["$in"];
+      }
+      if (filters.cards) {
+        this.filters.name = filters.cards["$or"][0].name["$contains"];
+      }
+    }
   },
   computed: {
     getSubtypeOptions: function () {
@@ -135,19 +173,15 @@ export default {
       await this.filterAcquisitions();
     },
     async handleNameChange(value) {
-      this.filters.name = value;
       await this.filterAcquisitions();
     },
     async handleServerChange(value) {
-      this.filters.server = value;
       await this.filterAcquisitions();
     },
     async handleTypeChange(value) {
-      this.filters.type = value;
       await this.filterAcquisitions();
     },
     async handleSubtypeChange(value) {
-      this.filters.subtype = value;
       await this.filterAcquisitions();
     },
     getFilters() {
@@ -157,17 +191,17 @@ export default {
           $or: [
             {
               name: {
-                $eq: this.filters.name,
+                $contains: this.filters.name,
               },
             },
             {
               name_en: {
-                $eq: this.filters.name,
+                $contains: this.filters.name,
               },
             },
             {
               name_ko: {
-                $eq: this.filters.name,
+                $contains: this.filters.name,
               },
             },
           ],
@@ -198,15 +232,19 @@ export default {
     },
     async filterAcquisitions() {
       this.isLoading = true;
-      const sort = this.getSorts();
-      const filters = this.getFilters();
-      console.log(filters);
+      const params = {
+        sort: this.getSorts(),
+        filters: this.getFilters(),
+      };
+      // update url without reloading
+      window.history.pushState(
+        {},
+        "",
+        `/card-acquisition?${qs.stringify(params)}`
+      );
       const acquisition = await this.$axios
         .$get("/api/card-acquisition/list", {
-          params: {
-            sort: sort,
-            filters: filters,
-          },
+          params: params,
         })
         .catch((error) => {
           console.log(error.toJSON());

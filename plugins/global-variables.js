@@ -102,7 +102,7 @@ const global = {
         (lv1num + ((lv10num - lv1num) / 9) * (lv - 1) + Number.EPSILON) * 100
       ) / 100
     );
-  },
+  }
 };
 
 export default ({ app }, inject) => {
