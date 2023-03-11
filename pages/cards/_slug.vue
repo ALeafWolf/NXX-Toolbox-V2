@@ -125,7 +125,18 @@
               </NuxtLink>
             </th>
             <td>
-              {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+              <NuxtLink
+                class="active-link"
+                :to="
+                  localePath(
+                    `/skills/${$globalV.nameToSlug(
+                      skill[`name${$globalV.getLocalePostfix($i18n.locale)}`]
+                    )}`
+                  )
+                "
+              >
+                {{ skill[`name${$globalV.getLocalePostfix($i18n.locale)}`] }}
+              </NuxtLink>
             </td>
           </tr>
           <tr>

@@ -4,7 +4,7 @@
     <NavBar />
     <div class="component-container custom-scrollbar">
       <SideBar />
-      <div class="content-container">
+      <div id="contentContainer" class="content-container">
         <div class="content">
           <div class="page base-panel">
             <Nuxt />
@@ -15,7 +15,17 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  watch: {
+    $route(to, from) {
+      window.setTimeout(() => {
+        document.getElementById("contentContainer").scrollTo(0, 0);
+      }, 100);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .main-container {
   position: absolute;

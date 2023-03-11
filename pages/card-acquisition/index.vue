@@ -80,6 +80,7 @@
 <script>
 import qs from "qs";
 export default {
+  name: 'CardAcquisitionPage',
   data() {
     return {
       startDateDesc: true,
@@ -110,7 +111,7 @@ export default {
       sort: ["start:desc", "end:desc", "id:desc"],
     };
     //get filters and sorts from url's query
-    if (query) {
+    if (Object.keys(query).length > 0) {
       params = qs.parse(qs.stringify(query));
     }
     // console.log(params);

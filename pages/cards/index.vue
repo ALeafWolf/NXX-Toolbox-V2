@@ -220,6 +220,7 @@
               </td>
               <td>
                 <NuxtLink
+                  class="active-link"
                   :to="
                     localePath(
                       `/cards/${$globalV.nameToSlug(

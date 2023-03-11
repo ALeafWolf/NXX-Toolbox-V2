@@ -1,7 +1,6 @@
 <template>
   <section>
     <div>
-      <!-- <h1>{{ $t("NAV.SKILL-LIST") }}</h1> -->
       <div class="filter-wrapper">
         <div>
           <h3>{{ $t("COMMON.SKILL-SLOT") }}</h3>
@@ -93,6 +92,7 @@
               </td>
               <td>
                 <NuxtLink
+                  class="active-link"
                   :to="
                     localePath(
                       `/skills/${$globalV.nameToSlug(

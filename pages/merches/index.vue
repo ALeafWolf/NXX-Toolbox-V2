@@ -224,6 +224,8 @@
 </template>
 
 <script>
+import qs from "qs";
+
 export default {
   name: "MerchPage",
   data() {
@@ -246,13 +248,18 @@ export default {
       isLoading: false,
     };
   },
-  async asyncData({ $axios }) {
-    const merchesReq = $axios.$get("/api/merch/list", {
-      params: {
-        sort: {
-          id: "desc",
-        },
+  async asyncData({ $axios, query }) {
+    let params = {
+      sort: {
+        id: "desc",
       },
+    };
+    //get filters and sorts from url's query
+    if (Object.keys(query).length > 0) {
+      params = qs.parse(qs.stringify(query));
+    }
+    const merchesReq = $axios.$get("/api/merch/list", {
+      params: params,
     });
     const seriesReq = $axios.$get("/api/merch-serieses", {
       params: {
@@ -315,6 +322,54 @@ export default {
   },
   mounted() {
     this.filters.priceRange = this.priceRange;
+    const p = qs.parse(window.location.search.replace("?", ""));
+    console.log(p);
+    if ("sort" in p) {
+      if (!p.sort[0].includes("desc")) {
+        this.isDateDesc = false;
+      }
+    }
+    if ("filters" in p) {
+      const filters = p.filters;
+      if (filters.art_source) {
+        this.filters.artSources = filters.art_source["$in"];
+      }
+      if (filters.art_styles) {
+        this.filters.artStyles = filters.art_styles.value["$in"];
+      }
+      if (filters.character) {
+        let c = filters.character.name["$in"];
+        const i = c.indexOf("ALL");
+        if (i !== -1) {
+          c.splice(i, 1);
+        }
+        this.filters.characters = c;
+      }
+      if (filters.is_released) {
+        this.filters.isReleased =
+          filters.is_released["$eq"] === "true" ? true : false;
+      }
+      if (filters.materials) {
+        this.filters.materials = filters.materials.value["$in"];
+      }
+      if (filters.sell_date_ranges) {
+      }
+      if (filters.series) {
+        this.filters.series = filters.series.name["$in"];
+      }
+      if (filters.technologies) {
+        this.filters.technologies = filters.technologies.value["$in"];
+      }
+      if (filters.type) {
+        this.filters.types = filters.type.value["$in"];
+      }
+      if(filters.sell_date_ranges){
+        this.filters.isLimitedTime = '$null' in filters.sell_date_ranges.end ? false : true;
+      }
+      if (filters["$and"]) {
+
+      }
+    }
   },
   head() {
     return {

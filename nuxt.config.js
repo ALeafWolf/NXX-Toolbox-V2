@@ -19,7 +19,7 @@ export default {
       },
       {
         src: "/js/ga.js",
-      },
+      }
     ],
   },
 
@@ -41,7 +41,6 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
   ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n"],
   i18n: {
@@ -64,7 +63,7 @@ export default {
         file: "ko.json",
       },
     ],
-    baseUrl: 'https://nxxtoolbox.com',
+    baseUrl: "https://nxxtoolbox.com",
     defaultLocale: "zh",
     seo: true,
     detectBrowserLanguage: {
