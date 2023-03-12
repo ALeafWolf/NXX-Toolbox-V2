@@ -42,7 +42,7 @@ export default {
     "@nuxtjs/tailwindcss",
   ],
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n", '@nuxtjs/sitemap'],
   i18n: {
     vueI18nLoader: true,
     langDir: "~/locales/",
@@ -72,6 +72,14 @@ export default {
       alwaysRedirect: false,
       fallbackLocale: "zh",
     },
+  },
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://www.nxxtoolbox.com',
+    i18n: true,
+    i18n: {
+      locales: ['zh', 'en', 'ko'],
+    }
   },
   styleResources: {
     scss: ["@/assets/scss/*.scss"],
