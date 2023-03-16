@@ -19,7 +19,7 @@ export default {
       },
       {
         src: "/js/ga.js",
-      }
+      },
     ],
   },
 
@@ -42,7 +42,12 @@ export default {
     "@nuxtjs/tailwindcss",
   ],
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/i18n", '@nuxtjs/sitemap'],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/style-resources",
+    "@nuxtjs/i18n",
+    "@nuxtjs/sitemap",
+  ],
   i18n: {
     vueI18nLoader: true,
     langDir: "~/locales/",
@@ -74,12 +79,12 @@ export default {
     },
   },
   sitemap: {
-    path: '/sitemap.xml',
-    hostname: 'https://www.nxxtoolbox.com',
+    path: "/sitemap.xml",
+    hostname: "https://www.nxxtoolbox.com",
     i18n: true,
     i18n: {
-      locales: ['zh', 'en', 'ko'],
-    }
+      locales: ["zh", "en", "ko"],
+    },
   },
   styleResources: {
     scss: ["@/assets/scss/*.scss"],
@@ -91,6 +96,11 @@ export default {
   },
   axios: {
     baseURL: process.env.API_URL || "http://localhost:1338",
+  },
+  loading: {
+    color: "#8e8baf",
+    height: "5px",
+    throttle: 0
   },
   env: {
     strapiBaseUri: process.env.API_URL || "http://localhost:1338",
