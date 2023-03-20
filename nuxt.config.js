@@ -103,6 +103,13 @@ export default {
     height: "5px",
     throttle: 0
   },
+  pwa: {
+    manifest: {
+      name: 'NxxToolbox',
+      description:'Tool App for the video game Tears of Themis',
+      background_color: '#8e8baf'
+    }
+  },
   env: {
     strapiBaseUri: process.env.API_URL || "http://localhost:1338",
   },
