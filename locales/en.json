@@ -50,7 +50,10 @@
     "GRID": "Grid",
     "TABLE": "Table",
     "ICON": "Icon",
-    "NUMBER": "Numbers"
+    "NUMBER": "Numbers",
+    "PWA-MESSAGE": "Add NXXToolbox App to your phone for the easier access.",
+    "INSTALL": "Install",
+    "DISMISS": "Dismiss"
   },
   "NAV": {
     "HOME": "Home",

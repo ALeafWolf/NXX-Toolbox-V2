@@ -1,5 +1,15 @@
 <template>
   <div class="main-container">
+    <div v-if="deferredPrompt" class="pwa-prompt base-panel">
+      <img src="/icon.png" alt="app icon" />
+      <div>
+        <h5 class="text-center">{{ $t("COMMON.PWA-MESSAGE") }}</h5>
+        <div class="flex justify-between">
+          <a-button @click="install">{{ $t("COMMON.INSTALL") }}</a-button>
+          <a-button @click="dismiss">{{ $t("COMMON.DISMISS") }}</a-button>
+        </div>
+      </div>
+    </div>
     <img class="nxx-logo" src="~/assets/images/nxx-logo.png" />
     <NavBar />
     <div class="component-container custom-scrollbar">
@@ -24,9 +34,45 @@ export default {
       }, 100);
     },
   },
+  data() {
+    return {
+      deferredPrompt: null,
+    };
+  },
+  mounted() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      this.deferredPrompt = e;
+    });
+    window.addEventListener("appinstalled", () => {
+      this.deferredPrompt = null;
+    });
+  },
+  methods: {
+    async dismiss() {
+      this.deferredPrompt = null;
+    },
+    async install() {
+      this.deferredPrompt.prompt();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+.pwa-prompt {
+  position: fixed;
+  height: 200px;
+  max-width: 500px;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 100px auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
 .main-container {
   position: absolute;
   top: 0;
@@ -89,6 +135,9 @@ export default {
   }
   .content-container {
     height: 100%;
+  }
+  .pwa-prompt{
+    grid-template-columns: 50px auto;
   }
 }
 </style>
