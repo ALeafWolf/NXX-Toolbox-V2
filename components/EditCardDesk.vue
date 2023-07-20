@@ -207,7 +207,11 @@ export default {
     getAttributeWithRank(rank, attribute, rarity) {
       let ratio = 0.4;
       if (rank === 5) return attribute;
-      if (rarity === "MR") ratio = 0.375;
+      if (rarity === "MR") {
+        ratio = 0.375;
+      }else if(rarity === "SSS"){
+        ratio = 0.6;
+      }
 
       return Math.round(
         (attribute / (1 + ratio)) * (1 + (ratio / 4) * (rank - 1))

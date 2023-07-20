@@ -558,11 +558,7 @@ export default {
       this.loadCardDesk();
       this.showCalcModal = false;
       this.isEditCard = false;
-    },
-    getAttributeWithRank(rank, attribute) {
-      if (rank === 5) return attribute;
-      return Math.round((attribute / 1.4) * (1 + 0.1 * (rank - 1)));
-    },
+    }
   },
   head() {
     return {
