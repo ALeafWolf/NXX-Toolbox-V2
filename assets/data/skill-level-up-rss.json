@@ -186,5 +186,52 @@
       "impression": 36,
       "item": 27
     }
+  ],
+  "SSS": [
+    {
+      "coin": 10500,
+      "impression": 6,
+      "item": 6
+    },
+    {
+      "coin": 21000,
+      "impression": 12,
+      "item": 12
+    },
+    {
+      "coin": 31500,
+      "impression": 18,
+      "item": 18
+    },
+    {
+      "coin": 45000,
+      "impression": 12,
+      "item": 12
+    },
+    {
+      "coin": 67500,
+      "impression": 18,
+      "item": 18
+    },
+    {
+      "coin": 101250,
+      "impression": 27,
+      "item": 27
+    },
+    {
+      "coin": 135000,
+      "impression": 18,
+      "item": 12
+    },
+    {
+      "coin": 198000,
+      "impression": 24,
+      "item": 18
+    },
+    {
+      "coin": 297000,
+      "impression": 36,
+      "item": 27
+    }
   ]
 }

@@ -603,6 +603,7 @@ th.icon-header {
   height: 100%;
   width: 100%;
   overflow-y: hidden;
+  z-index: 50;
   > .close-btn {
     position: absolute;
     right: 10px;

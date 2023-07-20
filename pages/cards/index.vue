@@ -34,6 +34,13 @@
           </th>
         </tr>
         <tr>
+          <th>SSS</th>
+          <td>{{ cardCount.luke[4] }}</td>
+          <td>{{ cardCount.artem[4] }}</td>
+          <td>{{ cardCount.vyn[4] }}</td>
+          <td>{{ cardCount.marius[4] }}</td>
+        </tr>
+        <tr>
           <th>SSR</th>
           <td>{{ cardCount.luke[3] }}</td>
           <td>{{ cardCount.artem[3] }}</td>
@@ -133,6 +140,7 @@
               <a-select-option key="MR"> MR </a-select-option>
               <a-select-option key="SR"> SR </a-select-option>
               <a-select-option key="SSR"> SSR </a-select-option>
+              <a-select-option key="SSS"> SSS </a-select-option>
             </a-select>
           </div>
           <div>
@@ -297,10 +305,10 @@ export default {
       console.log(error.toJSON());
     });
     const cardCount = {
-      luke: [0, 0, 0, 0],
-      artem: [0, 0, 0, 0],
-      vyn: [0, 0, 0, 0],
-      marius: [0, 0, 0, 0],
+      luke: [0, 0, 0, 0, 0],
+      artem: [0, 0, 0, 0, 0],
+      vyn: [0, 0, 0, 0, 0],
+      marius: [0, 0, 0, 0, 0],
     };
     cards.forEach((c) => {
       switch (c.character.id) {
@@ -453,7 +461,7 @@ export default {
 <style lang="scss" scoped>
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 .list-table {
@@ -464,12 +472,12 @@ export default {
 }
 @media all and (max-width: $lg) {
   .card-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 @media all and (max-width: $md) {
   .card-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .general-table {
     .large-icon {

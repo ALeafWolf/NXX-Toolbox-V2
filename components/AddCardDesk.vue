@@ -71,11 +71,12 @@
             <a-select-option key="MR"> MR </a-select-option>
             <a-select-option key="SR"> SR </a-select-option>
             <a-select-option key="SSR"> SSR </a-select-option>
+            <a-select-option key="SSS"> SSS </a-select-option>
           </a-select>
         </div>
       </div>
     </section>
-    <section class="grid grid-cols-5 gap-6 overflow-y-scroll h-full">
+    <section class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6 overflow-y-scroll h-full">
       <CardGridItem
         v-for="(card, i) in cards"
         :key="i"

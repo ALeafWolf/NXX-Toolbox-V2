@@ -84,6 +84,9 @@
                   <a-radio-button value="SSR">
                     <p>SSR</p>
                   </a-radio-button>
+                  <a-radio-button value="SSS">
+                    <p>SSS</p>
+                  </a-radio-button>
                 </a-radio-group>
               </td>
             </tr>

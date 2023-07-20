@@ -56,5 +56,23 @@
                 "charChip": 15
             }
         ]
+    },
+    "SSS": {
+        "rss": [
+            {
+                "lv": 40,
+                "coin": 7500,
+                "chip1": 10,
+                "chip2": 10,
+                "charChip": 10
+            },
+            {
+                "lv": 70,
+                "coin": 22500,
+                "chip1": 15,
+                "chip2": 15,
+                "charChip": 15
+            }
+        ]
     }
 }
