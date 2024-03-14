@@ -70,6 +70,10 @@
               <td>{{ card.rarity.value }}</td>
             </tr>
             <tr>
+              <th>{{ $t("COMMON.CHAPTER") }}</th>
+              <td>{{ card.card_period.name }}</td>
+            </tr>
+            <tr>
               <th>{{ $t("COMMON.LEVEL") }}</th>
               <td>100</td>
             </tr>

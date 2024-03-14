@@ -77,8 +77,8 @@
             @search="handleNameChange"
           />
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4">
+          <div class="filter-wrapper character">
             <h4>
               {{ $t("COMMON.CHARACTER") }}
             </h4>
@@ -103,7 +103,7 @@
               </a-select-option>
             </a-select>
           </div>
-          <div>
+          <div class="filter-wrapper attribute">
             <h4>
               {{ $t("COMMON.ATTRIBUTE") }}
             </h4>
@@ -125,7 +125,7 @@
               </a-select-option>
             </a-select>
           </div>
-          <div>
+          <div class="filter-wrapper rarity">
             <h4>
               {{ $t("COMMON.RARITY") }}
             </h4>
@@ -143,7 +143,7 @@
               <a-select-option key="SSS"> SSS </a-select-option>
             </a-select>
           </div>
-          <div>
+          <div class="filter-wrapper acquisition">
             <h4>
               {{ $t("NAV.CARD-ACQUISITION") }}
             </h4>
@@ -160,6 +160,25 @@
               <a-select-option key="OTHER">
                 {{ $t("COMMON.OTHER") }}
               </a-select-option>
+            </a-select>
+          </div>
+          <div class="filter-wrapper chapter">
+            <h4>
+              {{ $t("COMMON.CHAPTER") }}
+            </h4>
+            <a-select
+              mode="multiple"
+              class="w-full custom-select"
+              :defaultValue="[]"
+              dropdownClassName="custom-dropdown"
+              @change="handleChaptersChange"
+            >
+              <a-select-option key="1"> 旖慕篇 </a-select-option>
+              <a-select-option key="2"> 甜蜜篇 </a-select-option>
+              <a-select-option key="3"> 约定篇 </a-select-option>
+              <a-select-option key="4"> 挚爱篇 </a-select-option>
+              <a-select-option key="5"> 未定篇 </a-select-option>
+              <a-select-option key="6"> 异世篇 </a-select-option>
             </a-select>
           </div>
         </div>
@@ -296,6 +315,7 @@ export default {
         characters: [],
         rarities: [],
         acquisitions: [],
+        chapters: [],
       },
       isLoading: false,
     };
@@ -354,6 +374,10 @@ export default {
     },
     async handleAcquisitionsChange(value) {
       this.filters.acquisitions = value;
+      await this.filterCards();
+    },
+    async handleChaptersChange(value) {
+      this.filters.chapters = value;
       await this.filterCards();
     },
     getFilters() {
@@ -419,6 +443,13 @@ export default {
             },
           };
         }
+      }
+      if (this.filters.chapters.length > 0) {
+        f.card_period = {
+          id: {
+            $in: this.filters.chapters,
+          },
+        };
       }
       f.publishedAt = {
         $ne: null,
