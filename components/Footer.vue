@@ -1,5 +1,5 @@
 <template>
-  <footer id="siteFooter" class="base-panel px-4 py-2">
+  <footer id="siteFooter" class="base-panel p-4">
     <div class="mb-2">
       <a href="https://github.com/ALeafWolf/NXX-Toolbox-V2" target="_blank">
         <a-icon type="github" :style="{ fontSize: '30px' }" />
@@ -23,11 +23,22 @@
       </NuxtLink>
     </div>
     <h5>ALeafWolf © {{ getCurrentYear() }}</h5>
-    <a-radio-group v-model="$i18n.locale" @change="switchLanguage">
+    <!-- <a-radio-group v-model="$i18n.locale" @change="switchLanguage">
       <a-radio-button value="zh"> 中文 </a-radio-button>
       <a-radio-button value="en"> English </a-radio-button>
       <a-radio-button value="ko"> 한국인 </a-radio-button>
-    </a-radio-group>
+    </a-radio-group> -->
+    <div class="locale-group" :class="$i18n.locale">
+      <NuxtLink class="locale-btn zh" :to="switchLocalePath('zh')">
+        中文
+      </NuxtLink>
+      <NuxtLink class="locale-btn en" :to="switchLocalePath('en')">
+        English
+      </NuxtLink>
+      <NuxtLink class="locale-btn ko" :to="switchLocalePath('ko')">
+        한국인
+      </NuxtLink>
+    </div>
   </footer>
 </template>
 
@@ -39,7 +50,8 @@ export default {
       return new Date().getFullYear();
     },
     switchLanguage(e) {
-      this.$i18n.setLocale(e.target.value);
+      this.switchLocalePath(e.target.value);
+      // this.$i18n.setLocale(e.target.value);
     },
   },
 };
@@ -50,6 +62,27 @@ export default {
   height: $footer-height;
   display: grid;
   justify-items: center;
+}
+.locale-group {
+  display: flex;
+  font-size: 14px;
+  &.zh .locale-btn.zh, &.en .locale-btn.en, &.ko .locale-btn.ko {
+    border-color: #756dcc;
+  }
+  .locale-btn {
+    padding: 4px 16px;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: #00000080;
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
 }
 @media all and (max-width: $md) {
   #siteFooter {
