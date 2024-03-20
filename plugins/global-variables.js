@@ -102,6 +102,17 @@ const global = {
         (lv1num + ((lv10num - lv1num) / 9) * (lv - 1) + Number.EPSILON) * 100
       ) / 100
     );
+  },
+  getSocialMediaIcon (server, link){
+    if(server === 'CN'){
+      return 'weibo.png';
+    }else{
+      if(link.includes('hoyolab')){
+        return 'hoyolab.webp';
+      }else{
+        return 'twitter.png';
+      }
+    }
   }
 };
 

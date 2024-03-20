@@ -16,7 +16,7 @@
         <h3>
           {{
             e.end
-              ? `${$t("MERCH.LIMITED-TIME")} (${$t("MERCH.UNTIL")}${e.end})`
+              ? `${$t("MERCH.LIMITED-TIME")} (${$t("MERCH.UNTIL")} ${e.end})`
               : $t("MERCH.PERMANENT")
           }}
         </h3>

@@ -64,20 +64,22 @@
             </span>
           </td>
           <td>
-            <span class="flex justify-center">
+            <span class="flex justify-center gap-2">
               <a
                 v-if="record.social_media_url"
                 :href="record.social_media_url"
                 target="_blank"
+                class="inline-flex items-center"
               >
                 <img
                   class="icon"
                   :src="
-                    require(`~/assets/images/icons/icon-${
-                      record.server === 'CN' ? 'weibo' : 'twitter'
-                    }.png`)
+                    require(`~/assets/images/icons/icon-${$globalV.getSocialMediaIcon(
+                      record.server,
+                      record.social_media_url
+                    )}`)
                   "
-                  :alt="record.server === 'CN' ? 'weibo' : 'twitter'"
+                  alt="social media icon"
                   lazy
                 />
               </a>
@@ -85,6 +87,7 @@
                 v-if="record.video_url"
                 :href="record.video_url"
                 target="_blank"
+                class="inline-flex items-center"
               >
                 <img
                   class="icon"

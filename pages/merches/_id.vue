@@ -128,7 +128,7 @@
               <td>
                 <a :href="merch.tmall" target="_blank">
                   <img
-                    class="icon"
+                    class="icon tmall"
                     :src="require(`~/assets/images/icons/icon-tmall.png`)"
                     :alt="`${merch.name}-天猫商城`"
                   />
@@ -242,6 +242,9 @@ export default {
 }
 .description {
   background-color: rgba(0, 0, 0, 0.1);
+}
+.tmall{
+  filter: invert(100%);
 }
 @media all and (max-width: $lg) {
   .merch-detail-container {
